@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import os
 import sys
 sys.path.insert(0, os.path.dirname(__file__))
@@ -7,6 +8,9 @@ from common import (
     SOCIAL_MEDIA_CLIENTS, INFLUENCER_BRAND_LOGOS,
     head, header, footer,
     influencer_card, client_card, stats_strip, brand_list,
+)
+from blog_posts import (
+    BLOG_POSTS, CATEGORIES, CATEGORY_SLUGS, data_extenso, relacionados,
 )
 
 # O site e servido a partir da raiz do repositorio (a Vercel publica o repo
@@ -464,31 +468,182 @@ def build_resultados():
 
 
 # ---------------------------------------------------------------- BLOG
+def post_card(post, reveal=True):
+    cat_slug = CATEGORY_SLUGS[post["category"]]
+    cls = "post-card" + (" reveal" if reveal else "")
+    return f"""
+        <article class="{cls}" data-categoria="{cat_slug}">
+          <a class="post-card-link" href="/blog/{post['slug']}.html">
+            <span class="post-cover post-cover--{cat_slug}" aria-hidden="true"></span>
+            <span class="post-card-body">
+              <span class="post-tag">{post['category']}</span>
+              <span class="post-card-title">{post['title']}</span>
+              <span class="post-card-excerpt">{post['excerpt']}</span>
+              <span class="post-card-meta">
+                <time datetime="{post['date']}">{data_extenso(post['date'])}</time>
+                <span class="post-dot" aria-hidden="true"></span>
+                {post['read_time_min']} min de leitura
+              </span>
+            </span>
+          </a>
+        </article>"""
+
+
 def build_blog():
+    cards = "".join(post_card(p) for p in BLOG_POSTS)
+    filtros = '<button class="filtro-chip is-active" type="button" data-filtro="todos">Todos</button>'
+    for c in CATEGORIES:
+        filtros += (f'<button class="filtro-chip" type="button" '
+                    f'data-filtro="{CATEGORY_SLUGS[c]}">{c}</button>')
+
     html = head(
-        "Blog: Bertoluchi Agência",
-        "Conteúdo sobre marketing digital, redes sociais e gestão de influenciadoras.",
+        "Blog: marketing digital, social media e influenciadoras",
+        f"Artigos práticos sobre gestão de influenciadoras, social media, branding e "
+        f"marketing digital, escritos pela equipe da Bertoluchi Agência.",
         "/blog.html",
     )
     html += header("/blog.html")
     html += f"""
 <main id="conteudo">
-  <section class="section" style="padding-top:clamp(120px,16vw,160px)">
+  <section class="section page-hero">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Blog</span>
-        <h1 style="font-size:clamp(2rem,4vw,2.8rem)">Conteúdo sobre marketing digital e redes sociais</h1>
+        <h1>Conteúdo sobre marketing digital e redes sociais</h1>
+        <p>Artigos práticos sobre gestão de influenciadoras, social media e branding, escritos a partir do que a gente vê no dia a dia com clientes e criadoras.</p>
       </div>
-      <div class="blog-empty mt-lg reveal">
-        <h2>Primeiros artigos a caminho</h2>
-        <p>Estamos preparando os primeiros conteúdos do blog. Em breve, artigos sobre gestão de influenciadoras, social media e branding, direto aqui.</p>
+
+      <div class="filtros reveal" role="group" aria-label="Filtrar artigos por categoria">
+        {filtros}
       </div>
+
+      <div class="post-grid" data-post-grid>{cards}</div>
+      <p class="filtro-vazio" data-filtro-vazio hidden>Nenhum artigo nesta categoria por enquanto.</p>
+    </div>
+  </section>
+
+  {cta_band("Prefere falar com a gente direto?", "Conta o momento da sua marca e a gente indica por onde começar.")}
+</main>
+"""
+    html += footer()
+    write("/blog.html", html)
+
+
+def build_blog_post(post):
+    cat_slug = CATEGORY_SLUGS[post["category"]]
+    caminho = f"/blog/{post['slug']}.html"
+    canonical = SITE["domain"] + caminho
+
+    corpo = ""
+    for bloco in post["body"]:
+        if bloco.get("h2"):
+            corpo += f'\n        <h2>{bloco["h2"]}</h2>'
+        for par in bloco.get("p", []):
+            corpo += f'\n        <p>{par}</p>'
+        if bloco.get("ul"):
+            itens = "".join(f"<li>{i}</li>" for i in bloco["ul"])
+            corpo += f'\n        <ul class="lista-marcada">{itens}</ul>'
+
+    rel = relacionados(post)
+    rel_cards = "".join(post_card(r) for r in rel)
+
+    artigo_ld = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": post["title"],
+        "description": post["meta_description"],
+        "datePublished": post["date"],
+        "dateModified": post["date"],
+        "articleSection": post["category"],
+        "inLanguage": "pt-BR",
+        "wordCount": post["word_count"],
+        "mainEntityOfPage": {"@type": "WebPage", "@id": canonical},
+        "author": {
+            "@type": "Organization",
+            "name": SITE["full_name"],
+            "url": SITE["domain"],
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": SITE["full_name"],
+            "url": SITE["domain"],
+            "logo": {
+                "@type": "ImageObject",
+                "url": SITE["domain"] + "/assets/img/logo.png",
+            },
+        },
+    }
+    breadcrumb_ld = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Blog",
+             "item": SITE["domain"] + "/blog.html"},
+            {"@type": "ListItem", "position": 2, "name": post["category"],
+             "item": SITE["domain"] + "/blog.html#" + cat_slug},
+            {"@type": "ListItem", "position": 3, "name": post["title"],
+             "item": canonical},
+        ],
+    }
+    extra = (
+        '<script type="application/ld+json">'
+        + json.dumps(artigo_ld, ensure_ascii=False)
+        + '</script>\n<script type="application/ld+json">'
+        + json.dumps(breadcrumb_ld, ensure_ascii=False)
+        + '</script>\n'
+    )
+
+    html = head(post["title"], post["meta_description"], caminho,
+                og_type="article", extra_head=extra)
+    html += header("/blog.html")
+    html += f"""
+<main id="conteudo">
+  <article class="post">
+    <div class="container container-narrow">
+      <nav class="breadcrumb" aria-label="Trilha de navegação">
+        <a href="/blog.html">Blog</a>
+        <span aria-hidden="true">/</span>
+        <a href="/blog.html#{cat_slug}">{post['category']}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{post['title']}</span>
+      </nav>
+
+      <header class="post-head">
+        <span class="eyebrow">{post['category']}</span>
+        <h1>{post['title']}</h1>
+        <p class="post-meta">
+          <time datetime="{post['date']}">{data_extenso(post['date'])}</time>
+          <span class="post-dot" aria-hidden="true"></span>
+          {post['read_time_min']} min de leitura
+        </p>
+      </header>
+
+      <div class="post-body">{corpo}
+      </div>
+
+      <aside class="post-cta">
+        <p>Quer ajuda para colocar isso em prática?</p>
+        <div class="post-cta-acoes">
+          <a class="btn btn-primary" href="{post['cta']['href']}">{post['cta']['label']}</a>
+          <a class="btn btn-outline" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Falar no WhatsApp</a>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Continue lendo</span>
+        <h2>Artigos relacionados</h2>
+      </div>
+      <div class="post-grid">{rel_cards}</div>
     </div>
   </section>
 </main>
 """
     html += footer()
-    write("/blog.html", html)
+    write(caminho, html)
 
 
 # ---------------------------------------------------------------- CONTATO
@@ -684,6 +839,8 @@ def main():
     build_clientes_social_media()
     build_resultados()
     build_blog()
+    for _p in BLOG_POSTS:
+        build_blog_post(_p)
     build_contato()
     build_trabalhe_conosco()
 

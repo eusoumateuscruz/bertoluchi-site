@@ -63,4 +63,46 @@
     });
   }
 
+
+  // Filtro de categoria do blog
+  var grade = document.querySelector("[data-post-grid]");
+  if (grade) {
+    var chips = document.querySelectorAll("[data-filtro]");
+    var cards = grade.querySelectorAll("[data-categoria]");
+    var vazio = document.querySelector("[data-filtro-vazio]");
+
+    var aplicar = function (alvo) {
+      var visiveis = 0;
+      cards.forEach(function (card) {
+        var mostra = alvo === "todos" || card.dataset.categoria === alvo;
+        card.hidden = !mostra;
+        if (mostra) visiveis++;
+      });
+      chips.forEach(function (chip) {
+        chip.classList.toggle("is-active", chip.dataset.filtro === alvo);
+        chip.setAttribute("aria-pressed", chip.dataset.filtro === alvo ? "true" : "false");
+      });
+      if (vazio) vazio.hidden = visiveis > 0;
+    };
+
+    chips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        var alvo = chip.dataset.filtro;
+        aplicar(alvo);
+        history.replaceState(null, "", alvo === "todos" ? location.pathname : "#" + alvo);
+      });
+    });
+
+    // permite chegar filtrado por link, ex.: /blog.html#branding
+    var doHash = function () {
+      var alvo = location.hash.replace("#", "");
+      var existe = Array.prototype.some.call(chips, function (c) {
+        return c.dataset.filtro === alvo;
+      });
+      if (existe) aplicar(alvo);
+    };
+    doHash();
+    window.addEventListener("hashchange", doHash);
+  }
+
 })();

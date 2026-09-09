@@ -270,7 +270,8 @@ def brand_list():
     return f'<ul class="brand-grid">{chips}</ul>'
 
 
-def head(title, description, path="/index.html", og_image="/assets/img/hero-desktop.jpg"):
+def head(title, description, path="/index.html", og_image="/assets/img/hero-desktop.jpg",
+         og_type="website", extra_head=""):
     canonical = SITE["domain"] + path
     return f"""<!DOCTYPE html>
 <html lang="pt-BR">
@@ -281,7 +282,7 @@ def head(title, description, path="/index.html", og_image="/assets/img/hero-desk
 <title>{title}</title>
 <meta name="description" content="{description}">
 <link rel="canonical" href="{canonical}">
-<meta property="og:type" content="website">
+<meta property="og:type" content="{og_type}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{canonical}">
@@ -300,7 +301,7 @@ def head(title, description, path="/index.html", og_image="/assets/img/hero-desk
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 {FONTS_LINK}
 <link rel="stylesheet" href="/assets/css/style.css">
-<script>document.documentElement.classList.add("js-reveal");</script>
+{extra_head}<script>document.documentElement.classList.add("js-reveal");</script>
 </head>
 <body>
 """
