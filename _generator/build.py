@@ -350,6 +350,13 @@ def build_service_detail(s):
 def build_influenciadoras():
     cards = "".join(influencer_card(inf) for inf in INFLUENCERS)
     sem_foto = len([i for i in INFLUENCERS if not i.get("img")])
+    # a nota so faz sentido enquanto alguem estiver sem foto
+    nota = ""
+    if sem_foto:
+        plural = "perfis ainda aparecem" if sem_foto > 1 else "perfil ainda aparece"
+        nota = (f'<p class="note-block">{sem_foto} {plural} com o card de iniciais, '
+                'porque o material fotográfico não chegou. Assim que as fotos forem '
+                'enviadas, esta seção é atualizada.</p>')
 
     html = head(
         "Influenciadoras: Bertoluchi Agência",
@@ -367,7 +374,7 @@ def build_influenciadoras():
         <p>Cada uma com um nicho, um público e uma forma própria de se conectar. A gente cuida da parte comercial para que elas continuem focadas em criar.</p>
       </div>
       <div class="influencer-grid mt-lg">{cards}</div>
-      <p class="note-block">{sem_foto} perfis ainda aparecem com o card de iniciais, porque o material fotográfico não chegou. Assim que as fotos forem enviadas, esta seção é atualizada.</p>
+      {nota}
     </div>
   </section>
 
@@ -580,15 +587,28 @@ def build_clientes_social_media():
 
 # ---------------------------------------------------------------- TRABALHE CONOSCO
 def build_trabalhe_conosco():
-    areas = [
-        "Social Media", "Design", "Atendimento", "Comercial",
-        "Influenciadora parceira", "Outro",
+    tags = [
+        "Remoto · Santa Catarina e São Paulo",
+        "Regime · PJ",
+        "Início · Imediato",
+        "Salário · a partir de R$ 2.000 (a combinar)",
     ]
-    options = "".join(f'<option value="{a}">{a}</option>' for a in areas)
+    tags_html = "".join(f'<li class="vaga-tag">{t}</li>' for t in tags)
+
+    buscamos = [
+        "Experiência comprovada em design gráfico",
+        "Domínio de pelo menos um editor de imagem, preferencialmente Canva e Photoshop",
+        "Disponibilidade de segunda a sexta, das 9h às 17h",
+        "Possibilidade de atuar como PJ",
+        "Início imediato",
+    ]
+    buscamos_html = "".join(f"<li>{b}</li>" for b in buscamos)
 
     html = head(
-        "Trabalhe conosco: banco de talentos da Bertoluchi",
-        "Deixe seu currículo no banco de talentos da Bertoluchi Agência. Quando abrir uma posição de social media, design, atendimento ou comercial, falamos com você.",
+        "Vaga: Designer Gráfico para Social Media na Bertoluchi",
+        "A Bertoluchi está contratando designer gráfico(a) para social media. "
+        "Vaga remota para Santa Catarina e São Paulo, regime PJ e início imediato. "
+        "Candidatura pelo WhatsApp, com portfólio.",
         "/trabalhe-conosco.html",
     )
     html += header("/trabalhe-conosco.html")
@@ -597,57 +617,54 @@ def build_trabalhe_conosco():
   <section class="section" style="padding-top:clamp(120px,16vw,160px)">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">Banco de talentos</span>
-        <h1 style="font-size:clamp(2rem,4vw,2.8rem)">Trabalhe com a gente</h1>
-        <p>No momento não temos uma vaga aberta fixa. Mesmo assim, os currículos que chegam aqui ficam no nosso banco de talentos: quando surge uma posição, é para essa lista que olhamos primeiro.</p>
+        <span class="eyebrow">Vaga aberta · Design</span>
+        <h1 style="font-size:clamp(2rem,4vw,2.8rem)">Designer Gráfico para Social Media</h1>
+        <p>A Bertoluchi, agência de marketing digital, está contratando um(a) designer gráfico(a) para social media.</p>
       </div>
 
-      <div class="contact-grid mt-lg">
-        <form class="contact-form reveal" action="#" method="post">
-          <div class="form-field">
-            <label for="tc-nome">Nome</label>
-            <input type="text" id="tc-nome" name="nome" autocomplete="name" required>
-          </div>
-          <div class="form-field">
-            <label for="tc-email">E-mail</label>
-            <input type="email" id="tc-email" name="email" autocomplete="email" required>
-          </div>
-          <div class="form-field">
-            <label for="tc-telefone">Telefone</label>
-            <input type="tel" id="tc-telefone" name="telefone" autocomplete="tel" required>
-          </div>
-          <div class="form-field">
-            <label for="tc-area">Área de interesse</label>
-            <select id="tc-area" name="area" required>
-              <option value="">Selecione uma área</option>
-              {options}
-            </select>
-          </div>
-          <div class="form-field">
-            <label for="tc-portfolio">Link do portfólio ou Instagram</label>
-            <input type="url" id="tc-portfolio" name="portfolio" placeholder="https://" inputmode="url">
-          </div>
-          <div class="form-field">
-            <label for="tc-mensagem">Mensagem</label>
-            <textarea id="tc-mensagem" name="mensagem" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Enviar para o banco de talentos</button>
-          <p class="form-note">Este formulário ainda precisa ser conectado a um serviço de envio (ex.: Formspree, Netlify Forms) antes da publicação. Enquanto isso, nada é enviado ao clicar no botão.</p>
-        </form>
+      <ul class="vaga-tags reveal">{tags_html}</ul>
 
-        <div class="contact-info reveal">
-          <h3>Como funciona</h3>
-          <p>Você preenche o formulário, a gente guarda seu contato e o material que enviar. Quando abrimos uma posição compatível, entramos em contato pelo e-mail ou telefone informados.</p>
-
-          <h3>O que ajuda a se destacar</h3>
-          <p>Portfólio ou perfil com trabalhos reais, mesmo que de projetos pessoais. Para social media e design, ver o que você já produziu vale mais do que uma lista de ferramentas.</p>
-
-          <h3>Prefere mandar por e-mail?</h3>
-          <p><a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
-
-          <h3>Onde ficamos</h3>
-          <p>{SITE['address_line1']}<br>{SITE['address_line2']}</p>
+      <div class="vaga-corpo">
+        <div class="reveal">
+          <h2>Sobre a vaga</h2>
+          <p>Vaga remota, para candidatos de Santa Catarina e São Paulo. Contratação PJ, com início imediato.</p>
         </div>
+
+        <div class="reveal">
+          <h2>Sobre a Bertoluchi</h2>
+          <p>A Bertoluchi é uma agência de marketing digital com atuação em Joinville (SC) e São Paulo. Atendemos clientes de diversos segmentos, com uma atuação direta e estratégica no mercado, sempre buscando gerar resultado real e fortalecer o posicionamento de cada marca.</p>
+        </div>
+
+        <div class="reveal">
+          <h2>O que você vai fazer:</h2>
+          <p>Desenvolver criativos e carrosséis para os clientes de social media da agência.</p>
+        </div>
+
+        <div class="reveal">
+          <h2>O que buscamos</h2>
+          <ul class="lista-marcada">{buscamos_html}</ul>
+        </div>
+
+        <div class="destaque-portfolio reveal">
+          <p><strong>Portfólio:</strong> deixe um link (Behance, Instagram, Drive ou site) com os seus trabalhos, é o que a gente usa pra avaliar sua candidatura.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-band">
+        <div>
+          <h2>Quer se candidatar?</h2>
+          <p>Manda seu portfólio e uma mensagem pra gente pelo WhatsApp.</p>
+        </div>
+        <a class="btn btn-light" href="{SITE['whatsapp_link_vaga_designer']}" target="_blank" rel="noopener">Aplicar pelo WhatsApp</a>
+      </div>
+
+      <div class="vaga-rodape reveal">
+        <p>Dúvidas sobre a vaga? Fale com a Beatriz: <a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
+        <p>Vaga aberta até o preenchimento da posição.</p>
       </div>
     </div>
   </section>

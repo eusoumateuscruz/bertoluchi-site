@@ -20,6 +20,7 @@ SITE = {
     "instagram": "https://www.instagram.com/bertoluchiagencia/",
     "linkedin": "https://www.linkedin.com/company/bertoluchi/",
     "behance": "https://www.behance.net/beatrizbertolu",
+    "whatsapp_link_vaga_designer": "https://wa.me/554792545015?text=Ol%C3%A1%21%20Tenho%20interesse%20na%20vaga%20de%20Designer%20Gr%C3%A1fico%20para%20Social%20Media.%20Meu%20portf%C3%B3lio%3A%20",
     "stat_brandings": "+200",
     "stat_brandings_label": "Brandings realizados",
 }
@@ -118,8 +119,8 @@ SERVICES = [
 
 # Influenciadoras assessoradas, conforme os destaques do Instagram da
 # agência. Fotos baixadas do acervo da agência e otimizadas localmente
-# (webp + fallback jpg). As três últimas ainda não têm foto própria e
-# usam o card de iniciais até o material fotográfico ser enviado.
+# (webp + fallback jpg). Quem ainda não tiver foto cai no card de
+# iniciais, definido em influencer_card().
 INFLUENCERS = [
     {"name": "Larissa Estrada", "handle": "@larissaestradaa",
      "niche": "Fé | Lifestyle", "img": "influ-larissaestradaa"},
@@ -138,11 +139,11 @@ INFLUENCERS = [
     {"name": "Beatriz Bertoluchi", "handle": "@bertoluchib",
      "niche": "", "img": "influ-bertoluchib"},
     {"name": "Flávia Gabriela", "handle": "@fglins",
-     "niche": "Lifestyle | Empreendedorismo | Dicas", "img": None},
+     "niche": "Lifestyle | Empreendedorismo | Dicas", "img": "influ-flavia-gabriela"},
     {"name": "Leticia Levasz", "handle": "@_leticiafit_",
-     "niche": "Fitness | Lifestyle", "img": None},
+     "niche": "Fitness | Lifestyle", "img": "influ-leticia-levasz"},
     {"name": "Allan Popeye", "handle": "@allan_popeye",
-     "niche": "Luta | Lifestyle", "img": None},
+     "niche": "Luta | Lifestyle", "img": "influ-allan-popeye"},
 ]
 
 # Clientes ativos de social media (lista enviada por Mateus).

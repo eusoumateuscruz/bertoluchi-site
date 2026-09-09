@@ -589,3 +589,52 @@ p:last-child{ margin-bottom: 0; }
   .pillar-card:hover, .client-card:hover, .btn:hover,
   .whatsapp-float:hover, .influencer-card:hover img{ transform: none; }
 }
+
+/* ---------- Pagina de vaga ---------- */
+.vaga-tags{ display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 52px; }
+.vaga-tag{
+  font-family: var(--font-heading); font-weight: 700;
+  font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 9px 16px;
+  border: 1px solid rgba(44,30,21,0.22);
+  border-radius: 999px;
+  color: var(--color-text); -webkit-text-fill-color: var(--color-text);
+}
+.vaga-corpo{ max-width: 68ch; display: flex; flex-direction: column; gap: 40px; }
+.vaga-corpo h2{ font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin-bottom: 12px; }
+.vaga-corpo p{
+  font-size: 1.04rem;
+  color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted);
+}
+.lista-marcada{ display: flex; flex-direction: column; gap: 12px; }
+.lista-marcada li{
+  position: relative; padding-left: 22px; font-size: 1.02rem;
+  color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted);
+}
+.lista-marcada li::before{
+  content: ""; position: absolute; left: 0; top: 0.62em;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--color-primary);
+}
+.destaque-portfolio{
+  background: var(--color-bg-alt);
+  border: 1px solid rgba(44,30,21,0.18);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+}
+.destaque-portfolio p{
+  margin: 0;
+  color: var(--color-text); -webkit-text-fill-color: var(--color-text);
+}
+.destaque-portfolio strong{
+  color: var(--color-primary-dark); -webkit-text-fill-color: var(--color-primary-dark);
+}
+.vaga-rodape{
+  margin-top: 40px; font-size: 0.95rem;
+  color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted);
+}
+.vaga-rodape p{ margin-bottom: 6px; }
+.vaga-rodape a{
+  color: var(--color-primary); -webkit-text-fill-color: var(--color-primary);
+  border-bottom: 1px solid rgba(169,69,10,0.35);
+}
