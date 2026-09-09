@@ -7,7 +7,7 @@ from common import (
     SITE, NAV, SERVICES, INFLUENCERS, TESTIMONIALS, CASES,
     SOCIAL_MEDIA_CLIENTS, INFLUENCER_BRAND_LOGOS,
     head, header, footer,
-    influencer_card, client_card, stats_strip, brand_list,
+    influencer_card, client_card, stats_strip, brand_list, client_marquee,
 )
 from blog_posts import (
     BLOG_POSTS, CATEGORIES, CATEGORY_SLUGS, data_extenso, relacionados,
@@ -62,7 +62,7 @@ def build_home():
         </div>"""
 
     influencer_preview = "".join(influencer_card(inf) for inf in INFLUENCERS[:4])
-    client_preview = "".join(client_card(c) for c in SOCIAL_MEDIA_CLIENTS[:8])
+    client_preview = client_marquee(SOCIAL_MEDIA_CLIENTS)
 
     testimonial_preview = ""
     for t in TESTIMONIALS[:3]:
@@ -119,8 +119,8 @@ def build_home():
 
   <section class="section section-dark">
     <div class="container">
-      <div class="section-head center reveal" style="max-width:640px">
-        <span class="eyebrow" style="color:#F4D9C4;-webkit-text-fill-color:#F4D9C4">Nossa essência</span>
+      <div class="section-head center narrow reveal">
+        <span class="eyebrow">Nossa essência</span>
         <h2>Ética, compromisso e honestidade em cada entrega</h2>
         <p>Nossa missão é impulsionar empresas no ramo digital, conectando marcas e influenciadoras de forma estratégica, sem perder o cuidado humano em cada parceria.</p>
       </div>
@@ -134,11 +134,11 @@ def build_home():
         <div>
           <span class="eyebrow">Social media</span>
           <h2>Marcas que cuidamos todo dia</h2>
-          <p>Uma parte dos negócios que confiam a presença digital à nossa equipe.</p>
+          <p>Os negócios que confiam a presença digital à nossa equipe.</p>
         </div>
         <a class="btn btn-outline" href="/clientes-social-media.html">Ver todos os clientes</a>
       </div>
-      <div class="client-grid">{client_preview}</div>
+      <div class="reveal">{client_preview}</div>
     </div>
   </section>
 
@@ -194,11 +194,11 @@ def build_sobre():
     html += f"""
 <main id="conteudo">
 
-  <section class="section" style="padding-top:clamp(120px,16vw,160px)">
+  <section class="section page-hero">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Sobre a Bertoluchi</span>
-        <h1 style="font-size:clamp(2rem,4vw,2.8rem)">Uma agência nascida dentro da própria criação de conteúdo</h1>
+        <h1>Uma agência nascida dentro da própria criação de conteúdo</h1>
       </div>
 
       <div class="bio-split reveal">
@@ -275,11 +275,11 @@ def build_servicos_hub():
     html += header("/servicos.html")
     html += f"""
 <main id="conteudo">
-  <section class="section" style="padding-top:clamp(120px,16vw,160px)">
+  <section class="section page-hero">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Serviços</span>
-        <h1 style="font-size:clamp(2rem,4vw,2.8rem)">Tudo o que sua marca precisa para crescer nas redes</h1>
+        <h1>Tudo o que sua marca precisa para crescer nas redes</h1>
         <p>Cada serviço pode ser contratado isoladamente ou combinado, de acordo com o momento do seu negócio.</p>
       </div>
       <div class="mt-lg">{rows}</div>
@@ -328,7 +328,7 @@ def build_service_detail(s):
         <aside class="service-side">
           <h3>O que está incluso</h3>
           <ul>{highlights}</ul>
-          <a class="btn btn-primary" style="width:100%" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Solicitar proposta</a>
+          <a class="btn btn-primary btn-full" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Solicitar proposta</a>
         </aside>
       </div>
     </div>
@@ -336,10 +336,10 @@ def build_service_detail(s):
 
   <section class="section section-alt">
     <div class="container">
-      <div class="section-head reveal" style="max-width:none">
+      <div class="section-head full reveal">
         <span class="eyebrow">Outros serviços</span>
       </div>
-      <ul class="grid-2" style="font-family:var(--font-heading);font-weight:700;font-size:1.1rem">{other_links}</ul>
+      <ul class="grid-2 link-list">{other_links}</ul>
     </div>
   </section>
 
@@ -370,11 +370,11 @@ def build_influenciadoras():
     html += header("/influenciadoras.html")
     html += f"""
 <main id="conteudo">
-  <section class="section" style="padding-top:clamp(120px,16vw,160px)">
+  <section class="section page-hero">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Influenciadoras</span>
-        <h1 style="font-size:clamp(2rem,4vw,2.8rem)">Talentos que assessoramos</h1>
+        <h1>Talentos que assessoramos</h1>
         <p>Cada uma com um nicho, um público e uma forma própria de se conectar. A gente cuida da parte comercial para que elas continuem focadas em criar.</p>
       </div>
       <div class="influencer-grid mt-lg">{cards}</div>
@@ -427,11 +427,11 @@ def build_resultados():
     html += header("/resultados.html")
     html += f"""
 <main id="conteudo">
-  <section class="section" style="padding-top:clamp(120px,16vw,160px)">
+  <section class="section page-hero">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Resultados</span>
-        <h1 style="font-size:clamp(2rem,4vw,2.8rem)">Cases e depoimentos</h1>
+        <h1>Cases e depoimentos</h1>
         <p>Estamos organizando cases com números completos de cada cliente. Por enquanto, veja os números que já podemos confirmar, o projeto social que apoiamos e o que dizem sobre a gente.</p>
       </div>
 
@@ -656,11 +656,11 @@ def build_contato():
     html += header("/contato.html")
     html += f"""
 <main id="conteudo">
-  <section class="section" style="padding-top:clamp(120px,16vw,160px)">
+  <section class="section page-hero">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Contato</span>
-        <h1 style="font-size:clamp(2rem,4vw,2.8rem)">Vamos conversar</h1>
+        <h1>Vamos conversar</h1>
         <p>Preencha o formulário e nossa equipe retorna assim que possível. Se preferir, fale direto pelo WhatsApp.</p>
       </div>
 
@@ -687,7 +687,7 @@ def build_contato():
         </form>
 
         <div class="contact-info reveal">
-          <a class="btn btn-primary" style="width:100%;margin-bottom:8px" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Agendar no WhatsApp</a>
+          <a class="btn btn-primary btn-full mb-sm" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Agendar no WhatsApp</a>
 
           <h3>Endereço</h3>
           <p>{SITE['address_line1']}<br>{SITE['address_line2']}</p>
@@ -722,11 +722,11 @@ def build_clientes_social_media():
     html += header("/clientes-social-media.html")
     html += f"""
 <main id="conteudo">
-  <section class="section" style="padding-top:clamp(120px,16vw,160px)">
+  <section class="section page-hero">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Clientes</span>
-        <h1 style="font-size:clamp(2rem,4vw,2.8rem)">Quem confia a presença digital à nossa equipe</h1>
+        <h1>Quem confia a presença digital à nossa equipe</h1>
         <p>São {len(SOCIAL_MEDIA_CLIENTS)} marcas ativas em social media, de estética e nutrição a alimentação, pet, mineração e turismo. Cada uma com estratégia própria, calendário próprio e acompanhamento de métrica.</p>
       </div>
       <div class="client-grid mt-lg">{cards}</div>
@@ -769,11 +769,11 @@ def build_trabalhe_conosco():
     html += header("/trabalhe-conosco.html")
     html += f"""
 <main id="conteudo">
-  <section class="section" style="padding-top:clamp(120px,16vw,160px)">
+  <section class="section page-hero">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Vaga aberta · Design</span>
-        <h1 style="font-size:clamp(2rem,4vw,2.8rem)">Designer Gráfico para Social Media</h1>
+        <h1>Designer Gráfico para Social Media</h1>
         <p>A Bertoluchi, agência de marketing digital, está contratando um(a) designer gráfico(a) para social media.</p>
       </div>
 

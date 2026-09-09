@@ -263,11 +263,41 @@ def stats_strip(light=False):
     return f'<div class="{cls}">{cells}</div>'
 
 
+def marquee(itens, rotulo):
+    """Faixa de wordmarks. itens: lista de (texto, link ou None).
+
+    O conteudo e duplicado para o loop nao ter emenda; a copia fica
+    aria-hidden e some quando o visitante pede menos movimento.
+    Sao nomes tratados tipograficamente, nunca logotipo de terceiro.
+    """
+    def bloco(clone):
+        marca = ' data-clone aria-hidden="true"' if clone else ""
+        partes = []
+        for i, (texto, link) in enumerate(itens):
+            if i:
+                partes.append(f'<span class="marquee-sep"{marca}></span>')
+            if link:
+                tab = ' tabindex="-1"' if clone else ""
+                partes.append(
+                    f'<a class="wordmark" href="{link}" target="_blank" '
+                    f'rel="noopener"{marca}{tab}>{texto}</a>')
+            else:
+                partes.append(f'<span class="wordmark"{marca}>{texto}</span>')
+        return "".join(partes)
+
+    return f"""<div class="marquee" role="group" aria-label="{rotulo}">
+        <div class="marquee-track">{bloco(False)}{bloco(True)}</div>
+      </div>"""
+
+
 def brand_list():
-    chips = "".join(
-        f'<li class="brand-chip">{b}</li>' for b in INFLUENCER_BRAND_LOGOS
-    )
-    return f'<ul class="brand-grid">{chips}</ul>'
+    return marquee([(b, None) for b in INFLUENCER_BRAND_LOGOS],
+                   "Marcas que já fizeram campanha com nossas influenciadoras")
+
+
+def client_marquee(clientes):
+    return marquee([(c["name"], c["link"]) for c in clientes],
+                   "Clientes de social media da Bertoluchi")
 
 
 def head(title, description, path="/index.html", og_image="/assets/img/hero-desktop.jpg",
