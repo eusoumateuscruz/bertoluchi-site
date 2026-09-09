@@ -24,17 +24,43 @@
     });
   }
 
-  // Header com sombra ao rolar
+  // Header: transparente no topo, vidro fosco ao rolar
   var header = document.querySelector("[data-header]");
   if (header) {
     var onScroll = function () {
-      if (window.scrollY > 12) {
-        header.style.boxShadow = "0 8px 24px rgba(44,24,12,0.08)";
-      } else {
-        header.style.boxShadow = "none";
-      }
+      header.classList.toggle("is-scrolled", window.scrollY > 12);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }
+
+  // Reveal on scroll, respeitando prefers-reduced-motion
+  var alvos = document.querySelectorAll(".reveal");
+  var semMovimento =
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!alvos.length) {
+    // nada a fazer
+  } else if (semMovimento || !("IntersectionObserver" in window)) {
+    // sem animacao: mostra tudo de uma vez
+    alvos.forEach(function (el) {
+      el.classList.add("is-visible");
+    });
+  } else {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.08 }
+    );
+    alvos.forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
 })();

@@ -20,6 +20,8 @@ SITE = {
     "instagram": "https://www.instagram.com/bertoluchiagencia/",
     "linkedin": "https://www.linkedin.com/company/bertoluchi/",
     "behance": "https://www.behance.net/beatrizbertolu",
+    "stat_brandings": "+200",
+    "stat_brandings_label": "Brandings realizados",
 }
 
 NAV = [
@@ -27,6 +29,7 @@ NAV = [
     ("Sobre", "/sobre.html"),
     ("Serviços", "/servicos.html"),
     ("Influenciadoras", "/influenciadoras.html"),
+    ("Clientes", "/clientes-social-media.html"),
     ("Resultados", "/resultados.html"),
     ("Blog", "/blog.html"),
 ]
@@ -113,27 +116,65 @@ SERVICES = [
     },
 ]
 
-# Influenciadoras — nomes e handles conforme página /influenciadoras do site
-# atual (fonte mais completa e recente que a home). Fotos ainda são as do
-# site antigo (Squarespace), usadas como placeholder até Mateus enviar
-# material fotográfico novo — sinalizado no rodapé da seção.
+# Influenciadoras assessoradas, conforme os destaques do Instagram da
+# agência. Fotos baixadas do acervo da agência e otimizadas localmente
+# (webp + fallback jpg). As três últimas ainda não têm foto própria e
+# usam o card de iniciais até o material fotográfico ser enviado.
 INFLUENCERS = [
-    {"name": "O que fazer em Joinville", "handle": "@oquefazeremjoinville",
-     "img": "https://images.squarespace-cdn.com/content/v1/6679f20ef47bd7288437f3ba/70052233-723a-419c-a32b-34f42da8d98e/WhatsApp+Image+2024-08-20+at+13.25.06_263ae334.jpg"},
-    {"name": "Morgana Dias", "handle": "@morguih",
-     "img": "https://images.squarespace-cdn.com/content/v1/6679f20ef47bd7288437f3ba/04e4482e-3864-495a-8606-d06f7a527270/IMG_2231.jpg"},
-    {"name": "Beatriz Bertoluchi", "handle": "@bertoluchib",
-     "img": "https://images.squarespace-cdn.com/content/v1/6679f20ef47bd7288437f3ba/afde8285-e04c-4ef6-87a4-b006f947ac89/0X3A1248.jpg"},
-    {"name": "Larissa Estrada", "handle": "@larisaestradaa",
-     "img": "https://images.squarespace-cdn.com/content/v1/6679f20ef47bd7288437f3ba/737a3009-f78b-4ca7-8cff-bf52c3fa8acd/WhatsApp+Image+2024-08-01+at+11.54.22_1cf0f8a0.jpg"},
-    {"name": "Nidyellen Rodrigues", "handle": "@nidyellenr",
-     "img": "https://images.squarespace-cdn.com/content/v1/6679f20ef47bd7288437f3ba/a910b6c0-97c0-403c-9ebd-4a51f170a02c/Nidyellen+Rodrigues.png"},
-    {"name": "Lipão", "handle": "@pastorlipao",
-     "img": "https://images.squarespace-cdn.com/content/v1/6679f20ef47bd7288437f3ba/02483d7d-c1ca-43d4-a57c-71c8a138b46c/WhatsApp+Image+2024-08-01+at+11.54.16_24f8d131.jpg"},
+    {"name": "Larissa Estrada", "handle": "@larissaestradaa",
+     "niche": "Fé | Lifestyle", "img": "influ-larissaestradaa"},
     {"name": "Kauane Leite", "handle": "@kauanelleite",
-     "img": "https://images.squarespace-cdn.com/content/v1/6679f20ef47bd7288437f3ba/7755fcba-b34b-4a0a-837f-4ea03be50ffe/b8963401-1921-4b53-8fcf-2667b979fb7d.jpg"},
+     "niche": "Fé cristã | Saúde mental", "img": "influ-kauanelleite"},
+    {"name": "Pastor Lipão", "handle": "@pastorlipao",
+     "niche": "Life Style | Fé", "img": "influ-pastorlipao"},
+    {"name": "Nidyellen Rodrigues", "handle": "@nidyellenr",
+     "niche": "Life Style | Rotina", "img": "influ-nidyellenr"},
+    {"name": "O que fazer em Joinville", "handle": "@oquefazeremjoinville",
+     "niche": "Dicas de locais em Joinville e região", "img": "influ-oquefazeremjoinville"},
     {"name": "Mari Marques", "handle": "@mari.marques_",
-     "img": "https://images.squarespace-cdn.com/content/v1/6679f20ef47bd7288437f3ba/db9cb1b2-29ee-4c32-8181-b3b09db2275b/IMG_9240.JPG"},
+     "niche": "Lifestyle | Fitness", "img": "influ-mari-marques"},
+    {"name": "Morgana Dias", "handle": "@morguih",
+     "niche": "", "img": "influ-morguih"},
+    {"name": "Beatriz Bertoluchi", "handle": "@bertoluchib",
+     "niche": "", "img": "influ-bertoluchib"},
+    {"name": "Flávia Gabriela", "handle": "@fglins",
+     "niche": "Lifestyle | Empreendedorismo | Dicas", "img": None},
+    {"name": "Leticia Levasz", "handle": "@_leticiafit_",
+     "niche": "Fitness | Lifestyle", "img": None},
+    {"name": "Allan Popeye", "handle": "@allan_popeye",
+     "niche": "Luta | Lifestyle", "img": None},
+]
+
+# Clientes ativos de social media (lista enviada por Mateus).
+SOCIAL_MEDIA_CLIENTS = [
+    {"name": "Tainá Dias", "handle": "@tainadiasesteticista", "link": "https://www.instagram.com/tainadiasesteticista/"},
+    {"name": "Pytave", "handle": "@pytavefitness", "link": "https://www.instagram.com/pytavefitness/"},
+    {"name": "André - A2 Personal", "handle": "@a2_personalfitness", "link": "https://www.instagram.com/a2_personalfitness/"},
+    {"name": "Porto Pet", "handle": "@portopetpf", "link": "https://www.instagram.com/portopetpf/"},
+    {"name": "Tejada's Café", "handle": "@tejadascafe", "link": "https://www.instagram.com/tejadascafe/"},
+    {"name": "Sr. Tejada Coxinhas", "handle": "@srtejadacoxinhas", "link": "https://www.instagram.com/srtejadacoxinhas/"},
+    {"name": "Arge Auto Escola", "handle": "@argeautoescola", "link": "https://www.instagram.com/argeautoescola/"},
+    {"name": "Giovanna Giocondo", "handle": "@dragiovannagiocondo", "link": "https://www.instagram.com/dragiovannagiocondo/"},
+    {"name": "SOS Mangueiras", "handle": "@sosmangueiraspf", "link": "https://www.instagram.com/sosmangueiraspf/"},
+    {"name": "Loja Petrópolis", "handle": "@lojapetropolis_", "link": "https://www.instagram.com/lojapetropolis_/"},
+    {"name": "Veiga", "handle": "@mineracaoveiga", "link": "https://www.instagram.com/mineracaoveiga/"},
+    {"name": "Ideal Medical", "handle": "@idealemergencias", "link": "https://www.instagram.com/idealemergencias/"},
+    {"name": "Bertoluchi", "handle": "@bertoluchiagencia", "link": "https://www.instagram.com/bertoluchiagencia/"},
+    {"name": "Perfect Her", "handle": "@perfecther.oficial", "link": "https://www.instagram.com/perfecther.oficial/"},
+    {"name": "Suéllen", "handle": "@suellenjungernutri", "link": "https://www.instagram.com/suellenjungernutri/"},
+    {"name": "Congonhas Travel", "handle": "@congonhastravellcc", "link": "https://www.instagram.com/congonhastravellcc/"},
+    {"name": "Amanda Vencel", "handle": "@dra.amandavencel", "link": "https://www.instagram.com/dra.amandavencel/"},
+    {"name": "OTTO HOUSE", "handle": "@ottohouselarepatrimonio", "link": "https://www.instagram.com/ottohouselarepatrimonio/"},
+]
+
+# Marcas que já fizeram campanha publicitária com as influenciadoras
+# assessoradas. Somente nomes, não temos os logotipos.
+INFLUENCER_BRAND_LOGOS = [
+    "Havan", "Starbucks", "McDonald's", "Shopping Mueller Joinville",
+    "Shopping Garten Joinville", "Espaço Laser", "Atacadão", "Hipermais",
+    "Komprão", "Lavô", "Editoria Vida", "Girando Show",
+    "Growth (roupas fitness)", "AVI", "Easy YSY (semijoias)", "Madero",
+    "Jerônimo", "Leaves", "Dolher",
 ]
 
 # Depoimentos reais, coletados do site atual (autorização de uso ainda
@@ -163,6 +204,71 @@ FONTS_LINK = (
 )
 
 
+def initials(name):
+    """Iniciais para o card de influenciadora sem foto."""
+    ignorar = {"que", "fazer", "em", "de", "do", "da", "e", "dos", "das"}
+    palavras = [w for w in name.split() if w.lower() not in ignorar and w[:1].isalpha()]
+    return "".join(w[0] for w in palavras[:2]).upper()
+
+
+def influencer_card(inf, reveal=True):
+    """Card de influenciadora. Sem foto, cai no bloco de iniciais."""
+    cls = "influencer-card" + (" reveal" if reveal else "")
+    perfil = "https://www.instagram.com/" + inf["handle"][1:] + "/"
+    niche = f'<span class="influencer-niche">{inf["niche"]}</span>' if inf.get("niche") else ""
+    if inf.get("img"):
+        visual = f"""<picture>
+            <source srcset="/assets/img/{inf['img']}.webp" type="image/webp">
+            <img src="/assets/img/{inf['img']}.jpg" alt="{inf['name']}, influenciadora assessorada pela Bertoluchi" loading="lazy" decoding="async">
+          </picture>"""
+    else:
+        cls += " influencer-card--placeholder"
+        visual = f'<span class="influencer-initials" aria-hidden="true">{initials(inf["name"])}</span>'
+    return f"""
+        <a class="{cls}" href="{perfil}" target="_blank" rel="noopener">
+          {visual}
+          <div class="influencer-overlay">
+            <strong>{inf['name']}</strong>
+            <span class="influencer-handle">{inf['handle']}</span>
+            {niche}
+          </div>
+        </a>"""
+
+
+def client_card(c, reveal=True):
+    cls = "client-card" + (" reveal" if reveal else "")
+    return f"""
+        <a class="{cls}" href="{c['link']}" target="_blank" rel="noopener">
+          <span class="client-name">{c['name']}</span>
+          <span class="client-handle">{c['handle']}</span>
+        </a>"""
+
+
+def stats_strip(light=False):
+    """Numeros reais: brandings confirmados + contagem direta das listas."""
+    itens = [
+        (SITE["stat_brandings"], SITE["stat_brandings_label"]),
+        (str(len(INFLUENCERS)), "Influenciadoras assessoradas"),
+        (str(len(SOCIAL_MEDIA_CLIENTS)), "Clientes de Social Media"),
+    ]
+    cells = "".join(
+        f"""
+        <div class="stat-item reveal">
+          <div class="stat-number">{n}</div>
+          <div class="stat-label">{label}</div>
+        </div>""" for n, label in itens
+    )
+    cls = "stats-strip stats-strip--light" if light else "stats-strip"
+    return f'<div class="{cls}">{cells}</div>'
+
+
+def brand_list():
+    chips = "".join(
+        f'<li class="brand-chip">{b}</li>' for b in INFLUENCER_BRAND_LOGOS
+    )
+    return f'<ul class="brand-grid">{chips}</ul>'
+
+
 def head(title, description, path="/index.html", og_image="/assets/img/hero-desktop.jpg"):
     canonical = SITE["domain"] + path
     return f"""<!DOCTYPE html>
@@ -188,6 +294,7 @@ def head(title, description, path="/index.html", og_image="/assets/img/hero-desk
 <link rel="icon" href="/assets/img/logo.png">
 {FONTS_LINK}
 <link rel="stylesheet" href="/assets/css/style.css">
+<script>document.documentElement.classList.add("js-reveal");</script>
 </head>
 <body>
 """
@@ -240,8 +347,11 @@ def footer():
         <li><a href="/sobre.html">Sobre</a></li>
         <li><a href="/servicos.html">Serviços</a></li>
         <li><a href="/influenciadoras.html">Influenciadoras</a></li>
+        <li><a href="/clientes-social-media.html">Clientes</a></li>
         <li><a href="/resultados.html">Resultados</a></li>
         <li><a href="/blog.html">Blog</a></li>
+        <li><a href="/contato.html">Contato</a></li>
+        <li><a href="/trabalhe-conosco.html">Trabalhe conosco</a></li>
       </ul>
     </div>
     <div class="footer-col">

@@ -128,9 +128,17 @@ p:last-child{ margin-bottom: 0; }
    ============================================================ */
 .site-header{
   position: sticky; top: 0; z-index: 100;
-  background: rgba(251,244,236,0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--color-border);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background .28s ease, backdrop-filter .28s ease,
+              border-color .28s ease, box-shadow .28s ease;
+}
+.site-header.is-scrolled{
+  background: rgba(251,244,236,0.72);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 8px 32px rgba(44,24,12,0.10);
 }
 .header-inner{
   display: flex; align-items: center; gap: 24px;
@@ -410,7 +418,7 @@ p:last-child{ margin-bottom: 0; }
 .contact-form{ display: flex; flex-direction: column; gap: 16px; }
 .form-field{ display: flex; flex-direction: column; gap: 6px; }
 .form-field label{ font-size: 0.85rem; font-weight: 600; font-family: var(--font-heading); }
-.form-field input, .form-field textarea{
+.form-field input, .form-field textarea, .form-field select{
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: 14px 16px;
@@ -461,3 +469,123 @@ p:last-child{ margin-bottom: 0; }
 .mt-lg{ margin-top: 64px; }
 .grid-2{ display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 @media (max-width: 760px){ .grid-2{ grid-template-columns: 1fr; } }
+
+
+/* ============================================================
+   COMPONENTES ADICIONAIS
+   ============================================================ */
+
+/* ---------- Section head em duas colunas ---------- */
+.section-head.split{
+  display: flex; align-items: flex-end; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px; max-width: none;
+}
+.section-head.split h2{ margin-bottom: 0; }
+.section-head.split p{ margin-bottom: 0; margin-top: 8px; }
+
+/* ---------- Stats strip em fundo claro ---------- */
+.stats-strip--light{
+  border-top-color: var(--color-border);
+  border-bottom-color: var(--color-border);
+}
+.stats-strip--light .stat-number{ color: var(--color-primary); -webkit-text-fill-color: var(--color-primary); }
+.stats-strip--light .stat-label{ color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted); }
+
+/* ---------- Clientes de social media ---------- */
+.client-grid{ display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.client-card{
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  display: flex; flex-direction: column; gap: 4px;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.client-card:hover{
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+  border-color: rgba(169,69,10,0.35);
+}
+.client-name{
+  font-family: var(--font-heading); font-weight: 700; font-size: 1rem;
+  color: var(--color-text); -webkit-text-fill-color: var(--color-text);
+}
+.client-handle{
+  font-size: 0.86rem;
+  color: var(--color-primary); -webkit-text-fill-color: var(--color-primary);
+}
+@media (max-width: 980px){ .client-grid{ grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 520px){ .client-grid{ grid-template-columns: 1fr; } }
+
+/* ---------- Influenciadora: nicho e card sem foto ---------- */
+.influencer-card picture{ display: block; width: 100%; height: 100%; }
+.influencer-overlay .influencer-handle{ display: block; font-size: 0.85rem; opacity: 0.85; }
+.influencer-overlay .influencer-niche{
+  display: block; margin-top: 3px;
+  font-size: 0.78rem; line-height: 1.3; opacity: 1;
+  color: #F1D5BE; -webkit-text-fill-color: #F1D5BE;
+}
+.influencer-card--placeholder{
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(150deg, #F1D5BE 0%, #C9713A 55%, #A9450A 100%);
+}
+.influencer-initials{
+  font-family: var(--font-display); font-weight: 900;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  letter-spacing: 0.04em;
+  color: #FBF4EC; -webkit-text-fill-color: #FBF4EC;
+  text-shadow: 0 2px 14px rgba(44,24,12,0.28);
+}
+
+/* ---------- Marcas atendidas ---------- */
+.brand-grid{ display: flex; flex-wrap: wrap; gap: 10px 12px; justify-content: center; }
+.brand-chip{
+  font-family: var(--font-heading); font-weight: 700; font-size: 0.92rem;
+  padding: 10px 18px;
+  border: 1px solid rgba(44,30,21,0.18);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.55);
+  color: var(--color-text); -webkit-text-fill-color: var(--color-text);
+}
+
+/* ---------- Chamada do Behance ---------- */
+.behance-callout{
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px clamp(24px,4vw,40px);
+}
+.behance-callout .eyebrow{ margin-bottom: 8px; }
+.behance-text{
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  line-height: 1.18; max-width: 34ch; margin: 0;
+  color: var(--color-text); -webkit-text-fill-color: var(--color-text);
+}
+
+/* ---------- Reveal on scroll ---------- */
+.js-reveal .reveal{
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .62s cubic-bezier(.16,1,.3,1), transform .62s cubic-bezier(.16,1,.3,1);
+  will-change: opacity, transform;
+}
+.js-reveal .reveal.is-visible{ opacity: 1; transform: none; will-change: auto; }
+.js-reveal .influencer-grid .reveal:nth-child(2),
+.js-reveal .client-grid .reveal:nth-child(2),
+.js-reveal .stats-strip .reveal:nth-child(2){ transition-delay: .07s; }
+.js-reveal .influencer-grid .reveal:nth-child(3),
+.js-reveal .client-grid .reveal:nth-child(3),
+.js-reveal .stats-strip .reveal:nth-child(3){ transition-delay: .14s; }
+.js-reveal .influencer-grid .reveal:nth-child(4),
+.js-reveal .client-grid .reveal:nth-child(4){ transition-delay: .21s; }
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  .js-reveal .reveal{ opacity: 1; transform: none; transition: none; }
+  .site-header{ transition: none; }
+  .pillar-card:hover, .client-card:hover, .btn:hover,
+  .whatsapp-float:hover, .influencer-card:hover img{ transform: none; }
+}
