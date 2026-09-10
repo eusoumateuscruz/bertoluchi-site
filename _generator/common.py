@@ -236,6 +236,47 @@ def influencer_card(inf, reveal=True):
         </a>"""
 
 
+def coverflow(items, id_suffix="home"):
+    """Carrossel 3D estilo capa de album.
+
+    Adaptado ao projeto: INFLUENCERS guarda "img" como nome-base do arquivo
+    (ex.: influ-morguih), nao como URL. Entao servimos <picture> com webp e
+    fallback jpg, igual ao resto do site. Quem nao tiver foto cai no bloco
+    de iniciais, o mesmo usado em influencer_card().
+    """
+    cards = ""
+    for it in items:
+        title = it["name"]
+        partes = [it.get("handle", "")]
+        if it.get("niche"):
+            partes.append(it["niche"])
+        subtitle = " &middot; ".join([p for p in partes if p])
+        if it.get("img"):
+            visual = f"""<picture>
+               <source srcset="/assets/img/{it['img']}.webp" type="image/webp">
+               <img src="/assets/img/{it['img']}.jpg" alt="{title}, influenciadora assessorada pela Bertoluchi" loading="lazy" decoding="async">
+             </picture>"""
+        else:
+            visual = (f'<span class="coverflow-initials" aria-hidden="true">'
+                      f'{initials(title)}</span>')
+        cards += f"""
+           <div class="coverflow-card" data-title="{title}" data-subtitle="{subtitle}">
+             {visual}
+           </div>"""
+    return f"""
+       <div class="coverflow" data-coverflow id="coverflow-{id_suffix}">
+         <div class="coverflow-frame">
+           <div class="coverflow-stage">{cards}
+           </div>
+           <button class="coverflow-nav coverflow-prev" type="button" aria-label="Anterior">&larr;</button>
+           <button class="coverflow-nav coverflow-next" type="button" aria-label="Próximo">&rarr;</button>
+         </div>
+         <p class="coverflow-caption" aria-live="polite"></p>
+         <div class="coverflow-dots"></div>
+       </div>
+"""
+
+
 def client_card(c, reveal=True):
     cls = "client-card" + (" reveal" if reveal else "")
     return f"""

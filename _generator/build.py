@@ -8,6 +8,7 @@ from common import (
     SOCIAL_MEDIA_CLIENTS, INFLUENCER_BRAND_LOGOS,
     head, header, footer,
     influencer_card, client_card, stats_strip, brand_list, client_marquee,
+    coverflow,
 )
 from blog_posts import (
     BLOG_POSTS, CATEGORIES, CATEGORY_SLUGS, data_extenso, relacionados,
@@ -61,7 +62,7 @@ def build_home():
           <a class="pillar-link" href="/servicos/{s['slug']}.html">Saiba mais →</a>
         </div>"""
 
-    influencer_preview = "".join(influencer_card(inf) for inf in INFLUENCERS[:4])
+    influencer_preview = coverflow(INFLUENCERS, "home")
     client_preview = client_marquee(SOCIAL_MEDIA_CLIENTS)
 
     testimonial_preview = ""
@@ -151,7 +152,7 @@ def build_home():
         </div>
         <a class="btn btn-outline" href="/influenciadoras.html">Ver todas</a>
       </div>
-      <div class="influencer-grid mt-lg">{influencer_preview}</div>
+      <div class="mt-lg reveal">{influencer_preview}</div>
     </div>
   </section>
 
