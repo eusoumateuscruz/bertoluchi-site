@@ -898,3 +898,23 @@ a.wordmark:hover, a.wordmark:focus-visible{
   .marquee-track [data-clone]{ display: none; }
   .wordmark{ opacity: .8; }
 }
+
+/* ============================================================
+   BLINDAGEM: fundo escuro sempre vence (evita bug de contraste
+   quando um componente reutilizável de cor "clara" é usado dentro
+   de uma section-dark). Fica no fim do arquivo de propósito, pra
+   vencer qualquer empate de especificidade por ordem de cascata.
+   ============================================================ */
+.section-dark p,
+.section-dark .section-head p,
+.section-dark .pillar-card p,
+.section-dark .testimonial-card p,
+.section-dark .case-card p,
+.section-dark .value-card p,
+.section-dark .service-row p{
+  color: #E7D8CB; -webkit-text-fill-color: #E7D8CB;
+}
+.section-dark h1, .section-dark h2, .section-dark h3, .section-dark h4,
+.section-dark .section-head h2{
+  color: #fff; -webkit-text-fill-color: #fff;
+}
