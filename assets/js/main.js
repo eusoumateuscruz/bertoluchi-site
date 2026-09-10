@@ -63,10 +63,7 @@
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
-          // boundingClientRect.top < 0 cobre o elemento que ja ficou para
-          // tras num salto rapido de rolagem: sem isso ele nunca chega a
-          // intersectar e fica invisivel (observado no WebKit).
-          if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
+          if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
             observer.unobserve(entry.target);
           }
@@ -77,6 +74,27 @@
     alvos.forEach(function (el) {
       observer.observe(el);
     });
+
+    // Rede de seguranca: num salto rapido de rolagem (ancora, fim da pagina)
+    // um elemento pode nunca chegar a intersectar e ficaria invisivel para
+    // sempre. Observado no WebKit. A varredura garante que tudo que ja passou
+    // pela dobra aparece, sem depender do observer.
+    var varrendo = false;
+    var varrer = function () {
+      alvos.forEach(function (el) {
+        if (el.classList.contains("is-visible")) return;
+        if (el.getBoundingClientRect().top < window.innerHeight) {
+          el.classList.add("is-visible");
+          observer.unobserve(el);
+        }
+      });
+    };
+    window.addEventListener("scroll", function () {
+      if (varrendo) return;
+      varrendo = true;
+      requestAnimationFrame(function () { varrer(); varrendo = false; });
+    }, { passive: true });
+    window.addEventListener("load", varrer);
   }
 
 
