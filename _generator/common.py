@@ -339,9 +339,20 @@ def head(title, description, path="/index.html", og_image="/assets/img/hero-desk
 
 def header(active_path):
     links = ""
-    for label, href in NAV:
+    mobile_links = ""
+    for i, (label, href) in enumerate(NAV, start=1):
         active = " active" if href == active_path else ""
         links += f'<li><a class="nav-link{active}" href="{href}">{label}</a></li>'
+        mobile_links += (
+            f'<li><a class="mobile-nav-link{active}" href="{href}">'
+            f'<span class="mobile-nav-index">{i:02d}</span>'
+            f'<span class="mobile-nav-label">{label}</span>'
+            f'</a></li>'
+        )
+    # O drawer e o scrim ficam FORA do <header> de proposito: quando o header
+    # rola, ele ganha backdrop-filter, e backdrop-filter cria bloco de
+    # contencao para descendentes position:fixed. Dentro do header, o drawer
+    # colapsaria para a altura do header em vez de ocupar a tela.
     return f"""
 <a class="skip-link" href="#conteudo">Pular para conteúdo</a>
 <header class="site-header" data-header>
@@ -357,11 +368,29 @@ def header(active_path):
       <span></span><span></span><span></span>
     </button>
   </div>
-  <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
-    <ul class="mobile-nav-list">{links}</ul>
-    <a class="btn btn-primary" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente no WhatsApp</a>
-  </div>
 </header>
+<div class="menu-scrim" data-menu-scrim></div>
+<aside class="mobile-menu" id="mobile-menu" data-mobile-menu aria-hidden="true">
+  <div class="mobile-menu-head">
+    <img src="/assets/img/logo.png" alt="Bertoluchi" class="mobile-menu-logo">
+    <button class="menu-close" data-menu-toggle aria-label="Fechar menu">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+  </div>
+  <nav class="mobile-menu-nav" aria-label="Navegação mobile">
+    <ul class="mobile-nav-list">{mobile_links}</ul>
+  </nav>
+  <div class="mobile-menu-foot">
+    <a class="btn btn-primary mobile-menu-cta" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
+    <div class="mobile-menu-social">
+      <a href="{SITE['instagram']}" target="_blank" rel="noopener">Instagram</a>
+      <span class="mobile-menu-social-dot">&middot;</span>
+      <a href="mailto:{SITE['email']}">{SITE['email']}</a>
+    </div>
+  </div>
+</aside>
 """
 
 

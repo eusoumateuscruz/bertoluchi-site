@@ -6,21 +6,34 @@
     el.textContent = new Date().getFullYear();
   });
 
-  // Menu mobile
-  var toggle = document.querySelector("[data-menu-toggle]");
+  // Menu mobile: drawer lateral (hamburguer, X, scrim e Esc)
+  var toggles = document.querySelectorAll("[data-menu-toggle]");
   var menu = document.querySelector("[data-mobile-menu]");
-  if (toggle && menu) {
-    toggle.addEventListener("click", function () {
-      var isOpen = menu.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      document.body.style.overflow = isOpen ? "hidden" : "";
+  var scrim = document.querySelector("[data-menu-scrim]");
+  var hamburger = document.querySelector(".menu-toggle");
+
+  function setMenu(isOpen) {
+    menu.classList.toggle("is-open", isOpen);
+    if (scrim) scrim.classList.toggle("is-open", isOpen);
+    menu.setAttribute("aria-hidden", isOpen ? "false" : "true");
+    if (hamburger) hamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    document.body.style.overflow = isOpen ? "hidden" : "";
+  }
+
+  if (menu && toggles.length) {
+    toggles.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setMenu(!menu.classList.contains("is-open"));
+      });
+    });
+    if (scrim) {
+      scrim.addEventListener("click", function () { setMenu(false); });
+    }
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setMenu(false);
     });
     menu.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        menu.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-        document.body.style.overflow = "";
-      });
+      link.addEventListener("click", function () { setMenu(false); });
     });
   }
 
