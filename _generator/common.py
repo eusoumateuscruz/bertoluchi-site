@@ -45,7 +45,6 @@ NAV = [
     ("Sobre", "/sobre.html"),
     ("Serviços", "/servicos.html"),
     ("Influenciadoras", "/influenciadoras.html"),
-    ("Clientes", "/clientes-social-media.html"),
     ("Resultados", "/resultados.html"),
     ("Blog", "/blog.html"),
 ]
@@ -534,7 +533,6 @@ def footer():
         <li><a href="/sobre.html">Sobre</a></li>
         <li><a href="/servicos.html">Serviços</a></li>
         <li><a href="/influenciadoras.html">Influenciadoras</a></li>
-        <li><a href="/clientes-social-media.html">Clientes</a></li>
         <li><a href="/resultados.html">Resultados</a></li>
         <li><a href="/blog.html">Blog</a></li>
         <li><a href="/contato.html">Contato</a></li>
