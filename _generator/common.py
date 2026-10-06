@@ -26,12 +26,12 @@ SITE = {
     "form_email": "beatriz@bertoluchiagencia.com.br",
 }
 
-# Numeros confirmados pela Beatriz no PDF de ajustes (2026-10-06).
+# Numeros confirmados pelo CEO em 2026-10-06, em grade 2x2 nesta ordem.
 STATS = [
     ("+200", "Brandings realizados"),
-    ("+10", "Influenciadores assessorados"),
-    ("+20", "Clientes de social media"),
     ("+300", "Clientes já atendidos"),
+    ("+20", "Clientes de social media mensalmente"),
+    ("+15", "Influenciadores assessorados mensalmente"),
 ]
 
 
