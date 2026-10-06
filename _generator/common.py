@@ -519,7 +519,7 @@ def footer():
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <img src="/assets/img/logo-claro.png" alt="Bertoluchi" width="176" height="46" class="footer-logo">
+      <img src="/assets/img/logo-claro.svg" alt="Bertoluchi, Publicidade e marketing digital" width="231" height="46" class="footer-logo">
       <p>Social media, branding e gestão de influenciadoras para marcas que querem se tornar referência nas redes sociais.</p>
       <div class="footer-social">
         <a href="{SITE['instagram']}" target="_blank" rel="noopener" aria-label="Instagram da Bertoluchi">Instagram</a>
