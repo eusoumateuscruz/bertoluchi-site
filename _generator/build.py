@@ -155,14 +155,20 @@ def build_home():
 
   <section class="hero hero--marca">
     <div class="hero-content">
-      <div class="container">
-        <img class="hero-logo" src="/assets/img/logo-hero.png" width="1262" height="252" alt="Bertoluchi, publicidade e marketing digital" fetchpriority="high">
+      <div class="container hero-marca-grid">
+        <div>
+        <span class="eyebrow">Publicidade e marketing digital</span>
         <h1 class="hero-headline">Torne seu negócio uma referência nas redes sociais</h1>
         <p class="hero-sub">Social media com estratégia, criação de conteúdo de alta qualidade e branding, para marcas que querem crescer com consistência. E, quando faz sentido, conectamos sua marca às influenciadoras certas.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
           <a class="btn btn-outline" href="/servicos.html">Conhecer serviços</a>
         </div>
+        </div>
+        <picture class="hero-icone">
+          <source srcset="/assets/img/icone-hero.webp" type="image/webp">
+          <img src="/assets/img/icone-hero.png" width="512" height="512" alt="Ícone da Bertoluchi" fetchpriority="high">
+        </picture>
       </div>
     </div>
   </section>
