@@ -195,11 +195,11 @@ INFLUENCERS = [
     {"name": "Allan Popeye", "handle": "@allan_popeye",
      "niche": "Luta | Lifestyle", "img": "influ-allan-popeye"},
     # Novos em 2026-10-06 (fotos enviadas pela Beatriz). Nome como aparece
-    # no proprio perfil do Instagram; nicho ainda nao informado.
+    # no proprio perfil do Instagram.
     {"name": "Yasmin Andrade", "handle": "@yasmin.andrade__",
-     "niche": "", "img": "influ-yasmin-andrade"},
+     "niche": "Lifestyle | Fitness", "img": "influ-yasmin-andrade"},
     {"name": "ÉÉÉguaaa", "handle": "@eeeguaaa",
-     "niche": "Joinville | Santa Catarina", "img": "influ-eeeguaaa"},
+     "niche": "Dicas de locais em Joinville e região", "img": "influ-eeeguaaa"},
 ]
 
 # Clientes ativos de social media (lista enviada por Mateus).
