@@ -171,8 +171,8 @@ def build_home():
         </div>
         <div class="hero-marca-icone" aria-hidden="true">
           <svg viewBox="0 0 100 100" width="100%" height="100%">
-            <rect x="0" y="0" width="100" height="100" rx="18" fill="#C4500F"/>
-            <path d="M50 14 L54 46 L86 50 L54 54 L50 86 L46 54 L14 50 L46 46 Z" fill="#FBF4EC"/>
+            <rect x="0" y="0" width="100" height="100" rx="20" fill="#B0480A"/>
+            <path d="M50.0 6.0 L53.1 42.6 L66.3 33.7 L57.4 46.9 L94.0 50.0 L57.4 53.1 L66.3 66.3 L53.1 57.4 L50.0 94.0 L46.9 57.4 L33.7 66.3 L42.6 53.1 L6.0 50.0 L42.6 46.9 L33.7 33.7 L46.9 42.6 Z" fill="#FBF4EC"/>
           </svg>
         </div>
       </div>

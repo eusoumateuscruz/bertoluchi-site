@@ -277,6 +277,30 @@ def initials(name):
     return "".join(w[0] for w in palavras[:2]).upper()
 
 
+def story_chrome(inf, rodape=True):
+    """Barras de progresso, avatar e @ no topo, nome e nicho embaixo,
+    imitando um stories do Instagram."""
+    if inf.get("img"):
+        avatar = f'<img src="/assets/img/{inf["img"]}.jpg" alt="" loading="lazy" decoding="async">'
+    else:
+        avatar = f'<span>{initials(inf["name"])}</span>'
+    niche = f'<span class="story-niche">{inf["niche"]}</span>' if inf.get("niche") else ""
+    baixo = f"""
+            <div class="story-bottom">
+              <strong class="story-name">{inf['name']}</strong>
+              {niche}
+              <span class="story-cta">Ver perfil</span>
+            </div>""" if rodape else ""
+    return f"""
+            <div class="story-top" aria-hidden="true">
+              <div class="story-bars"><span class="is-on"></span><span></span><span></span></div>
+              <div class="story-user">
+                <span class="story-avatar">{avatar}</span>
+                <span class="story-handle">{inf['handle'][1:]}</span>
+              </div>
+            </div>{baixo}"""
+
+
 def influencer_card(inf, reveal=True):
     """Card de influenciadora. Sem foto, cai no bloco de iniciais."""
     cls = "influencer-card" + (" reveal" if reveal else "")
@@ -291,13 +315,8 @@ def influencer_card(inf, reveal=True):
         cls += " influencer-card--placeholder"
         visual = f'<span class="influencer-initials" aria-hidden="true">{initials(inf["name"])}</span>'
     return f"""
-        <a class="{cls}" href="{perfil}" target="_blank" rel="noopener">
-          {visual}
-          <div class="influencer-overlay">
-            <strong>{inf['name']}</strong>
-            <span class="influencer-handle">{inf['handle']}</span>
-            {niche}
-          </div>
+        <a class="{cls} story-card" href="{perfil}" target="_blank" rel="noopener" aria-label="{inf['name']} ({inf['handle']}) no Instagram">
+          {visual}{story_chrome(inf)}
         </a>"""
 
 
@@ -325,8 +344,8 @@ def coverflow(items, id_suffix="home"):
             visual = (f'<span class="coverflow-initials" aria-hidden="true">'
                       f'{initials(title)}</span>')
         cards += f"""
-           <div class="coverflow-card" data-title="{title}" data-subtitle="{subtitle}">
-             {visual}
+           <div class="coverflow-card story-card" data-title="{title}" data-subtitle="{subtitle}">
+             {visual}{story_chrome(it)}
            </div>"""
     return f"""
        <div class="coverflow" data-coverflow id="coverflow-{id_suffix}">
