@@ -4,9 +4,9 @@ import os
 import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from common import (
-    SITE, NAV, SERVICES, INFLUENCERS, TESTIMONIALS, CASES,
+    SITE, NAV, SERVICES, INFLUENCERS, TESTIMONIALS,
     SOCIAL_MEDIA_CLIENTS, INFLUENCER_BRAND_LOGOS,
-    head, header, footer,
+    head, header, footer, whatsapp,
     influencer_card, client_card, stats_strip, brand_list, client_marquee,
     coverflow,
 )
@@ -35,7 +35,9 @@ def picture(base, alt, cls="", sizes="100vw"):
     </picture>"""
 
 
-def cta_band(title, sub):
+def cta_band(title, sub, link=None, rotulo="Falar no WhatsApp"):
+    link = link or SITE["whatsapp_link"]
+    alvo = ' target="_blank" rel="noopener"' if link.startswith("http") else ""
     return f"""
 <section class="section">
   <div class="container">
@@ -44,10 +46,85 @@ def cta_band(title, sub):
         <h2>{title}</h2>
         <p>{sub}</p>
       </div>
-      <a class="btn btn-light" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <a class="btn btn-light" href="{link}"{alvo}>{rotulo}</a>
     </div>
   </div>
 </section>"""
+
+
+def testimonial_card(t):
+    fonte = ('<span class="testimonial-source">'
+             '<span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> '
+             'Avaliação no Google</span>') if t.get("google") else ""
+    return f"""
+        <div class="testimonial-card reveal">
+          {fonte}
+          <p>&ldquo;{t['quote']}&rdquo;</p>
+          <cite>{t['author']}</cite>
+        </div>"""
+
+
+def campo(nome, rotulo, tipo="text", obrigatorio=True, extra=""):
+    req = " required" if obrigatorio else ""
+    opc = "" if obrigatorio else ' <span class="form-optional">(opcional)</span>'
+    if tipo == "textarea":
+        controle = f'<textarea id="{nome}" name="{nome}"{req}{extra}></textarea>'
+    else:
+        controle = f'<input type="{tipo}" id="{nome}" name="{nome}"{req}{extra}>'
+    return f"""
+          <div class="form-field">
+            <label for="{nome}">{rotulo}{opc}</label>
+            {controle}
+          </div>"""
+
+
+def seletor(nome, rotulo, opcoes):
+    ops = "".join(f'<option value="{o}">{o}</option>' for o in opcoes)
+    return f"""
+          <div class="form-field">
+            <label for="{nome}">{rotulo}</label>
+            <select id="{nome}" name="{nome}" required>
+              <option value="" disabled selected>Selecione</option>{ops}
+            </select>
+          </div>"""
+
+
+def formulario(tipo, assunto, campos, botao, id_form=""):
+    """Formulario enviado pelo FormSubmit.co direto para o e-mail da agencia.
+
+    Cada envio chega como e-mail em tabela, com o assunto padronizado
+    (ex.: "[Casting] Nome"), o que deixa tudo pesquisavel na caixa de entrada.
+    O main.js completa o assunto com o nome e manda o visitante para
+    /obrigado.html depois do envio.
+    """
+    ident = f' id="{id_form}"' if id_form else ""
+    return f"""
+        <form class="contact-form site-form reveal"{ident} action="https://formsubmit.co/{SITE['form_email']}" method="POST" data-form="{tipo}" data-assunto="{assunto}">
+          <input type="hidden" name="_subject" value="{assunto}">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="{SITE['domain']}/obrigado.html">
+          <input type="hidden" name="Origem" value="{tipo}">
+          <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+          {campos}
+          <button type="submit" class="btn btn-primary">{botao}</button>
+          <p class="form-note">Seus dados são usados apenas pela equipe da Bertoluchi para responder a este contato.</p>
+        </form>"""
+
+
+def form_casting():
+    campos = (
+        campo("Nome", "Nome completo")
+        + campo("Instagram", "Seu @ no Instagram", extra=' placeholder="@seuperfil"')
+        + campo("Seguidores", "Número aproximado de seguidores", extra=' placeholder="Ex.: 25 mil"')
+        + campo("Nicho", "Nicho de conteúdo", extra=' placeholder="Ex.: lifestyle, fitness, fé, maternidade"')
+        + campo("Cidade", "Cidade e estado")
+        + campo("WhatsApp", "WhatsApp", "tel")
+        + campo("email", "E-mail", "email")
+        + campo("Midia kit", "Link do mídia kit", "url", obrigatorio=False, extra=' placeholder="https://"')
+        + campo("Mensagem", "Conta um pouco sobre você e por que quer ser assessorada pela Bertoluchi", "textarea")
+    )
+    return formulario("Casting", "[Casting] Nova inscrição de influenciadora", campos, "Enviar inscrição", "casting")
 
 
 # ---------------------------------------------------------------- HOME
@@ -56,7 +133,7 @@ def build_home():
     for i, s in enumerate(SERVICES[:3], start=1):
         pillars += f"""
         <div class="pillar-card reveal">
-          <span class="pillar-index">0{i}</span>
+          <span class="pillar-index">{i:02d}</span>
           <h3>{s['title']}</h3>
           <p>{s['short']}</p>
           <a class="pillar-link" href="/servicos/{s['slug']}.html">Saiba mais →</a>
@@ -65,43 +142,38 @@ def build_home():
     influencer_preview = coverflow(INFLUENCERS, "home")
     client_preview = client_marquee(SOCIAL_MEDIA_CLIENTS)
 
-    testimonial_preview = ""
-    for t in TESTIMONIALS[:3]:
-        testimonial_preview += f"""
-        <div class="testimonial-card reveal">
-          <p>&ldquo;{t['quote']}&rdquo;</p>
-          <cite>{t['author']}</cite>
-        </div>"""
-
-    case = CASES[0]
+    testimonial_preview = "".join(testimonial_card(t) for t in TESTIMONIALS[:3])
 
     html = head(
         "Bertoluchi Agência: Gestão de Influenciadoras e Social Media em Joinville",
-        "Gestão completa de influenciadoras, social media e branding. Torne seu negócio uma referência nas redes sociais com a Bertoluchi Agência.",
+        "Social media, branding e gestão de influenciadoras em Joinville. Torne seu negócio uma referência nas redes sociais com a Bertoluchi Agência.",
         "/index.html",
     )
     html += header("/index.html")
     html += f"""
 <main id="conteudo">
 
-  <section class="hero">
-    <div class="hero-media">
-      <picture>
-        <source media="(max-width: 720px)" srcset="/assets/img/hero-mobile.webp" type="image/webp">
-        <source media="(max-width: 720px)" srcset="/assets/img/hero-mobile.jpg">
-        <source srcset="/assets/img/hero-desktop.webp" type="image/webp">
-        <img src="/assets/img/hero-desktop.jpg" alt="Beatriz Bertoluchi, fundadora da Bertoluchi Agência" fetchpriority="high">
-      </picture>
+  <section class="hero hero--marca">
+    <div class="hero-marca-fundo" aria-hidden="true">
+      <span class="hero-marca-palavra">BERTO</span>
+      <span class="hero-marca-palavra">LUCHI</span>
     </div>
-    <div class="hero-scrim"></div>
     <div class="hero-content">
-      <div class="container">
-        <span class="eyebrow">Publicidade e marketing digital</span>
-        <h1 class="hero-headline">Torne seu negócio uma referência nas redes sociais</h1>
-        <p class="hero-sub">Gestão completa de influenciadoras, planejamento estratégico e criação de conteúdo de alta qualidade, para marcas e criadoras que querem crescer com consistência.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
-          <a class="btn btn-outline-invert" href="/servicos.html">Conhecer serviços</a>
+      <div class="container hero-marca-grid">
+        <div>
+          <span class="eyebrow">Publicidade e marketing digital</span>
+          <h1 class="hero-headline">Torne seu negócio uma referência nas redes sociais</h1>
+          <p class="hero-sub">Social media com estratégia, criação de conteúdo de alta qualidade e branding, para marcas que querem crescer com consistência. E, quando faz sentido, conectamos sua marca às influenciadoras certas.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
+            <a class="btn btn-outline" href="/servicos.html">Conhecer serviços</a>
+          </div>
+        </div>
+        <div class="hero-marca-icone" aria-hidden="true">
+          <svg viewBox="0 0 100 100" width="100%" height="100%">
+            <rect x="0" y="0" width="100" height="100" rx="18" fill="#C4500F"/>
+            <path d="M50 14 L54 46 L86 50 L54 54 L50 86 L46 54 L14 50 L46 46 Z" fill="#FBF4EC"/>
+          </svg>
         </div>
       </div>
     </div>
@@ -112,7 +184,7 @@ def build_home():
       <div class="section-head center reveal">
         <span class="eyebrow">O que fazemos</span>
         <h2>Três frentes, um único objetivo: sua marca em evidência</h2>
-        <p>Da negociação da parceria certa até o post que sai no ar, cuidamos de cada etapa da sua presença digital.</p>
+        <p>Do planejamento do conteúdo ao post que sai no ar, cuidamos das redes sociais da sua marca de ponta a ponta, com identidade forte e as parcerias certas.</p>
       </div>
       <div class="pillars-grid">{pillars}</div>
     </div>
@@ -123,7 +195,7 @@ def build_home():
       <div class="section-head center narrow reveal">
         <span class="eyebrow">Nossa essência</span>
         <h2>Ética, compromisso e honestidade em cada entrega</h2>
-        <p>Nossa missão é impulsionar empresas no ramo digital, conectando marcas e influenciadoras de forma estratégica, sem perder o cuidado humano em cada parceria.</p>
+        <p>Nossa missão é impulsionar empresas no ramo digital com estratégia, conteúdo e as parcerias certas, sem perder o cuidado humano em cada entrega. Mais de 300 clientes de diversos setores já passaram pela Bertoluchi.</p>
       </div>
       {stats_strip()}
     </div>
@@ -153,16 +225,6 @@ def build_home():
         <a class="btn btn-outline" href="/influenciadoras.html">Ver todas</a>
       </div>
       <div class="mt-lg reveal">{influencer_preview}</div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="container">
-      <div class="case-card">
-        <span class="eyebrow">{case['tag']}</span>
-        <h3>{case['name']}</h3>
-        <p>{case['text']}</p>
-      </div>
     </div>
   </section>
 
@@ -259,7 +321,7 @@ def build_servicos_hub():
         rows += f"""
         <div class="service-row reveal">
           <div class="service-row-left">
-            <span class="service-num">0{i}</span>
+            <span class="service-num">{i:02d}</span>
             <div>
               <h3>{s['title']}</h3>
               <p>{s['short']}</p>
@@ -270,7 +332,7 @@ def build_servicos_hub():
 
     html = head(
         "Serviços: Bertoluchi Agência",
-        "Gestão de influenciadoras, social media, branding, consultoria e mentoria: conheça os serviços da Bertoluchi Agência.",
+        "Social media, branding, gestão de influenciadoras, criação de sites, tráfego pago, consultoria e mentoria: conheça os serviços da Bertoluchi Agência.",
         "/servicos.html",
     )
     html += header("/servicos.html")
@@ -301,8 +363,52 @@ def build_service_detail(s):
 
     other = [x for x in SERVICES if x["slug"] != s["slug"]]
     other_links = "".join(
-        f'<li><a href="/servicos/{o["slug"]}.html">{o["title"]}</a></li>' for o in other[:4]
+        f'<li><a href="/servicos/{o["slug"]}.html">{o["title"]}</a></li>' for o in other
     )
+
+    if s.get("casting"):
+        botoes = '<a class="btn btn-primary btn-full" href="#casting">Quero fazer parte do casting</a>'
+        cta_link = "#casting"
+    else:
+        link = whatsapp(s["cta_text"])
+        botoes = f'<a class="btn btn-primary btn-full" href="{link}" target="_blank" rel="noopener">Solicitar proposta</a>'
+        cta_link = link
+    if s.get("portfolio"):
+        botoes += (f'<a class="btn btn-outline btn-full mt-sm" href="{SITE["behance"]}" '
+                   f'target="_blank" rel="noopener">Ver portfólio no Behance</a>')
+
+    portfolio_html = ""
+    if s.get("portfolio"):
+        portfolio_html = f"""
+  <section class="section">
+    <div class="container">
+      <div class="behance-callout reveal">
+        <div>
+          <span class="eyebrow">Portfólio</span>
+          <p class="behance-text">Veja os projetos de branding que já criamos, com logotipos, paletas e manuais de marca completos.</p>
+        </div>
+        <a class="btn btn-primary" href="{SITE['behance']}" target="_blank" rel="noopener">Ver portfólio no Behance</a>
+      </div>
+    </div>
+  </section>
+"""
+
+    casting_html = ""
+    if s.get("casting"):
+        casting_html = f"""
+  <section class="section" id="casting-secao">
+    <div class="container">
+      <div class="form-split">
+        <div class="section-head reveal">
+          <span class="eyebrow">Casting</span>
+          <h2>Quer ser assessorada pela Bertoluchi?</h2>
+          <p>Nosso casting está fechado no momento. Preencha o formulário para entrar na nossa lista: avaliamos cada perfil com cuidado e entramos em contato quando abrirmos novas vagas.</p>
+        </div>
+        {form_casting()}
+      </div>
+    </div>
+  </section>
+"""
 
     html = head(
         f"{s['title']}: Serviços Bertoluchi",
@@ -329,12 +435,13 @@ def build_service_detail(s):
         <aside class="service-side">
           <h3>O que está incluso</h3>
           <ul>{highlights}</ul>
-          <a class="btn btn-primary btn-full" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Solicitar proposta</a>
+          {botoes}
         </aside>
       </div>
     </div>
   </section>
 
+{portfolio_html}{casting_html}
   <section class="section section-alt">
     <div class="container">
       <div class="section-head full reveal">
@@ -344,7 +451,7 @@ def build_service_detail(s):
     </div>
   </section>
 
-  {cta_band(f"Quer contratar {s['title']}?", "Fale com a gente e receba um direcionamento sob medida.")}
+  {cta_band(f"Quer contratar {s['title']}?", "Fale com a gente e receba um direcionamento sob medida.", cta_link) if not s.get("casting") else ""}
 </main>
 """
     html += footer()
@@ -394,7 +501,7 @@ def build_influenciadoras():
     </div>
   </section>
 
-  {cta_band("É influenciadora e quer assessoria?", "Fale com a gente e entenda como podemos cuidar da parte comercial da sua carreira.")}
+  {cta_band("É influenciadora e quer assessoria?", "Nosso casting está fechado no momento, mas você pode se inscrever na lista e ser avaliada nas próximas aberturas.", "/servicos/gestao-de-influenciadores.html#casting", "Quero me inscrever")}
 </main>
 """
     html += footer()
@@ -403,22 +510,7 @@ def build_influenciadoras():
 
 # ---------------------------------------------------------------- RESULTADOS
 def build_resultados():
-    cases_html = ""
-    for c in CASES:
-        cases_html += f"""
-        <div class="case-card reveal">
-          <span class="eyebrow">{c['tag']}</span>
-          <h3>{c['name']}</h3>
-          <p>{c['text']}</p>
-        </div>"""
-
-    testimonial_full = ""
-    for t in TESTIMONIALS:
-        testimonial_full += f"""
-        <div class="testimonial-card reveal">
-          <p>&ldquo;{t['quote']}&rdquo;</p>
-          <cite>{t['author']}</cite>
-        </div>"""
+    testimonial_full = "".join(testimonial_card(t) for t in TESTIMONIALS)
 
     html = head(
         "Resultados: Bertoluchi Agência",
@@ -433,7 +525,7 @@ def build_resultados():
       <div class="section-head reveal">
         <span class="eyebrow">Resultados</span>
         <h1>Cases e depoimentos</h1>
-        <p>Estamos organizando cases com números completos de cada cliente. Por enquanto, veja os números que já podemos confirmar, o projeto social que apoiamos e o que dizem sobre a gente.</p>
+        <p>Mais de 300 clientes de diversos setores já passaram pela Bertoluchi. Veja nossos números, o portfólio de branding e o que dizem sobre a gente.</p>
       </div>
 
       {stats_strip(light=True)}
@@ -441,13 +533,11 @@ def build_resultados():
       <div class="behance-callout reveal mt-lg">
         <div>
           <span class="eyebrow">Portfólio</span>
-          <p class="behance-text">Fazemos mídia kit para influenciadoras, veja o portfólio completo no Behance</p>
+          <p class="behance-text">Branding, identidade visual e mídia kit para influenciadoras: veja o portfólio completo no Behance</p>
         </div>
         <a class="btn btn-primary" href="{SITE['behance']}" target="_blank" rel="noopener">Ver portfólio no Behance</a>
       </div>
 
-      <div class="mt-lg">{cases_html}</div>
-      <p class="note-block">Métricas de resultado (engajamento, crescimento de seguidores, conversão) serão adicionadas aqui assim que autorizadas por cada cliente. Nenhum número é publicado sem confirmação.</p>
     </div>
   </section>
 
@@ -666,28 +756,14 @@ def build_contato():
       </div>
 
       <div class="contact-grid mt-lg">
-        <form class="contact-form reveal" action="#" method="post">
-          <div class="form-field">
-            <label for="name">Nome</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="form-field">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="form-field">
-            <label for="subject">Assunto</label>
-            <input type="text" id="subject" name="subject">
-          </div>
-          <div class="form-field">
-            <label for="message">Mensagem</label>
-            <textarea id="message" name="message" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Enviar mensagem</button>
-          <p class="form-note">Este formulário ainda precisa ser conectado a um serviço de envio (ex.: Formspree, Netlify Forms) antes da publicação.</p>
-        </form>
+{formulario("Contato", "[Contato] Nova mensagem pelo site",
+                   campo("Nome", "Nome") + campo("email", "E-mail", "email")
+                   + campo("WhatsApp", "WhatsApp", "tel", obrigatorio=False)
+                   + campo("Assunto", "Assunto", obrigatorio=False)
+                   + campo("Mensagem", "Mensagem", "textarea"),
+                   "Enviar mensagem")}
 
-        <div class="contact-info reveal">
+                <div class="contact-info reveal">
           <a class="btn btn-primary btn-full mb-sm" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Agendar no WhatsApp</a>
 
           <h3>Endereço</h3>
@@ -717,7 +793,7 @@ def build_clientes_social_media():
 
     html = head(
         "Clientes de Social Media: Bertoluchi Agência",
-        f"Conheça os {len(SOCIAL_MEDIA_CLIENTS)} negócios que confiam a gestão das redes sociais à Bertoluchi Agência, em Joinville e região.",
+        "Conheça alguns dos mais de 20 negócios que confiam a gestão das redes sociais à Bertoluchi Agência, em Joinville e região.",
         "/clientes-social-media.html",
     )
     html += header("/clientes-social-media.html")
@@ -728,7 +804,7 @@ def build_clientes_social_media():
       <div class="section-head reveal">
         <span class="eyebrow">Clientes</span>
         <h1>Quem confia a presença digital à nossa equipe</h1>
-        <p>São {len(SOCIAL_MEDIA_CLIENTS)} marcas ativas em social media, de estética e nutrição a alimentação, pet, mineração e turismo. Cada uma com estratégia própria, calendário próprio e acompanhamento de métrica.</p>
+        <p>São mais de 20 marcas ativas em social media, de estética e nutrição a alimentação, pet, mineração e turismo. Cada uma com estratégia própria, calendário próprio e acompanhamento de métrica.</p>
       </div>
       <div class="client-grid mt-lg">{cards}</div>
     </div>
@@ -742,29 +818,88 @@ def build_clientes_social_media():
 
 
 # ---------------------------------------------------------------- TRABALHE CONOSCO
+# Vagas abertas. Para abrir uma vaga nova, acrescente um item; para fechar,
+# remova. O formulario de candidatura lista as vagas abertas e sempre tem a
+# opcao de banco de talentos, entao a pagina funciona mesmo sem vaga.
+VAGAS = [
+    {
+        "titulo": "Designer Gráfico para Social Media",
+        "area": "Design",
+        "tags": [
+            "Remoto · Santa Catarina e São Paulo",
+            "Regime · PJ",
+            "Início · Imediato",
+            "Salário · a partir de R$ 2.000 (a combinar)",
+        ],
+        "resumo": "Vaga remota, para candidatos de Santa Catarina e São Paulo. Contratação PJ, com início imediato.",
+        "atividades": "Desenvolver criativos e carrosséis para os clientes de social media da agência.",
+        "requisitos": [
+            "Experiência comprovada em design gráfico",
+            "Domínio de pelo menos um editor de imagem, preferencialmente Canva e Photoshop",
+            "Disponibilidade de segunda a sexta, das 9h às 17h",
+            "Possibilidade de atuar como PJ",
+            "Início imediato",
+        ],
+    },
+]
+
+AREAS_TALENTO = [
+    "Design gráfico", "Social media e estratégia", "Captação e edição de vídeo",
+    "Redação e copy", "Atendimento e comercial", "Tráfego pago", "Outra área",
+]
+
+BANCO = "Banco de talentos (sem vaga específica)"
+
+
 def build_trabalhe_conosco():
-    tags = [
-        "Remoto · Santa Catarina e São Paulo",
-        "Regime · PJ",
-        "Início · Imediato",
-        "Salário · a partir de R$ 2.000 (a combinar)",
-    ]
-    tags_html = "".join(f'<li class="vaga-tag">{t}</li>' for t in tags)
+    vagas_html = ""
+    for v in VAGAS:
+        tags_html = "".join(f'<li class="vaga-tag">{t}</li>' for t in v["tags"])
+        req = "".join(f"<li>{r}</li>" for r in v["requisitos"])
+        vagas_html += f"""
+        <article class="vaga-card reveal">
+          <span class="eyebrow">Vaga aberta · {v['area']}</span>
+          <h3>{v['titulo']}</h3>
+          <ul class="vaga-tags">{tags_html}</ul>
+          <div class="vaga-card-corpo">
+            <div>
+              <h4>Sobre a vaga</h4>
+              <p>{v['resumo']}</p>
+              <h4>O que você vai fazer</h4>
+              <p>{v['atividades']}</p>
+            </div>
+            <div>
+              <h4>O que buscamos</h4>
+              <ul class="lista-marcada">{req}</ul>
+            </div>
+          </div>
+          <a class="btn btn-primary" href="#candidatura" data-vaga="{v['titulo']}">Candidatar-se a esta vaga</a>
+        </article>"""
+    if not VAGAS:
+        vagas_html = ('<p class="note-block">No momento não temos vagas abertas. '
+                      'Cadastre-se no banco de talentos abaixo: é por lá que procuramos '
+                      'primeiro quando surge uma oportunidade.</p>')
 
-    buscamos = [
-        "Experiência comprovada em design gráfico",
-        "Domínio de pelo menos um editor de imagem, preferencialmente Canva e Photoshop",
-        "Disponibilidade de segunda a sexta, das 9h às 17h",
-        "Possibilidade de atuar como PJ",
-        "Início imediato",
-    ]
-    buscamos_html = "".join(f"<li>{b}</li>" for b in buscamos)
+    opcoes = [v["titulo"] for v in VAGAS] + [BANCO]
+    campos = (
+        seletor("Vaga", "Vaga de interesse", opcoes)
+        + seletor("Area", "Área de atuação", AREAS_TALENTO)
+        + campo("Nome", "Nome completo")
+        + campo("email", "E-mail", "email")
+        + campo("WhatsApp", "WhatsApp", "tel")
+        + campo("Cidade", "Cidade e estado")
+        + campo("Portfolio", "Link do portfólio", "url", extra=' placeholder="Behance, Drive, Instagram ou site"')
+        + campo("LinkedIn", "LinkedIn ou Instagram profissional", obrigatorio=False)
+        + campo("Mensagem", "Conta um pouco sobre você e sua experiência", "textarea")
+    )
+    form = formulario("Trabalhe conosco", "[Candidatura]", campos, "Enviar candidatura", "candidatura")
 
+    n = len(VAGAS)
+    desc_vagas = (f"{n} vaga aberta" if n == 1 else f"{n} vagas abertas") if n else "Banco de talentos aberto"
     html = head(
-        "Vaga: Designer Gráfico para Social Media na Bertoluchi",
-        "A Bertoluchi está contratando designer gráfico(a) para social media. "
-        "Vaga remota para Santa Catarina e São Paulo, regime PJ e início imediato. "
-        "Candidatura pelo WhatsApp, com portfólio.",
+        "Trabalhe conosco: vagas e banco de talentos da Bertoluchi",
+        f"Trabalhe na Bertoluchi, agência de marketing digital de Joinville (SC). {desc_vagas}. "
+        "Mesmo sem vaga para a sua área, cadastre-se no nosso banco de talentos.",
         "/trabalhe-conosco.html",
     )
     html += header("/trabalhe-conosco.html")
@@ -773,54 +908,40 @@ def build_trabalhe_conosco():
   <section class="section page-hero">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">Vaga aberta · Design</span>
-        <h1>Designer Gráfico para Social Media</h1>
-        <p>A Bertoluchi, agência de marketing digital, está contratando um(a) designer gráfico(a) para social media.</p>
+        <span class="eyebrow">Trabalhe conosco</span>
+        <h1>Venha construir marcas com a gente</h1>
+        <p>A Bertoluchi é uma agência de marketing digital com atuação em Joinville (SC) e São Paulo. Atendemos clientes de diversos segmentos, com uma atuação direta e estratégica, sempre buscando gerar resultado real e fortalecer o posicionamento de cada marca.</p>
       </div>
-
-      <ul class="vaga-tags reveal">{tags_html}</ul>
-
-      <div class="vaga-corpo">
-        <div class="reveal">
-          <h2>Sobre a vaga</h2>
-          <p>Vaga remota, para candidatos de Santa Catarina e São Paulo. Contratação PJ, com início imediato.</p>
-        </div>
-
-        <div class="reveal">
-          <h2>Sobre a Bertoluchi</h2>
-          <p>A Bertoluchi é uma agência de marketing digital com atuação em Joinville (SC) e São Paulo. Atendemos clientes de diversos segmentos, com uma atuação direta e estratégica no mercado, sempre buscando gerar resultado real e fortalecer o posicionamento de cada marca.</p>
-        </div>
-
-        <div class="reveal">
-          <h2>O que você vai fazer:</h2>
-          <p>Desenvolver criativos e carrosséis para os clientes de social media da agência.</p>
-        </div>
-
-        <div class="reveal">
-          <h2>O que buscamos</h2>
-          <ul class="lista-marcada">{buscamos_html}</ul>
-        </div>
-
-        <div class="destaque-portfolio reveal">
-          <p><strong>Portfólio:</strong> deixe um link (Behance, Instagram, Drive ou site) com os seus trabalhos, é o que a gente usa pra avaliar sua candidatura.</p>
-        </div>
+      <div class="hero-actions reveal">
+        <a class="btn btn-primary" href="#vagas">Ver vagas abertas</a>
+        <a class="btn btn-outline" href="#candidatura" data-vaga="{BANCO}">Cadastrar no banco de talentos</a>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-alt" id="vagas">
     <div class="container">
-      <div class="cta-band">
-        <div>
-          <h2>Quer se candidatar?</h2>
-          <p>Manda seu portfólio e uma mensagem pra gente pelo WhatsApp.</p>
-        </div>
-        <a class="btn btn-light" href="{SITE['whatsapp_link_vaga_designer']}" target="_blank" rel="noopener">Aplicar pelo WhatsApp</a>
+      <div class="section-head reveal">
+        <span class="eyebrow">Oportunidades</span>
+        <h2>Vagas abertas</h2>
       </div>
+      <div class="vaga-lista">{vagas_html}</div>
+    </div>
+  </section>
 
+  <section class="section" id="candidatura-secao">
+    <div class="container">
+      <div class="form-split">
+        <div class="section-head reveal">
+          <span class="eyebrow">Banco de talentos</span>
+          <h2>Candidate-se ou deixe seu perfil com a gente</h2>
+          <p>Escolha uma vaga aberta ou cadastre-se no banco de talentos, mesmo que hoje não tenha vaga para a sua área. Quando surge uma oportunidade, é no banco de talentos que procuramos primeiro.</p>
+          <p class="destaque-portfolio"><strong>Portfólio:</strong> deixe um link (Behance, Instagram, Drive ou site) com os seus trabalhos, é o que a gente usa pra avaliar sua candidatura.</p>
+        </div>
+        {form}
+      </div>
       <div class="vaga-rodape reveal">
-        <p>Dúvidas sobre a vaga? Fale com a Beatriz: <a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
-        <p>Vaga aberta até o preenchimento da posição.</p>
+        <p>Dúvidas? Fale com a Beatriz: <a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
       </div>
     </div>
   </section>
@@ -828,6 +949,36 @@ def build_trabalhe_conosco():
 """
     html += footer()
     write("/trabalhe-conosco.html", html)
+
+
+# ---------------------------------------------------------------- OBRIGADO
+def build_obrigado():
+    html = head(
+        "Recebemos seu envio: Bertoluchi Agência",
+        "Obrigado pelo contato com a Bertoluchi Agência.",
+        "/obrigado.html",
+        extra_head='<meta name="robots" content="noindex">\n',
+    )
+    html += header("")
+    html += f"""
+<main id="conteudo">
+  <section class="section page-hero">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Tudo certo</span>
+        <h1>Recebemos seu envio</h1>
+        <p>Obrigado! Nossa equipe vai analisar as informações e retorna pelo contato que você deixou. Se for urgente, fale com a gente pelo WhatsApp.</p>
+      </div>
+      <div class="hero-actions reveal">
+        <a class="btn btn-primary" href="/index.html">Voltar ao início</a>
+        <a class="btn btn-outline" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+"""
+    html += footer()
+    write("/obrigado.html", html)
 
 
 def main():
@@ -844,6 +995,7 @@ def main():
         build_blog_post(_p)
     build_contato()
     build_trabalhe_conosco()
+    build_obrigado()
 
 
 if __name__ == "__main__":

@@ -338,7 +338,7 @@ p:last-child{ margin-bottom: 0; }
 
 /* ---------- Stats strip ---------- */
 .stats-strip{
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
   border-top: 1px solid rgba(255,255,255,0.15);
   border-bottom: 1px solid rgba(255,255,255,0.15);
   padding: 40px 0;
@@ -346,7 +346,7 @@ p:last-child{ margin-bottom: 0; }
 .stat-item{ text-align: center; }
 .stat-number{ font-family: var(--font-display); font-weight: 900; font-size: clamp(2rem,4vw,3rem); color: #F4D9C4; -webkit-text-fill-color: #F4D9C4; }
 .stat-label{ font-size: 0.85rem; color: #D9C4B2; -webkit-text-fill-color: #D9C4B2; text-transform: uppercase; letter-spacing: .06em; }
-@media (max-width: 700px){ .stats-strip{ grid-template-columns: 1fr; gap: 28px; } }
+@media (max-width: 900px){ .stats-strip{ grid-template-columns: 1fr 1fr; gap: 32px 16px; } }
 
 /* ---------- Sobre / bio split ---------- */
 .bio-split{
@@ -985,3 +985,124 @@ a.wordmark:hover, a.wordmark:focus-visible{
 }
 .coverflow-dot.is-active{ opacity: 1; }
 @media (max-width: 640px){ .coverflow-nav{ display: none; } }
+
+
+/* ============================================================
+   AJUSTES 2026-10 (PDF de ajustes da Beatriz)
+   ============================================================ */
+
+/* ---------- Hero de marca (sem foto) ----------
+   Recria o fundo da identidade: arcos claros, letreiro BERTO/LUCHI
+   gigante como marca d'agua e o quadrado da estrela. */
+.hero--marca{
+  align-items: center;
+  min-height: clamp(560px, 64vw, 760px);
+  background-color: #EFD3BC;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='200' viewBox='0 0 160 200'%3E%3Crect x='14' y='14' width='132' height='172' rx='66' fill='%23A9450A' fill-opacity='0.05'/%3E%3C/svg%3E"),
+    radial-gradient(120% 90% at 0% 0%, rgba(255,240,226,0.9), rgba(255,240,226,0) 60%);
+  background-size: 160px 200px, 100% 100%;
+}
+.hero-marca-fundo{
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-end;
+  padding-right: 3vw;
+  pointer-events: none; user-select: none;
+}
+.hero-marca-palavra{
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(5rem, 17vw, 15rem);
+  line-height: 0.86; letter-spacing: -0.02em;
+  color: #C4500F; -webkit-text-fill-color: #C4500F;
+  opacity: 0.11;
+}
+.hero--marca .hero-content{ padding: 120px 0 80px; color: var(--color-text); -webkit-text-fill-color: var(--color-text); }
+.hero--marca .hero-content .eyebrow{ color: var(--color-primary); -webkit-text-fill-color: var(--color-primary); }
+.hero--marca .hero-headline{ color: var(--color-text); -webkit-text-fill-color: var(--color-text); }
+.hero--marca .hero-sub{ color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted); max-width: 52ch; }
+.hero-marca-grid{ display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 48px; }
+.hero-marca-icone{
+  width: clamp(160px, 20vw, 260px); aspect-ratio: 1;
+  filter: drop-shadow(0 24px 40px rgba(124,51,8,0.28));
+  transform: rotate(-6deg);
+}
+@media (max-width: 860px){
+  .hero-marca-grid{ grid-template-columns: 1fr; gap: 0; }
+  .hero-marca-icone{ display: none; }
+}
+@media (max-width: 720px){
+  .hero.hero--marca{ display: flex; min-height: 0; align-items: center; }
+  .hero--marca .hero-content{ padding: 96px 0 56px; }
+  .hero-marca-fundo{ align-items: center; padding-right: 0; justify-content: flex-start; padding-top: 64px; }
+  .hero-marca-palavra{ font-size: 28vw; }
+}
+
+/* ---------- Rodape ---------- */
+.footer-logo{ height: 46px; width: auto; }
+
+/* ---------- Depoimentos do Google ---------- */
+.testimonial-source{
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-heading); font-weight: 600; font-size: 0.78rem;
+  letter-spacing: 0.02em; margin-bottom: 12px;
+  color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted);
+}
+.testimonial-source span{ color: #E0A100; -webkit-text-fill-color: #E0A100; letter-spacing: 1px; }
+
+/* ---------- Formularios ---------- */
+.form-split{ display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
+.form-split .section-head{ margin-bottom: 0; position: sticky; top: 110px; }
+@media (max-width: 900px){
+  .form-split{ grid-template-columns: 1fr; }
+  .form-split .section-head{ position: static; }
+}
+.site-form{
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 4vw, 40px);
+}
+.section-alt .site-form .form-field input,
+.section-alt .site-form .form-field textarea,
+.section-alt .site-form .form-field select{ background: var(--color-bg); }
+.form-honey{ position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.form-optional{ font-weight: 400; color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted); }
+.site-form button[disabled]{ opacity: .6; cursor: wait; }
+.mt-sm{ margin-top: 10px; }
+.site-form, #vagas{ scroll-margin-top: 110px; }
+
+/* ---------- Vagas ---------- */
+.vaga-lista{ display: flex; flex-direction: column; gap: 24px; }
+.vaga-card{
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 4vw, 44px);
+}
+.vaga-card h3{ font-size: var(--fs-h2-sm); margin: 8px 0 18px; }
+.vaga-card .vaga-tags{ margin-bottom: 28px; }
+.vaga-card-corpo{ display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 28px; }
+.vaga-card h4{ font-family: var(--font-heading); font-size: 1rem; margin: 0 0 8px; }
+.vaga-card-corpo p{ color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted); margin: 0 0 20px; }
+@media (max-width: 760px){ .vaga-card-corpo{ grid-template-columns: 1fr; gap: 8px; } }
+#candidatura-secao .destaque-portfolio{ margin-top: 20px; }
+
+/* ---------- Faixa de logos das marcas ---------- */
+.marquee--logos .marquee-track{ gap: 18px; padding: 6px 0; }
+.logo-tile{
+  flex: 0 0 auto;
+  width: 176px; height: 96px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 14px 20px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 6px 18px rgba(44,24,12,0.06);
+}
+.logo-tile img{ max-width: 100%; max-height: 64px; width: auto; height: auto; object-fit: contain; border-radius: 10px; }
+.logo-tile-nome{
+  font-family: var(--font-display); font-weight: 800; font-size: 1rem;
+  text-align: center; line-height: 1.15;
+  color: var(--color-text); -webkit-text-fill-color: var(--color-text);
+}
+@media (max-width: 640px){ .logo-tile{ width: 140px; height: 80px; padding: 12px 14px; } .logo-tile img{ max-height: 52px; } }

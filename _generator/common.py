@@ -14,16 +14,31 @@ SITE = {
     "phone_display": "(47) 9254-5015",
     "whatsapp_link": "https://wa.me/554792545015?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20reuni%C3%A3o.",
     "email": "beatriz@bertoluchiagencia.com.br",
-    "address_line1": "Rua Evaristo Veiga, 156 - 6º andar",
-    "address_line2": "Glória, Joinville - SC",
+    "address_line1": "R. Victor Müller, 215 - Costa e Silva",
+    "address_line2": "Joinville - SC, 89218-460",
     "hours": "Segunda a sexta, das 9h às 17h",
     "instagram": "https://www.instagram.com/bertoluchiagencia/",
     "linkedin": "https://www.linkedin.com/company/bertoluchi/",
     "behance": "https://www.behance.net/beatrizbertolu",
     "whatsapp_link_vaga_designer": "https://wa.me/554792545015?text=Ol%C3%A1%21%20Tenho%20interesse%20na%20vaga%20de%20Designer%20Gr%C3%A1fico%20para%20Social%20Media.%20Meu%20portf%C3%B3lio%3A%20",
-    "stat_brandings": "+200",
-    "stat_brandings_label": "Brandings realizados",
+    # Formularios do site enviam para este e-mail via FormSubmit.co
+    # (sem chave; o primeiro envio pede ativacao no proprio e-mail).
+    "form_email": "beatriz@bertoluchiagencia.com.br",
 }
+
+# Numeros confirmados pela Beatriz no PDF de ajustes (2026-10-06).
+STATS = [
+    ("+200", "Brandings realizados"),
+    ("+10", "Influenciadores assessorados"),
+    ("+20", "Clientes de social media"),
+    ("+300", "Clientes já atendidos"),
+]
+
+
+def whatsapp(texto):
+    """Link de WhatsApp com mensagem pronta."""
+    from urllib.parse import quote
+    return "https://wa.me/554792545015?text=" + quote(texto)
 
 NAV = [
     ("Início", "/index.html"),
@@ -36,23 +51,6 @@ NAV = [
 ]
 
 SERVICES = [
-    {
-        "slug": "gestao-de-influenciadores",
-        "title": "Gestão de Influenciadoras",
-        "short": "Assessoria completa para quem vive de criar conteúdo.",
-        "summary": "Cuidamos das parcerias comerciais, negociações e crescimento de marca pessoal de influenciadoras digitais, para que a criação de conteúdo continue sendo o foco.",
-        "body": [
-            "A assessoria de influenciadoras existe para tirar da sua frente o que não é criação: negociação de parceria, alinhamento comercial e organização da rotina de entregas.",
-            "Acompanhamos métricas de engajamento e alcance para embasar cada negociação com dado real, não com achismo. E cuidamos do desenvolvimento da marca pessoal a médio e longo prazo, para que cada parceria feche com marcas que fazem sentido para o seu público.",
-            "Fazem parte do serviço: mídia kit atualizado, apoio em negociação comercial, curadoria de propostas e organização de calendário de entregas.",
-        ],
-        "highlights": [
-            "Negociação e intermediação de parcerias comerciais",
-            "Mídia kit profissional atualizado por temporada",
-            "Acompanhamento de métricas de engajamento e alcance",
-            "Desenvolvimento de marca pessoal a médio e longo prazo",
-        ],
-    },
     {
         "slug": "social-media",
         "title": "Social Media",
@@ -69,6 +67,7 @@ SERVICES = [
             "Calendário editorial e publicação",
             "Monitoramento de métricas com relatório periódico",
         ],
+        "cta_text": "Olá! Vim pelo site e gostaria de receber uma proposta de social media.",
     },
     {
         "slug": "branding",
@@ -85,6 +84,62 @@ SERVICES = [
             "Manual de marca",
             "Materiais de marketing alinhados à identidade",
         ],
+        "cta_text": "Olá! Vim pelo site e gostaria de receber uma proposta de branding.",
+        "portfolio": True,
+    },
+    {
+        "slug": "gestao-de-influenciadores",
+        "title": "Gestão de Influenciadoras",
+        "short": "Assessoria completa para quem vive de criar conteúdo.",
+        "summary": "Cuidamos das parcerias comerciais, negociações e crescimento de marca pessoal de influenciadoras digitais, para que a criação de conteúdo continue sendo o foco.",
+        "body": [
+            "A assessoria de influenciadoras existe para tirar da sua frente o que não é criação: negociação de parceria, alinhamento comercial e organização da rotina de entregas.",
+            "Acompanhamos métricas de engajamento e alcance para embasar cada negociação com dado real, não com achismo. E cuidamos do desenvolvimento da marca pessoal a médio e longo prazo, para que cada parceria feche com marcas que fazem sentido para o seu público.",
+            "Fazem parte do serviço: mídia kit atualizado, apoio em negociação comercial, curadoria de propostas e organização de calendário de entregas.",
+        ],
+        "highlights": [
+            "Negociação e intermediação de parcerias comerciais",
+            "Mídia kit profissional atualizado por temporada",
+            "Acompanhamento de métricas de engajamento e alcance",
+            "Desenvolvimento de marca pessoal a médio e longo prazo",
+        ],
+        "casting": True,
+    },
+    {
+        "slug": "sites",
+        "title": "Criação de Sites",
+        "short": "Site profissional para sua marca ser encontrada no Google.",
+        "summary": "Sites institucionais rápidos, bonitos e preparados para o Google, para transformar quem chega das redes sociais em cliente.",
+        "body": [
+            "Sua presença digital não termina no Instagram. Um site profissional dá credibilidade à marca, reúne seus serviços em um só lugar e ajuda você a ser encontrado por quem pesquisa no Google.",
+            "Desenvolvemos o site com a mesma identidade da sua marca: layout pensado para celular, textos claros, botão de WhatsApp em destaque e estrutura otimizada para buscas.",
+            "Para entregar com qualidade técnica, o desenvolvimento é feito em parceria com uma equipe especializada em sites e Google, e todo o atendimento continua com a Bertoluchi.",
+        ],
+        "highlights": [
+            "Site institucional com a identidade da sua marca",
+            "Layout pensado primeiro para o celular",
+            "Estrutura otimizada para aparecer no Google",
+            "Integração com WhatsApp, Instagram e formulários",
+        ],
+        "cta_text": "Olá! Vim pelo site e gostaria de receber uma proposta de criação de site.",
+    },
+    {
+        "slug": "trafego-pago",
+        "title": "Tráfego Pago",
+        "short": "Anúncios no Google e no Instagram para atrair mais clientes.",
+        "summary": "Gestão de anúncios no Google Ads e no Meta Ads (Instagram e Facebook), com foco em gerar contatos e vendas, não só curtidas.",
+        "body": [
+            "O conteúdo orgânico constrói a marca. O tráfego pago acelera: coloca sua mensagem na frente de quem já está procurando o que você vende, ou de quem tem o perfil do seu cliente ideal.",
+            "Planejamos as campanhas a partir do objetivo do negócio, acompanhamos os resultados de perto e ajustamos verba e anúncios conforme os números mostram o que funciona.",
+            "As campanhas são operadas em parceria com uma equipe especializada em Google Ads e rastreamento, e todo o atendimento continua com a Bertoluchi.",
+        ],
+        "highlights": [
+            "Campanhas no Google Ads",
+            "Campanhas no Meta Ads (Instagram e Facebook)",
+            "Configuração de rastreamento de conversões",
+            "Acompanhamento de resultados com relatório periódico",
+        ],
+        "cta_text": "Olá! Vim pelo site e gostaria de receber uma proposta de tráfego pago.",
     },
     {
         "slug": "consultoria",
@@ -99,6 +154,7 @@ SERVICES = [
             "Consultoria Express: 30 minutos, foco em uma dúvida específica",
             "Consultoria Contínua: acompanhamento estratégico permanente",
         ],
+        "cta_text": "Olá! Vim pelo site e gostaria de saber mais sobre a consultoria.",
     },
     {
         "slug": "mentoria",
@@ -114,6 +170,7 @@ SERVICES = [
             "Foco em estratégia e resolução de desafios reais",
             "Formato personalizado para o momento do profissional",
         ],
+        "cta_text": "Olá! Vim pelo site e gostaria de saber mais sobre a mentoria.",
     },
 ]
 
@@ -124,8 +181,6 @@ SERVICES = [
 INFLUENCERS = [
     {"name": "Larissa Estrada", "handle": "@larissaestradaa",
      "niche": "Fé | Lifestyle", "img": "influ-larissaestradaa"},
-    {"name": "Kauane Leite", "handle": "@kauanelleite",
-     "niche": "Fé cristã | Saúde mental", "img": "influ-kauanelleite"},
     {"name": "Pastor Lipão", "handle": "@pastorlipao",
      "niche": "Life Style | Fé", "img": "influ-pastorlipao"},
     {"name": "Nidyellen Rodrigues", "handle": "@nidyellenr",
@@ -134,16 +189,18 @@ INFLUENCERS = [
      "niche": "Dicas de locais em Joinville e região", "img": "influ-oquefazeremjoinville"},
     {"name": "Mari Marques", "handle": "@mari.marques_",
      "niche": "Lifestyle | Fitness", "img": "influ-mari-marques"},
-    {"name": "Morgana Dias", "handle": "@morguih",
-     "niche": "", "img": "influ-morguih"},
-    {"name": "Beatriz Bertoluchi", "handle": "@bertoluchib",
-     "niche": "", "img": "influ-bertoluchib"},
     {"name": "Flávia Gabriela", "handle": "@fglins",
      "niche": "Lifestyle | Empreendedorismo | Dicas", "img": "influ-flavia-gabriela"},
     {"name": "Leticia Levasz", "handle": "@_leticiafit_",
      "niche": "Fitness | Lifestyle", "img": "influ-leticia-levasz"},
     {"name": "Allan Popeye", "handle": "@allan_popeye",
      "niche": "Luta | Lifestyle", "img": "influ-allan-popeye"},
+    # Novos em 2026-10-06 (fotos enviadas pela Beatriz). Nome como aparece
+    # no proprio perfil do Instagram; nicho ainda nao informado.
+    {"name": "Yasmin Andrade", "handle": "@yasmin.andrade__",
+     "niche": "", "img": "influ-yasmin-andrade"},
+    {"name": "ÉÉÉguaaa", "handle": "@eeeguaaa",
+     "niche": "Joinville | Santa Catarina", "img": "influ-eeeguaaa"},
 ]
 
 # Clientes ativos de social media (lista enviada por Mateus).
@@ -169,18 +226,33 @@ SOCIAL_MEDIA_CLIENTS = [
 ]
 
 # Marcas que já fizeram campanha publicitária com as influenciadoras
-# assessoradas. Somente nomes, não temos os logotipos.
+# assessoradas (lista enviada pela agência). Logos baixados de fonte oficial
+# (site da marca, Wikimedia Commons ou perfil oficial) em 2026-10-06, a pedido
+# da Beatriz. Sem logo confirmado, o card mostra o nome.
 INFLUENCER_BRAND_LOGOS = [
-    "Havan", "Starbucks", "McDonald's", "Shopping Mueller Joinville",
-    "Shopping Garten Joinville", "Espaço Laser", "Atacadão", "Hipermais",
-    "Komprão", "Lavô", "Editoria Vida", "Girando Show",
-    "Growth (roupas fitness)", "AVI", "Easy YSY (semijoias)", "Madero",
-    "Jerônimo", "Leaves", "Dolher",
+    ("Havan", "havan.svg"), ("Starbucks", "starbucks.svg"),
+    ("McDonald's", "mcdonalds.svg"), ("Shopping Mueller Joinville", "mueller-joinville.png"),
+    ("Garten Shopping Joinville", "garten-shopping.svg"), ("Espaço Laser", "espaco-laser.png"),
+    ("Atacadão", "atacadao.svg"), ("Hipermais", "hipermais.png"),
+    ("Komprão", "komprao.png"), ("Lavô", "lavo.png"),
+    ("Editora Vida", "editora-vida.png"), ("Girando Show", None),
+    ("Growth", "growth.png"), ("AVI", None),
+    ("Easy YSY", None), ("Madero", "madero.png"),
+    ("Jerônimo", "jeronimo.png"), ("Leaves", "leaves.png"),
+    ("Döhler", "dohler.svg"),
 ]
 
 # Depoimentos reais, coletados do site atual (autorização de uso ainda
 # pendente de confirmação por Mateus — ver checklist de bloqueantes).
 TESTIMONIALS = [
+    # Avaliacoes recentes do Perfil da Empresa no Google (prints no PDF de
+    # ajustes enviado pela Beatriz em 2026-10-06).
+    {"quote": "Já estamos há um ano juntos e só tenho a agradecer por toda a parceria e dedicação. A agência vem acompanhando de perto o crescimento da PYTAVE e fazendo parte de cada evolução da nossa marca. Muito obrigada por todo o trabalho e carinho com a gente!", "author": "Carliana Alves", "google": True},
+    {"quote": "Desde que essa empresa se tornou nossa agência de marketing, nosso Instagram evoluiu significativamente. Eles possuem inúmeras ideias criativas de conteúdo, que têm impulsionado de forma notável a qualidade das nossas redes sociais.", "author": "Enzo Benazzi", "google": True},
+    {"quote": "Excelente agência! Equipe muito profissional, criativa e atenciosa. Estamos muito satisfeitos com o trabalho e com os resultados. Recomendo!", "author": "Lucimara Benazzi", "google": True},
+    {"quote": "Excelente atendimento, uma equipe organizada e prestativa. Trouxeram resultados incríveis para a gente. Recomendo sempre.", "author": "Elaine Stepanski", "google": True},
+    {"quote": "Excelentes profissionais!! Ótimo atendimento!!", "author": "Dra. Giovana Giocondo", "google": True},
+    {"quote": "Super indico a Bertoluchi!!", "author": "Mariana Toews", "google": True},
     {"quote": "Comprometimento, dedicação, criatividade e responsabilidade são alguns adjetivos que definem a agência Bertoluchi.", "author": "Joana Ostrovski"},
     {"quote": "Sem sombra de dúvidas, um eterno agradecimento à Agência Bertoluchi, que viu potencial e acreditou em mim.", "author": "Thayná"},
     {"quote": "Sou cliente há 2 anos da agência e tive muito retorno positivo nas captações, engajamento e seguidores nas redes sociais.", "author": "Ketlyn Alves"},
@@ -190,13 +262,6 @@ TESTIMONIALS = [
     {"quote": "Conheci a agência e me encantei desde o primeiro contato. A equipe é maravilhosa e muito alto astral.", "author": "Clini.ko"},
 ]
 
-CASES = [
-    {
-        "name": "Onda Dura Hope",
-        "tag": "Projeto social apoiado",
-        "text": "Fortalecendo famílias, transformando vidas. O Onda Dura Hope já impactou mais de 3.000 famílias, promovendo mudanças significativas que fortalecem a sociedade como um todo.",
-    },
-]
 
 FONTS_LINK = (
     '<link rel="preconnect" href="https://fonts.googleapis.com">'
@@ -287,18 +352,13 @@ def client_card(c, reveal=True):
 
 
 def stats_strip(light=False):
-    """Numeros reais: brandings confirmados + contagem direta das listas."""
-    itens = [
-        (SITE["stat_brandings"], SITE["stat_brandings_label"]),
-        (str(len(INFLUENCERS)), "Influenciadoras assessoradas"),
-        (str(len(SOCIAL_MEDIA_CLIENTS)), "Clientes de Social Media"),
-    ]
+    """Numeros confirmados pela agencia (ver STATS)."""
     cells = "".join(
         f"""
         <div class="stat-item reveal">
           <div class="stat-number">{n}</div>
           <div class="stat-label">{label}</div>
-        </div>""" for n, label in itens
+        </div>""" for n, label in STATS
     )
     cls = "stats-strip stats-strip--light" if light else "stats-strip"
     return f'<div class="{cls}">{cells}</div>'
@@ -332,8 +392,22 @@ def marquee(itens, rotulo):
 
 
 def brand_list():
-    return marquee([(b, None) for b in INFLUENCER_BRAND_LOGOS],
-                   "Marcas que já fizeram campanha com nossas influenciadoras")
+    """Faixa animada de logos das marcas, no mesmo esquema do marquee."""
+    def bloco(clone):
+        marca = ' aria-hidden="true" data-clone' if clone else ""
+        partes = []
+        for nome, arq in INFLUENCER_BRAND_LOGOS:
+            if arq:
+                alt = "" if clone else nome
+                conteudo = f'<img src="/assets/img/marcas/{arq}" alt="{alt}" loading="lazy" decoding="async">'
+            else:
+                conteudo = f'<span class="logo-tile-nome">{nome}</span>'
+            partes.append(f'<span class="logo-tile"{marca}>{conteudo}</span>')
+        return "".join(partes)
+
+    return f"""<div class="marquee marquee--logos" role="group" aria-label="Marcas que já fizeram campanha com nossas influenciadoras">
+        <div class="marquee-track">{bloco(False)}{bloco(True)}</div>
+      </div>"""
 
 
 def client_marquee(clientes):
@@ -440,8 +514,8 @@ def footer():
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <img src="/assets/img/logo.png" alt="Bertoluchi" width="160" height="42">
-      <p>Gestão de influenciadoras, social media e branding para marcas que querem se tornar referência nas redes sociais.</p>
+      <img src="/assets/img/logo-claro.png" alt="Bertoluchi" width="176" height="46" class="footer-logo">
+      <p>Social media, branding e gestão de influenciadoras para marcas que querem se tornar referência nas redes sociais.</p>
       <div class="footer-social">
         <a href="{SITE['instagram']}" target="_blank" rel="noopener" aria-label="Instagram da Bertoluchi">Instagram</a>
         <a href="{SITE['linkedin']}" target="_blank" rel="noopener" aria-label="LinkedIn da Bertoluchi">LinkedIn</a>

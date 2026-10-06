@@ -303,4 +303,32 @@
 
   document.querySelectorAll("[data-coverflow]").forEach(initCoverflow);
 
+  // ---------- Formularios (FormSubmit) ----------
+  // Completa o assunto com o nome e a vaga, aponta o retorno para a
+  // pagina de obrigado do proprio dominio e evita envio duplo.
+  document.querySelectorAll("form[data-form]").forEach(function (form) {
+    var next = form.querySelector('input[name="_next"]');
+    if (next) next.value = window.location.origin + "/obrigado.html";
+    form.addEventListener("submit", function () {
+      var assunto = form.getAttribute("data-assunto") || "";
+      var nome = form.querySelector('[name="Nome"]');
+      var vaga = form.querySelector('[name="Vaga"]');
+      var partes = [assunto];
+      if (vaga && vaga.value) partes.push(vaga.value);
+      if (nome && nome.value) partes.push(nome.value);
+      var campo = form.querySelector('input[name="_subject"]');
+      if (campo) campo.value = partes.join(" - ");
+      var botao = form.querySelector('button[type="submit"]');
+      if (botao) { botao.disabled = true; botao.textContent = "Enviando..."; }
+    });
+  });
+
+  // Botoes "Candidatar-se" ja deixam a vaga escolhida no formulario.
+  document.querySelectorAll("[data-vaga]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var sel = document.querySelector('#candidatura [name="Vaga"]');
+      if (sel) sel.value = btn.getAttribute("data-vaga");
+    });
+  });
+
 })();
