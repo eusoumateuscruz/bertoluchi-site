@@ -154,26 +154,14 @@ def build_home():
 <main id="conteudo">
 
   <section class="hero hero--marca">
-    <div class="hero-marca-fundo" aria-hidden="true">
-      <span class="hero-marca-palavra">BERTO</span>
-      <span class="hero-marca-palavra">LUCHI</span>
-    </div>
     <div class="hero-content">
-      <div class="container hero-marca-grid">
-        <div>
-          <span class="eyebrow">Publicidade e marketing digital</span>
-          <h1 class="hero-headline">Torne seu negócio uma referência nas redes sociais</h1>
-          <p class="hero-sub">Social media com estratégia, criação de conteúdo de alta qualidade e branding, para marcas que querem crescer com consistência. E, quando faz sentido, conectamos sua marca às influenciadoras certas.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
-            <a class="btn btn-outline" href="/servicos.html">Conhecer serviços</a>
-          </div>
-        </div>
-        <div class="hero-marca-icone" aria-hidden="true">
-          <svg viewBox="0 0 100 100" width="100%" height="100%">
-            <rect x="0" y="0" width="100" height="100" rx="20" fill="#B0480A"/>
-            <path d="M50.0 6.0 L53.1 42.6 L66.3 33.7 L57.4 46.9 L94.0 50.0 L57.4 53.1 L66.3 66.3 L53.1 57.4 L50.0 94.0 L46.9 57.4 L33.7 66.3 L42.6 53.1 L6.0 50.0 L42.6 46.9 L33.7 33.7 L46.9 42.6 Z" fill="#FBF4EC"/>
-          </svg>
+      <div class="container">
+        <img class="hero-logo" src="/assets/img/logo-hero.png" width="1262" height="252" alt="Bertoluchi, publicidade e marketing digital" fetchpriority="high">
+        <h1 class="hero-headline">Torne seu negócio uma referência nas redes sociais</h1>
+        <p class="hero-sub">Social media com estratégia, criação de conteúdo de alta qualidade e branding, para marcas que querem crescer com consistência. E, quando faz sentido, conectamos sua marca às influenciadoras certas.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
+          <a class="btn btn-outline" href="/servicos.html">Conhecer serviços</a>
         </div>
       </div>
     </div>
@@ -220,7 +208,7 @@ def build_home():
       <div class="section-head split reveal">
         <div>
           <span class="eyebrow">Talentos</span>
-          <h2>Influenciadoras que assessoramos</h2>
+          <h2>Influenciadores que assessoramos</h2>
         </div>
         <a class="btn btn-outline" href="/influenciadoras.html">Ver todas</a>
       </div>
@@ -482,7 +470,7 @@ def build_influenciadoras():
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Influenciadoras</span>
-        <h1>Talentos que assessoramos</h1>
+        <h1>Influenciadores que assessoramos</h1>
         <p>Cada uma com um nicho, um público e uma forma própria de se conectar. A gente cuida da parte comercial para que elas continuem focadas em criar.</p>
       </div>
       <div class="influencer-grid mt-lg">{cards}</div>

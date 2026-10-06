@@ -1172,3 +1172,8 @@ a.story-card:hover .story-cta{ background: #fff; color: var(--color-text); -webk
   .story-avatar{ width: 28px; height: 28px; }
   .story-handle{ font-size: 0.75rem; }
 }
+
+/* Topo com a logo oficial como imagem principal */
+.hero-logo{ display: block; width: min(100%, 860px); height: auto; margin: 0 0 clamp(32px, 5vw, 56px); }
+.hero--marca .hero-content{ padding: clamp(110px, 12vw, 150px) 0 clamp(56px, 7vw, 88px); }
+@media (max-width: 720px){ .hero--marca .hero-content{ padding: 96px 0 56px; } }
