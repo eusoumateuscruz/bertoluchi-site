@@ -1177,3 +1177,10 @@ a.story-card:hover .story-cta{ background: #fff; color: var(--color-text); -webk
 .hero-logo{ display: block; width: min(100%, 860px); height: auto; margin: 0 0 clamp(32px, 5vw, 56px); }
 .hero--marca .hero-content{ padding: clamp(110px, 12vw, 150px) 0 clamp(56px, 7vw, 88px); }
 @media (max-width: 720px){ .hero--marca .hero-content{ padding: 96px 0 56px; } }
+
+/* Formato reels: so o card vertical, sem barras, avatar ou botao */
+.story-card::before{ display: none; }
+.story-bottom .story-handle{
+  display: block; margin-top: 2px; font-weight: 600; font-size: 0.85rem;
+  color: rgba(255,255,255,0.85); -webkit-text-fill-color: rgba(255,255,255,0.85);
+}

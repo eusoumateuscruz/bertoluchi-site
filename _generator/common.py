@@ -277,28 +277,15 @@ def initials(name):
     return "".join(w[0] for w in palavras[:2]).upper()
 
 
-def story_chrome(inf, rodape=True):
-    """Barras de progresso, avatar e @ no topo, nome e nicho embaixo,
-    imitando um stories do Instagram."""
-    if inf.get("img"):
-        avatar = f'<img src="/assets/img/{inf["img"]}.jpg" alt="" loading="lazy" decoding="async">'
-    else:
-        avatar = f'<span>{initials(inf["name"])}</span>'
+def story_chrome(inf):
+    """Nome, @ e nicho na base do card vertical (formato reels)."""
     niche = f'<span class="story-niche">{inf["niche"]}</span>' if inf.get("niche") else ""
-    baixo = f"""
+    return f"""
             <div class="story-bottom">
               <strong class="story-name">{inf['name']}</strong>
+              <span class="story-handle">{inf['handle']}</span>
               {niche}
-              <span class="story-cta">Ver perfil</span>
-            </div>""" if rodape else ""
-    return f"""
-            <div class="story-top" aria-hidden="true">
-              <div class="story-bars"><span class="is-on"></span><span></span><span></span></div>
-              <div class="story-user">
-                <span class="story-avatar">{avatar}</span>
-                <span class="story-handle">{inf['handle'][1:]}</span>
-              </div>
-            </div>{baixo}"""
+            </div>"""
 
 
 def influencer_card(inf, reveal=True):
