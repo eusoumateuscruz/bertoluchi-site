@@ -1185,6 +1185,6 @@ a.story-card:hover .story-cta{ background: #fff; color: var(--color-text); -webk
   color: rgba(255,255,255,0.85); -webkit-text-fill-color: rgba(255,255,255,0.85);
 }
 
-/* Topo: so o icone oficial da logo, no lugar onde ficava a logo */
-.hero-icone{ display: block; width: clamp(110px, 12vw, 170px); margin: 0 0 clamp(32px, 5vw, 56px); }
-.hero-icone img{ width: 100%; height: auto; display: block; }
+/* Topo: icone oficial da logo, grande, a direita (vetor, nitido em qualquer tela) */
+.hero-icone{ display: block; width: clamp(200px, 26vw, 360px); height: auto; filter: drop-shadow(0 28px 44px rgba(124,51,8,0.30)); }
+@media (max-width: 860px){ .hero-icone{ order: -1; width: 120px; margin-bottom: 28px; } }
