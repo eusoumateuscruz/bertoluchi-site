@@ -1246,3 +1246,9 @@ a.story-card:hover .story-cta{ background: #fff; color: var(--color-text); -webk
 .review-cta{ margin-top: 36px; text-align: center; }
 .review-cta p{ color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted); margin-bottom: 16px; }
 .review-cta-botoes{ display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* Logos dos clientes de social media (foto de perfil oficial do Instagram) */
+.wordmark{ display: inline-flex; align-items: center; gap: 12px; }
+.wordmark-logo{ width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: 0 0 56px; border: 1px solid var(--color-border); background: #fff; }
+.client-logo{ width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1px solid var(--color-border); background: #fff; margin-bottom: 12px; display: block; }
+.client-logo--iniciais{ display: grid; place-items: center; background: var(--color-primary-tint); color: var(--color-primary); -webkit-text-fill-color: var(--color-primary); font-family: var(--font-heading); font-weight: 700; }

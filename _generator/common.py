@@ -5,6 +5,7 @@ Toda informação factual (endereço, telefone, e-mail, links) vem do site
 atual (bertoluchi.com.br) ou de materiais enviados por Mateus.
 Nenhum número, depoimento ou dado de contato foi inventado.
 """
+import os
 
 SITE = {
     "name": "Bertoluchi",
@@ -349,8 +350,12 @@ def coverflow(items, id_suffix="home"):
 
 def client_card(c, reveal=True):
     cls = "client-card" + (" reveal" if reveal else "")
+    arq = client_logo(c)
+    logo = (f'<img class="client-logo" src="{arq}" alt="Logo {c["name"]}" width="56" height="56" loading="lazy" decoding="async">'
+            if arq else f'<span class="client-logo client-logo--iniciais" aria-hidden="true">{initials(c["name"])}</span>')
     return f"""
         <a class="{cls}" href="{c['link']}" target="_blank" rel="noopener">
+          {logo}
           <span class="client-name">{c['name']}</span>
           <span class="client-handle">{c['handle']}</span>
         </a>"""
@@ -379,7 +384,12 @@ def marquee(itens, rotulo):
     def bloco(clone):
         marca = ' data-clone aria-hidden="true"' if clone else ""
         partes = []
-        for i, (texto, link) in enumerate(itens):
+        for i, item in enumerate(itens):
+            texto, link = item[0], item[1]
+            logo = item[2] if len(item) > 2 else None
+            if logo:
+                texto = (f'<img class="wordmark-logo" src="{logo}" alt="" width="44" height="44" '
+                         f'loading="lazy" decoding="async">{texto}')
             if i:
                 partes.append(f'<span class="marquee-sep"{marca}></span>')
             if link:
@@ -415,8 +425,15 @@ def brand_list():
       </div>"""
 
 
+def client_logo(c):
+    """Foto de perfil oficial do Instagram do cliente (baixada em 2026-10-13), se existir."""
+    nome = c["handle"].lstrip("@").replace(".", "-")
+    caminho = os.path.join(os.path.dirname(__file__), "..", "assets", "img", "clientes", nome + ".webp")
+    return f"/assets/img/clientes/{nome}.webp" if os.path.exists(caminho) else None
+
+
 def client_marquee(clientes):
-    return marquee([(c["name"], c["link"]) for c in clientes],
+    return marquee([(c["name"], c["link"], client_logo(c)) for c in clientes],
                    "Clientes de social media da Bertoluchi")
 
 
