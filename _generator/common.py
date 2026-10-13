@@ -214,7 +214,7 @@ SOCIAL_MEDIA_CLIENTS = [
     {"name": "Arge Auto Escola", "handle": "@argeautoescola", "link": "https://www.instagram.com/argeautoescola/"},
     {"name": "Giovanna Giocondo", "handle": "@dragiovannagiocondo", "link": "https://www.instagram.com/dragiovannagiocondo/"},
     {"name": "SOS Mangueiras", "handle": "@sosmangueiraspf", "link": "https://www.instagram.com/sosmangueiraspf/"},
-    {"name": "Loja Petrópolis", "handle": "@lojapetropolis_", "link": "https://www.instagram.com/lojapetropolis_/"},
+    {"name": "Loja Petrópolis", "handle": "@_lojapetropolis", "link": "https://www.instagram.com/_lojapetropolis/"},
     {"name": "Veiga", "handle": "@mineracaoveiga", "link": "https://www.instagram.com/mineracaoveiga/"},
     {"name": "Ideal Medical", "handle": "@idealemergencias", "link": "https://www.instagram.com/idealemergencias/"},
     {"name": "Bertoluchi", "handle": "@bertoluchiagencia", "link": "https://www.instagram.com/bertoluchiagencia/"},
