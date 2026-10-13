@@ -266,6 +266,13 @@ def build_home():
       </div>
     <div class="reveal">{testimonial_preview}</div>
     <div class="container">
+      <div class="review-cta reveal">
+        <p>Já trabalhou com a gente? Deixe sua avaliação no Google:</p>
+        <div class="review-cta-botoes">
+          <a class="btn btn-primary" href="https://share.google/7EMR0wkWhQ438s8xv" target="_blank" rel="noopener">Avaliar a unidade de Joinville</a>
+          <a class="btn btn-outline" href="https://share.google/lNIa2PT6v64zZGGB3" target="_blank" rel="noopener">Avaliar a unidade de Porto Ferreira</a>
+        </div>
+      </div>
     </div>
   </section>
 
