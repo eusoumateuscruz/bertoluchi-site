@@ -1231,3 +1231,19 @@ a.story-card:hover .story-cta{ background: #fff; color: var(--color-text); -webk
   .review-track[aria-hidden="true"]{ display: none; }
   .review-marquee{ -webkit-mask-image: none; mask-image: none; }
 }
+
+/* Topo no computador: painel claro com desfoque atrás do texto, para dar contraste sobre a foto. */
+@media (min-width: 721px){
+  .hero-painel{
+    max-width: 640px; padding: 36px 40px 40px;
+    background: linear-gradient(135deg, rgba(251,244,236,0.90), rgba(244,226,214,0.80));
+    -webkit-backdrop-filter: blur(16px) saturate(1.15); backdrop-filter: blur(16px) saturate(1.15);
+    border: 1px solid rgba(255,255,255,0.6); border-radius: var(--radius-lg);
+    box-shadow: 0 24px 60px rgba(36,23,16,0.28);
+  }
+  .hero-painel .eyebrow{ color: #111; -webkit-text-fill-color: #111; }
+  .hero-painel .hero-headline{ color: var(--color-text); -webkit-text-fill-color: var(--color-text); }
+  .hero-painel .hero-sub{ color: #4A372A; -webkit-text-fill-color: #4A372A; }
+  .hero-painel .btn-outline-invert{ border-color: var(--color-text); color: var(--color-text); -webkit-text-fill-color: var(--color-text); }
+  .hero-painel .btn-outline-invert:hover{ background: var(--color-text); color: #fff; -webkit-text-fill-color: #fff; }
+}

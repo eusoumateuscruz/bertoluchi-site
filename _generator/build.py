@@ -195,6 +195,7 @@ def build_home():
     <div class="hero-scrim"></div>
     <div class="hero-content">
       <div class="container">
+        <div class="hero-painel">
         <span class="eyebrow">Publicidade e marketing digital</span>
         <h1 class="hero-headline">Torne seu negócio uma referência nas redes sociais</h1>
         <p class="hero-sub">Social media com estratégia, criação de conteúdo de alta qualidade e branding, para marcas que querem crescer com consistência. E, quando faz sentido, conectamos sua marca às influenciadoras certas.</p>
@@ -203,6 +204,7 @@ def build_home():
           <a class="btn btn-outline-invert" href="/servicos.html">Conhecer serviços</a>
         </div>
       </div>
+        </div>
     </div>
   </section>
 
