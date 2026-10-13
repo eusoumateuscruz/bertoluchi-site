@@ -8,7 +8,7 @@ from common import (
     SOCIAL_MEDIA_CLIENTS, INFLUENCER_BRAND_LOGOS,
     head, header, footer, whatsapp,
     influencer_card, client_card, stats_strip, brand_list, client_marquee,
-    coverflow,
+    coverflow, initials,
 )
 from blog_posts import (
     BLOG_POSTS, CATEGORIES, CATEGORY_SLUGS, data_extenso, relacionados,
@@ -62,6 +62,36 @@ def testimonial_card(t):
           <p>&ldquo;{t['quote']}&rdquo;</p>
           <cite>{t['author']}</cite>
         </div>"""
+
+
+def review_card(t):
+    """Cartão compacto da faixa de depoimentos (estilo marquee)."""
+    sub = ('<span class="review-sub"><span class="review-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> Google</span>'
+           if t.get("google") else '<span class="review-sub">Cliente Bertoluchi</span>')
+    return f"""
+          <figure class="review-card">
+            <div class="review-head">
+              <span class="review-avatar" aria-hidden="true">{initials(t['author'])}</span>
+              <div><figcaption class="review-name">{t['author']}</figcaption>{sub}</div>
+            </div>
+            <blockquote class="review-body">&ldquo;{t['quote']}&rdquo;</blockquote>
+          </figure>"""
+
+
+def testimonial_marquee(items):
+    """Duas faixas de depoimentos correndo em sentidos opostos.
+    O conteúdo é repetido para o loop não ter emenda; a cópia fica escondida do leitor de tela."""
+    meio = (len(items) + 1) // 2
+    linhas = []
+    for i, grupo in enumerate((items[:meio], items[meio:])):
+        cards = "".join(review_card(t) for t in grupo)
+        reverso = " review-row--reverse" if i else ""
+        linhas.append(f"""
+        <div class="review-row{reverso}">
+          <div class="review-track">{cards}</div>
+          <div class="review-track" aria-hidden="true">{cards}</div>
+        </div>""")
+    return f'<div class="review-marquee">{"".join(linhas)}</div>'
 
 
 def campo(nome, rotulo, tipo="text", obrigatorio=True, extra=""):
@@ -142,7 +172,7 @@ def build_home():
     influencer_preview = coverflow(INFLUENCERS, "home")
     client_preview = client_marquee(SOCIAL_MEDIA_CLIENTS)
 
-    testimonial_preview = "".join(testimonial_card(t) for t in TESTIMONIALS[:3])
+    testimonial_preview = testimonial_marquee(TESTIMONIALS)
 
     html = head(
         "Bertoluchi Agência: Gestão de Influenciadoras e Social Media em Joinville",
@@ -231,7 +261,9 @@ def build_home():
         <span class="eyebrow">O que dizem</span>
         <h2>Quem trabalha com a gente, indica</h2>
       </div>
-      <div class="testimonial-grid">{testimonial_preview}</div>
+      </div>
+    <div class="reveal">{testimonial_preview}</div>
+    <div class="container">
     </div>
   </section>
 
