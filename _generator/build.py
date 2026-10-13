@@ -153,19 +153,25 @@ def build_home():
     html += f"""
 <main id="conteudo">
 
-  <section class="hero hero--marca">
+  <section class="hero">
+    <div class="hero-media">
+      <picture>
+        <source media="(max-width: 720px)" srcset="/assets/img/hero-mobile.webp" type="image/webp">
+        <source media="(max-width: 720px)" srcset="/assets/img/hero-mobile.jpg">
+        <source srcset="/assets/img/hero-desktop.webp" type="image/webp">
+        <img src="/assets/img/hero-desktop.jpg" alt="Beatriz Bertoluchi, fundadora da Bertoluchi Agência" fetchpriority="high">
+      </picture>
+    </div>
+    <div class="hero-scrim"></div>
     <div class="hero-content">
-      <div class="container hero-marca-grid">
-        <div>
+      <div class="container">
         <span class="eyebrow">Publicidade e marketing digital</span>
         <h1 class="hero-headline">Torne seu negócio uma referência nas redes sociais</h1>
         <p class="hero-sub">Social media com estratégia, criação de conteúdo de alta qualidade e branding, para marcas que querem crescer com consistência. E, quando faz sentido, conectamos sua marca às influenciadoras certas.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
-          <a class="btn btn-outline" href="/servicos.html">Conhecer serviços</a>
+          <a class="btn btn-outline-invert" href="/servicos.html">Conhecer serviços</a>
         </div>
-        </div>
-        <img class="hero-icone" src="/assets/img/icone-bertoluchi.svg" width="360" height="360" alt="Ícone da Bertoluchi" fetchpriority="high">
       </div>
     </div>
   </section>
