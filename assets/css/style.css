@@ -1147,6 +1147,11 @@ a.wordmark:hover, a.wordmark:focus-visible{
   display: block; margin-top: 4px; font-size: 0.82rem; line-height: 1.3;
   color: #F1D5BE; -webkit-text-fill-color: #F1D5BE;
 }
+.story-city{
+  display: flex; align-items: center; gap: 4px; margin-top: 4px; font-size: 0.78rem; line-height: 1.3;
+  color: rgba(255,255,255,0.85); -webkit-text-fill-color: rgba(255,255,255,0.85);
+}
+.story-city::before{ content: "F4CD"; font-size: 0.75rem; }
 .story-cta{
   display: inline-block; margin-top: 12px; padding: 7px 14px; border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.7);

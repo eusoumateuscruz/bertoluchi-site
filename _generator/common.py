@@ -179,25 +179,25 @@ SERVICES = [
 # (webp + fallback jpg). Quem ainda não tiver foto cai no card de
 # iniciais, definido em influencer_card().
 INFLUENCERS = [
-    {"name": "Larissa Estrada", "handle": "@larissaestradaa",
+    {"name": "Larissa Estrada", "handle": "@larissaestradaa", "city": "Joinville, SC",
      "niche": "Fé | Lifestyle", "img": "influ-larissaestradaa"},
-    {"name": "Pastor Lipão", "handle": "@pastorlipao",
+    {"name": "Pastor Lipão", "handle": "@pastorlipao", "city": "Joinville, SC",
      "niche": "Life Style | Fé", "img": "influ-pastorlipao"},
-    {"name": "Nidyellen Rodrigues", "handle": "@nidyellenr",
+    {"name": "Nidyellen Rodrigues", "handle": "@nidyellenr", "city": "Florianópolis, SC",
      "niche": "Life Style | Rotina", "img": "influ-nidyellenr"},
-    {"name": "O que fazer em Joinville", "handle": "@oquefazeremjoinville",
+    {"name": "O que fazer em Joinville", "handle": "@oquefazeremjoinville", "city": "Joinville, SC",
      "niche": "Dicas de locais em Joinville e região", "img": "influ-oquefazeremjoinville"},
-    {"name": "Flávia Gabriela", "handle": "@fglins",
+    {"name": "Flávia Gabriela", "handle": "@fglins", "city": "Porto Ferreira, SP",
      "niche": "Lifestyle | Empreendedorismo | Dicas", "img": "influ-flavia-gabriela"},
-    {"name": "Leticia Levasz", "handle": "@_leticiafit_",
+    {"name": "Leticia Levasz", "handle": "@_leticiafit_", "city": "São Paulo, SP",
      "niche": "Fitness | Lifestyle", "img": "influ-leticia-levasz"},
-    {"name": "Allan Popeye", "handle": "@allan_popeye",
+    {"name": "Allan Popeye", "handle": "@allan_popeye", "city": "São Paulo, SP",
      "niche": "Luta | Lifestyle", "img": "influ-allan-popeye"},
     # Novos em 2026-10-06 (fotos enviadas pela Beatriz). Nome como aparece
     # no proprio perfil do Instagram.
-    {"name": "Yasmin Andrade", "handle": "@yasmin.andrade__",
+    {"name": "Yasmin Andrade", "handle": "@yasmin.andrade__", "city": "Curitiba, PR",
      "niche": "Lifestyle | Fitness", "img": "influ-yasmin-andrade"},
-    {"name": "ÉÉÉguaaa", "handle": "@eeeguaaa",
+    {"name": "ÉÉÉguaaa", "handle": "@eeeguaaa", "city": "Joinville, SC",
      "niche": "Dicas de locais em Joinville e região", "img": "influ-eeeguaaa"},
 ]
 
@@ -278,11 +278,12 @@ def initials(name):
 def story_chrome(inf):
     """Nome, @ e nicho na base do card vertical (formato reels)."""
     niche = f'<span class="story-niche">{inf["niche"]}</span>' if inf.get("niche") else ""
+    city = f'<span class="story-city">{inf["city"]}</span>' if inf.get("city") else ""
     return f"""
             <div class="story-bottom">
               <strong class="story-name">{inf['name']}</strong>
               <span class="story-handle">{inf['handle']}</span>
-              {niche}
+              {niche}{city}
             </div>"""
 
 
