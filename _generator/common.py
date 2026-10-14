@@ -187,8 +187,6 @@ INFLUENCERS = [
      "niche": "Life Style | Rotina", "img": "influ-nidyellenr"},
     {"name": "O que fazer em Joinville", "handle": "@oquefazeremjoinville",
      "niche": "Dicas de locais em Joinville e região", "img": "influ-oquefazeremjoinville"},
-    {"name": "Mari Marques", "handle": "@mari.marques_",
-     "niche": "Lifestyle | Fitness", "img": "influ-mari-marques"},
     {"name": "Flávia Gabriela", "handle": "@fglins",
      "niche": "Lifestyle | Empreendedorismo | Dicas", "img": "influ-flavia-gabriela"},
     {"name": "Leticia Levasz", "handle": "@_leticiafit_",
