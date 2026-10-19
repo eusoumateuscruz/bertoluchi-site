@@ -157,6 +157,44 @@ def form_casting():
     return formulario("Casting", "[Casting] Nova inscrição de influenciadora", campos, "Enviar inscrição", "casting")
 
 
+def schema_empresa():
+    """JSON-LD da agência na home. Só dados que já estão no site (common.SITE).
+
+    Telefone fora de propósito: o site mostra (47) 9254-5015 e a ficha do
+    cliente fala em (47) 99254-5015. Entra quando o número for confirmado.
+    """
+    dados = {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "@id": SITE["domain"] + "/#empresa",
+        "name": SITE["full_name"],
+        "alternateName": "Bertoluchi Agência",
+        "url": SITE["domain"] + "/",
+        "logo": SITE["domain"] + "/assets/img/logo.png",
+        "image": SITE["domain"] + "/assets/img/hero-desktop.jpg",
+        "description": "Agência de publicidade e marketing digital em Joinville: social media, branding e gestão de influenciadoras.",
+        "email": SITE["email"],
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "R. Victor Müller, 215, Costa e Silva",
+            "addressLocality": "Joinville",
+            "addressRegion": "SC",
+            "postalCode": "89218-460",
+            "addressCountry": "BR",
+        },
+        "areaServed": {"@type": "City", "name": "Joinville"},
+        "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "17:00",
+        }],
+        "sameAs": [SITE["instagram"], SITE["linkedin"], SITE["behance"]],
+    }
+    return ('<script type="application/ld+json">'
+            + json.dumps(dados, ensure_ascii=False) + "</script>\n")
+
+
 # ---------------------------------------------------------------- HOME
 def build_home():
     pillars = ""
@@ -178,6 +216,7 @@ def build_home():
         "Bertoluchi Agência: Gestão de Influenciadoras e Social Media em Joinville",
         "Social media, branding e gestão de influenciadoras em Joinville. Torne seu negócio uma referência nas redes sociais com a Bertoluchi Agência.",
         "/index.html",
+        extra_head=schema_empresa(),
     )
     html += header("/index.html")
     html += f"""
@@ -197,7 +236,7 @@ def build_home():
       <div class="container">
         <div class="hero-painel">
         <span class="eyebrow">Publicidade e marketing digital</span>
-        <h1 class="hero-headline">Torne seu negócio uma referência nas redes sociais</h1>
+        <h1 class="hero-headline">Torne seu negócio uma referência nas redes sociais em Joinville</h1>
         <p class="hero-sub">Social media com estratégia, criação de conteúdo de alta qualidade e branding, para marcas que querem crescer com consistência. E, quando faz sentido, conectamos sua marca às influenciadoras certas.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
@@ -1019,6 +1058,70 @@ def build_obrigado():
     write("/obrigado.html", html)
 
 
+# ---------------------------------------------------------------- PRIVACIDADE
+def build_privacidade():
+    # Texto padrão de LGPD montado pela Destaq: precisa de revisão do CEO antes de publicar.
+    html = head(
+        "Política de privacidade: Bertoluchi Agência",
+        "Como a Bertoluchi Agência trata os dados pessoais enviados pelo site, de acordo com a Lei Geral de Proteção de Dados (LGPD).",
+        "/politica-de-privacidade.html",
+    )
+    html += header("")
+    html += f"""
+<!-- Texto padrão de LGPD: precisa de revisão do CEO antes de publicar. -->
+<main id="conteudo">
+  <article class="post">
+    <div class="container container-narrow">
+      <header class="post-head">
+        <span class="eyebrow">Privacidade</span>
+        <h1>Política de privacidade</h1>
+        <p class="post-meta">Atualizada em 19 de outubro de 2026</p>
+      </header>
+
+      <div class="post-body">
+        <p>Esta política explica como a {SITE['full_name']} trata os dados pessoais de quem visita o site e entra em contato com a agência, de acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018).</p>
+
+        <h2>Quem é a responsável pelos dados</h2>
+        <p>{SITE['full_name']}, {SITE['address_line1']}, {SITE['address_line2']}. E-mail: <a href="mailto:{SITE['email']}">{SITE['email']}</a>.</p>
+
+        <h2>Quais dados coletamos</h2>
+        <ul>
+          <li>Dados que você envia pelos formulários: nome, e-mail, WhatsApp, assunto e mensagem. Na inscrição de influenciadoras, também o perfil no Instagram, o número aproximado de seguidores, o nicho, a cidade e o link do mídia kit.</li>
+          <li>Dados que você compartilha quando fala com a gente pelo WhatsApp ou por e-mail.</li>
+          <li>Dados técnicos de navegação, como endereço IP e tipo de navegador, registrados pelos serviços que mantêm o site no ar e carregam as fontes do site.</li>
+        </ul>
+
+        <h2>Para que usamos os dados</h2>
+        <ul>
+          <li>Responder ao seu contato e enviar propostas que você pediu.</li>
+          <li>Avaliar inscrições de influenciadoras e candidaturas a vagas.</li>
+          <li>Cumprir obrigações legais e manter o site funcionando com segurança.</li>
+        </ul>
+        <p>Não vendemos dados pessoais e não usamos os dados enviados pelo site para outras finalidades sem avisar você.</p>
+
+        <h2>Com quem compartilhamos</h2>
+        <p>Os formulários são enviados para o e-mail da agência pelo serviço FormSubmit. As conversas pelo WhatsApp passam pela plataforma da Meta. O site fica hospedado em um provedor de nuvem. Esses serviços tratam os dados apenas para prestar o serviço contratado.</p>
+
+        <h2>Cookies</h2>
+        <p>Hoje o site não usa cookies de publicidade nem de medição de audiência. Se isso mudar, esta política será atualizada.</p>
+
+        <h2>Por quanto tempo guardamos</h2>
+        <p>Guardamos os dados pelo tempo necessário para atender ao seu pedido e cumprir obrigações legais. Depois disso, eles são apagados.</p>
+
+        <h2>Seus direitos</h2>
+        <p>Você pode pedir a confirmação de que tratamos seus dados, o acesso, a correção, a exclusão, a portabilidade e informações sobre o compartilhamento, além de retirar o consentimento a qualquer momento. Basta escrever para <a href="mailto:{SITE['email']}">{SITE['email']}</a>.</p>
+
+        <h2>Mudanças nesta política</h2>
+        <p>Esta política pode ser atualizada. A data da última versão fica no topo da página.</p>
+      </div>
+    </div>
+  </article>
+</main>
+"""
+    html += footer()
+    write("/politica-de-privacidade.html", html)
+
+
 def main():
     build_home()
     build_sobre()
@@ -1034,6 +1137,7 @@ def main():
     build_contato()
     build_trabalhe_conosco()
     build_obrigado()
+    build_privacidade()
 
 
 if __name__ == "__main__":

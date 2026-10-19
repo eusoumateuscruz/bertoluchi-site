@@ -387,7 +387,7 @@ def marquee(itens, rotulo):
             texto, link = item[0], item[1]
             logo = item[2] if len(item) > 2 else None
             if logo:
-                texto = (f'<img class="wordmark-logo" src="{logo}" alt="" width="44" height="44" '
+                texto = (f'<img class="wordmark-logo" src="{logo}" alt="Logo {texto}" aria-hidden="true" width="44" height="44" '
                          f'loading="lazy" decoding="async">{texto}')
             if i:
                 partes.append(f'<span class="marquee-sep"{marca}></span>')
@@ -412,8 +412,7 @@ def brand_list():
         partes = []
         for nome, arq in INFLUENCER_BRAND_LOGOS:
             if arq:
-                alt = "" if clone else nome
-                conteudo = f'<img src="/assets/img/marcas/{arq}" alt="{alt}" loading="lazy" decoding="async">'
+                conteudo = f'<img src="/assets/img/marcas/{arq}" alt="{nome}" loading="lazy" decoding="async">'
             else:
                 conteudo = f'<span class="logo-tile-nome">{nome}</span>'
             partes.append(f'<span class="logo-tile"{marca}>{conteudo}</span>')
@@ -438,7 +437,8 @@ def client_marquee(clientes):
 
 def head(title, description, path="/index.html", og_image="/assets/img/hero-desktop.jpg",
          og_type="website", extra_head=""):
-    canonical = SITE["domain"] + path
+    # A home responde em "/": canonical e og:url apontam para a raiz, não para /index.html.
+    canonical = SITE["domain"] + ("/" if path == "/index.html" else path)
     return f"""<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -567,7 +567,7 @@ def footer():
     </div>
   </div>
   <div class="container footer-bottom">
-    <p>&copy; <span data-year></span> Bertoluchi Publicidade e Marketing Digital. Todos os direitos reservados.</p>
+    <p>&copy; <span data-year></span> Bertoluchi Publicidade e Marketing Digital. Todos os direitos reservados. <a href="/politica-de-privacidade.html">Política de privacidade</a></p>
   </div>
 </footer>
 <a class="whatsapp-float" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
