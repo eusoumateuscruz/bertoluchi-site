@@ -12,8 +12,9 @@ SITE = {
     "full_name": "Bertoluchi Publicidade e Marketing Digital",
     "tagline": "Publicidade e marketing digital",
     "domain": "https://www.bertoluchi.com.br",
-    "phone_display": "(47) 9254-5015",
-    "whatsapp_link": "https://wa.me/554792545015?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20reuni%C3%A3o.",
+    "phone_display": "(47) 99254-5015",
+    "phone_tel": "+5547992545015",
+    "whatsapp_link": "https://wa.me/5547992545015?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20reuni%C3%A3o.",
     "email": "beatriz@bertoluchiagencia.com.br",
     "address_line1": "R. Victor Müller, 215 - Costa e Silva",
     "address_line2": "Joinville - SC, 89218-460",
@@ -21,7 +22,7 @@ SITE = {
     "instagram": "https://www.instagram.com/bertoluchiagencia/",
     "linkedin": "https://www.linkedin.com/company/bertoluchi/",
     "behance": "https://www.behance.net/beatrizbertolu",
-    "whatsapp_link_vaga_designer": "https://wa.me/554792545015?text=Ol%C3%A1%21%20Tenho%20interesse%20na%20vaga%20de%20Designer%20Gr%C3%A1fico%20para%20Social%20Media.%20Meu%20portf%C3%B3lio%3A%20",
+    "whatsapp_link_vaga_designer": "https://wa.me/5547992545015?text=Ol%C3%A1%21%20Tenho%20interesse%20na%20vaga%20de%20Designer%20Gr%C3%A1fico%20para%20Social%20Media.%20Meu%20portf%C3%B3lio%3A%20",
     # Formularios do site enviam para este e-mail via FormSubmit.co
     # (sem chave; o primeiro envio pede ativacao no proprio e-mail).
     "form_email": "beatriz@bertoluchiagencia.com.br",
@@ -39,7 +40,7 @@ STATS = [
 def whatsapp(texto):
     """Link de WhatsApp com mensagem pronta."""
     from urllib.parse import quote
-    return "https://wa.me/554792545015?text=" + quote(texto)
+    return "https://wa.me/5547992545015?text=" + quote(texto)
 
 NAV = [
     ("Início", "/index.html"),
@@ -561,7 +562,7 @@ def footer():
         <li>{SITE['address_line1']}</li>
         <li>{SITE['address_line2']}</li>
         <li><a href="mailto:{SITE['email']}">{SITE['email']}</a></li>
-        <li><a href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">{SITE['phone_display']}</a></li>
+        <li><a href="tel:{SITE['phone_tel']}">{SITE['phone_display']}</a></li>
         <li>{SITE['hours']}</li>
       </ul>
     </div>

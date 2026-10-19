@@ -158,11 +158,7 @@ def form_casting():
 
 
 def schema_empresa():
-    """JSON-LD da agência na home. Só dados que já estão no site (common.SITE).
-
-    Telefone fora de propósito: o site mostra (47) 9254-5015 e a ficha do
-    cliente fala em (47) 99254-5015. Entra quando o número for confirmado.
-    """
+    """JSON-LD da agência na home. Só dados que já estão no site (common.SITE)."""
     dados = {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
@@ -174,6 +170,7 @@ def schema_empresa():
         "image": SITE["domain"] + "/assets/img/hero-desktop.jpg",
         "description": "Agência de publicidade e marketing digital em Joinville: social media, branding e gestão de influenciadoras.",
         "email": SITE["email"],
+        "telephone": SITE["phone_tel"],
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "R. Victor Müller, 215, Costa e Silva",
@@ -236,7 +233,7 @@ def build_home():
       <div class="container">
         <div class="hero-painel">
         <span class="eyebrow">Publicidade e marketing digital</span>
-        <h1 class="hero-headline">Torne seu negócio uma referência nas redes sociais em Joinville</h1>
+        <h1 class="hero-headline">Referência nas redes sociais em Joinville</h1>
         <p class="hero-sub">Social media com estratégia, criação de conteúdo de alta qualidade e branding, para marcas que querem crescer com consistência. E, quando faz sentido, conectamos sua marca às influenciadoras certas.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
@@ -850,7 +847,7 @@ def build_contato():
           <p><a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
 
           <h3>Telefone</h3>
-          <p>{SITE['phone_display']}</p>
+          <p><a href="tel:{SITE['phone_tel']}">{SITE['phone_display']}</a></p>
 
           <h3>Horário</h3>
           <p>{SITE['hours']}</p>
