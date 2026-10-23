@@ -15,7 +15,10 @@
 const crypto = require("crypto");
 
 const COOKIE = "bt_inf";
-const DURACAO = 60 * 60 * 24 * 7; // 7 dias
+// "Manter conectado": 90 dias, renovados a cada visita. Sem a opção, a sessão
+// vale até fechar o navegador (e no máximo 12 horas).
+const DURACAO_LONGA = 60 * 60 * 24 * 90;
+const DURACAO_CURTA = 60 * 60 * 12;
 
 async function lerConfig(chave) {
   const bruto = process.env.EDGE_CONFIG;
@@ -40,11 +43,13 @@ function assinar(texto) {
   return crypto.createHmac("sha256", process.env.SESSAO_SEGREDO || "").update(texto).digest("base64url");
 }
 
-function criarSessao(res, usuario) {
-  const expira = Math.floor(Date.now() / 1000) + DURACAO;
-  const corpo = `${Buffer.from(usuario).toString("base64url")}.${expira}`;
+function criarSessao(res, usuario, lembrar) {
+  const duracao = lembrar ? DURACAO_LONGA : DURACAO_CURTA;
+  const expira = Math.floor(Date.now() / 1000) + duracao;
+  const corpo = `${Buffer.from(usuario).toString("base64url")}.${expira}.${lembrar ? 1 : 0}`;
+  const validade = lembrar ? `; Max-Age=${duracao}` : "";
   res.setHeader("Set-Cookie",
-    `${COOKIE}=${corpo}.${assinar(corpo)}; Path=/; Max-Age=${DURACAO}; HttpOnly; Secure; SameSite=Lax`);
+    `${COOKIE}=${corpo}.${assinar(corpo)}; Path=/${validade}; HttpOnly; Secure; SameSite=Lax`);
 }
 
 function encerrarSessao(res) {
@@ -56,13 +61,13 @@ function lerSessao(req) {
   const linha = req.headers.cookie || "";
   const par = linha.split(/;\s*/).find((c) => c.startsWith(COOKIE + "="));
   if (!par) return null;
-  const [u, expira, sig] = par.slice(COOKIE.length + 1).split(".");
-  if (!u || !expira || !sig) return null;
-  const esperado = Buffer.from(assinar(`${u}.${expira}`));
+  const [u, expira, lembrar, sig] = par.slice(COOKIE.length + 1).split(".");
+  if (!u || !expira || !lembrar || !sig) return null;
+  const esperado = Buffer.from(assinar(`${u}.${expira}.${lembrar}`));
   const recebido = Buffer.from(sig);
   if (esperado.length !== recebido.length || !crypto.timingSafeEqual(esperado, recebido)) return null;
   if (Number(expira) < Date.now() / 1000) return null;
-  return Buffer.from(u, "base64url").toString();
+  return { usuario: Buffer.from(u, "base64url").toString(), lembrar: lembrar === "1" };
 }
 
 function semCache(res) {

@@ -1074,6 +1074,10 @@ def build_area_influenciadora():
               <button type="button" class="area-ver-senha" data-ver-senha aria-label="Mostrar senha">Mostrar</button>
             </div>
           </div>
+          <label class="area-lembrar">
+            <input type="checkbox" name="lembrar" checked>
+            <span>Manter conectado neste aparelho</span>
+          </label>
           <p class="area-erro" data-area-erro role="alert" hidden></p>
           <button type="submit" class="btn btn-primary btn-full">Entrar</button>
           <p class="form-note">Esqueceu a senha? <a href="{whatsapp('Olá! Faço parte do casting da Bertoluchi e preciso de ajuda com o acesso ao portal do influenciador.')}" target="_blank" rel="noopener">Fale com a equipe</a>.</p>

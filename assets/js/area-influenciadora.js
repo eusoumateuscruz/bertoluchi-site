@@ -83,7 +83,7 @@
     fetch("/api/entrar", {
       method: "POST", credentials: "same-origin",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ usuario: usuario, senha: senha })
+      body: JSON.stringify({ usuario: usuario, senha: senha, lembrar: form.lembrar.checked })
     }).then(function (r) {
       return r.json().then(function (j) { return { ok: r.ok, j: j }; });
     }).then(function (res) {
