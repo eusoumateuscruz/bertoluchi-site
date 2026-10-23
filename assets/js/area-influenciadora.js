@@ -56,7 +56,7 @@
 
   function abrirPainel(json) {
     dados = json.oportunidades || [];
-    ola.textContent = "Olá, " + (json.nome || "influenciadora") + "!";
+    ola.textContent = "Olá, " + (json.nome || "tudo bem") + "!";
     raiz.hidden = true;
     painel.hidden = false;
     render();

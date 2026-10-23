@@ -1345,3 +1345,20 @@ a.story-card:hover .story-cta{ background: #fff; color: var(--color-text); -webk
 }
 .area-chamada h2{ margin: 6px 0 8px; }
 .area-chamada p{ margin: 0; max-width: 56ch; color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted); }
+
+/* ---------- Cabeçalho: botão do portal e menu compacto ---------- */
+.nav-link{ white-space: nowrap; }
+.site-header .brand{ flex: 0 0 auto; }
+.btn-portal{ display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.btn-header.btn-outline{ padding: 11px 18px; }
+.mobile-menu-cta.btn-portal{ justify-content: center; }
+.btn-portal .curto{ display: none; }
+@media (max-width: 1480px){
+  .nav-list{ gap: 20px; } .nav-link{ font-size: 0.9rem; }
+  .header-inner{ gap: 18px; }
+  .btn-header .longo{ display: none; } .btn-header .curto{ display: inline; }
+}
+@media (max-width: 1140px){
+  .main-nav, .btn-header{ display: none; }
+  .menu-toggle{ display: flex; }
+}

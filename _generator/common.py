@@ -48,6 +48,7 @@ NAV = [
     ("Influenciadoras", "/influenciadoras.html"),
     ("Resultados", "/resultados.html"),
     ("Blog", "/blog.html"),
+    ("Trabalhe conosco", "/trabalhe-conosco.html"),
 ]
 
 SERVICES = [
@@ -499,6 +500,7 @@ def header(active_path):
     <nav class="main-nav" aria-label="Navegação principal">
       <ul class="nav-list">{links}</ul>
     </nav>
+    <a class="btn btn-outline btn-header btn-portal" href="/portal-do-influenciador.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg><span class="longo">Portal do influenciador</span><span class="curto">Portal</span></a>
     <a class="btn btn-primary btn-header" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
     <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu">
       <span></span><span></span><span></span>
@@ -519,6 +521,7 @@ def header(active_path):
     <ul class="mobile-nav-list">{mobile_links}</ul>
   </nav>
   <div class="mobile-menu-foot">
+    <a class="btn btn-outline mobile-menu-cta btn-portal" href="/portal-do-influenciador.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg><span>Portal do influenciador</span></a>
     <a class="btn btn-primary mobile-menu-cta" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
     <div class="mobile-menu-social">
       <a href="{SITE['instagram']}" target="_blank" rel="noopener">Instagram</a>
@@ -553,7 +556,7 @@ def footer():
         <li><a href="/blog.html">Blog</a></li>
         <li><a href="/contato.html">Contato</a></li>
         <li><a href="/trabalhe-conosco.html">Trabalhe conosco</a></li>
-        <li><a href="/area-da-influenciadora.html">Área da influenciadora</a></li>
+        <li><a href="/portal-do-influenciador.html">Portal do influenciador</a></li>
       </ul>
     </div>
     <div class="footer-col">

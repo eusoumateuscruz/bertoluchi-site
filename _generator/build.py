@@ -580,10 +580,10 @@ def build_influenciadoras():
       <div class="area-chamada reveal">
         <div>
           <span class="eyebrow">Já faz parte do casting?</span>
-          <h2>Área da influenciadora</h2>
+          <h2>Portal do influenciador</h2>
           <p>Entre com seu usuário e senha para ver as oportunidades de campanha que a Bertoluchi está fechando para você.</p>
         </div>
-        <a class="btn btn-primary" href="/area-da-influenciadora.html">Entrar na minha área</a>
+        <a class="btn btn-primary" href="/portal-do-influenciador.html">Entrar no portal</a>
       </div>
     </div>
   </section>
@@ -1020,23 +1020,23 @@ def build_trabalhe_conosco():
 # Global Config da Vercel (ver api/_area.js), nunca neste repositorio publico.
 def build_area_influenciadora():
     html = head(
-        "Área da influenciadora: Bertoluchi Agência",
-        "Acesso exclusivo das influenciadoras assessoradas pela Bertoluchi às oportunidades de campanha.",
-        "/area-da-influenciadora.html",
+        "Portal do influenciador: Bertoluchi Agência",
+        "Acesso exclusivo dos influenciadores assessorados pela Bertoluchi às oportunidades de campanha.",
+        "/portal-do-influenciador.html",
         extra_head='<meta name="robots" content="noindex, nofollow">\n',
     )
-    html += header("")
+    html += header("/portal-do-influenciador.html")
     html += f"""
 <main id="conteudo">
   <section class="section page-hero area-hero">
     <div class="container">
       <div class="area-grid" data-area>
         <div class="section-head reveal">
-          <span class="eyebrow">Área da influenciadora</span>
+          <span class="eyebrow">Portal do influenciador</span>
           <h1>Suas oportunidades, num só lugar</h1>
           <p>Aqui você acompanha as campanhas que a Bertoluchi está fechando para você: marca, formato, cachê e prazo de cada uma.</p>
           <ul class="area-pontos">
-            <li><strong>Exclusivo</strong> para influenciadoras do nosso casting</li>
+            <li><strong>Exclusivo</strong> para quem faz parte do nosso casting</li>
             <li><strong>Atualizado</strong> sempre que surge uma nova proposta</li>
             <li><strong>Sem acesso?</strong> Peça seu usuário para a equipe pelo WhatsApp</li>
           </ul>
@@ -1057,14 +1057,14 @@ def build_area_influenciadora():
           </div>
           <p class="area-erro" data-area-erro role="alert" hidden></p>
           <button type="submit" class="btn btn-primary btn-full">Entrar</button>
-          <p class="form-note">Esqueceu a senha? <a href="{whatsapp('Olá! Sou influenciadora da Bertoluchi e preciso de ajuda com o acesso à área da influenciadora.')}" target="_blank" rel="noopener">Fale com a equipe</a>.</p>
+          <p class="form-note">Esqueceu a senha? <a href="{whatsapp('Olá! Faço parte do casting da Bertoluchi e preciso de ajuda com o acesso ao portal do influenciador.')}" target="_blank" rel="noopener">Fale com a equipe</a>.</p>
         </form>
       </div>
 
       <div class="area-painel" data-area-painel hidden>
         <div class="area-painel-topo">
           <div>
-            <span class="eyebrow">Área da influenciadora</span>
+            <span class="eyebrow">Portal do influenciador</span>
             <h1 data-area-ola>Olá!</h1>
           </div>
           <button type="button" class="btn btn-outline" data-area-sair>Sair</button>
@@ -1084,7 +1084,7 @@ def build_area_influenciadora():
 """
     html += footer().replace('<script src="/assets/js/main.js"></script>',
                              '<script src="/assets/js/main.js"></script>\n<script src="/assets/js/area-influenciadora.js"></script>')
-    write("/area-da-influenciadora.html", html)
+    write("/portal-do-influenciador.html", html)
 
 
 # ---------------------------------------------------------------- OBRIGADO
