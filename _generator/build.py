@@ -575,6 +575,19 @@ def build_influenciadoras():
     </div>
   </section>
 
+  <section class="section">
+    <div class="container">
+      <div class="area-chamada reveal">
+        <div>
+          <span class="eyebrow">Já faz parte do casting?</span>
+          <h2>Área da influenciadora</h2>
+          <p>Entre com seu usuário e senha para ver as oportunidades de campanha que a Bertoluchi está fechando para você.</p>
+        </div>
+        <a class="btn btn-primary" href="/area-da-influenciadora.html">Entrar na minha área</a>
+      </div>
+    </div>
+  </section>
+
   {cta_band("É influenciadora e quer assessoria?", "Nosso casting está fechado no momento, mas você pode se inscrever na lista e ser avaliada nas próximas aberturas.", "/servicos/gestao-de-influenciadores.html#casting", "Quero me inscrever")}
 </main>
 """
@@ -893,44 +906,36 @@ def build_clientes_social_media():
 
 # ---------------------------------------------------------------- TRABALHE CONOSCO
 # Vagas abertas. Para abrir uma vaga nova, acrescente um item; para fechar,
-# remova. O formulario de candidatura lista as vagas abertas e sempre tem a
-# opcao de banco de talentos, entao a pagina funciona mesmo sem vaga.
-VAGAS = [
-    {
-        "titulo": "Designer Gráfico para Social Media",
-        "area": "Design",
-        "tags": [
-            "Remoto · Santa Catarina e São Paulo",
-            "Regime · PJ",
-            "Início · Imediato",
-            "Salário · a partir de R$ 2.000 (a combinar)",
-        ],
-        "resumo": "Vaga remota, para candidatos de Santa Catarina e São Paulo. Contratação PJ, com início imediato.",
-        "atividades": "Desenvolver criativos e carrosséis para os clientes de social media da agência.",
-        "requisitos": [
-            "Experiência comprovada em design gráfico",
-            "Domínio de pelo menos um editor de imagem, preferencialmente Canva e Photoshop",
-            "Disponibilidade de segunda a sexta, das 9h às 17h",
-            "Possibilidade de atuar como PJ",
-            "Início imediato",
-        ],
-    },
-]
+# remova. Sem vaga, a secao some e a pagina fica so com o formulario.
+# (vaga de Designer Grafico para Social Media encerrada em 2026-10-23)
+VAGAS = []
 
-AREAS_TALENTO = [
-    "Design gráfico", "Social media e estratégia", "Captação e edição de vídeo",
-    "Redação e copy", "Atendimento e comercial", "Tráfego pago", "Outra área",
-]
+# Candidaturas chegam pelo Jotform da agencia, nao mais pelo FormSubmit.
+JOTFORM_ID = "262935108328056"
 
-BANCO = "Banco de talentos (sem vaga específica)"
+
+def jotform_embed(form_id, titulo):
+    return f"""
+        <div class="jotform-wrap reveal">
+          <iframe id="JotFormIFrame-{form_id}" title="{titulo}"
+            onload="window.parent.scrollTo(0,0)" allowtransparency="true"
+            allow="geolocation; microphone; camera; fullscreen"
+            src="https://form.jotform.com/{form_id}"
+            frameborder="0" scrolling="no" loading="lazy"></iframe>
+          <p class="form-note">O formulário não carregou? <a href="https://form.jotform.com/{form_id}" target="_blank" rel="noopener">Abra em uma nova aba</a>.</p>
+        </div>
+        <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
+        <script>window.jotformEmbedHandler && window.jotformEmbedHandler("iframe[id='JotFormIFrame-{form_id}']", "https://form.jotform.com/");</script>"""
 
 
 def build_trabalhe_conosco():
-    vagas_html = ""
-    for v in VAGAS:
-        tags_html = "".join(f'<li class="vaga-tag">{t}</li>' for t in v["tags"])
-        req = "".join(f"<li>{r}</li>" for r in v["requisitos"])
-        vagas_html += f"""
+    vagas_secao = ""
+    if VAGAS:
+        vagas_html = ""
+        for v in VAGAS:
+            tags_html = "".join(f'<li class="vaga-tag">{t}</li>' for t in v["tags"])
+            req = "".join(f"<li>{r}</li>" for r in v["requisitos"])
+            vagas_html += f"""
         <article class="vaga-card reveal">
           <span class="eyebrow">Vaga aberta · {v['area']}</span>
           <h3>{v['titulo']}</h3>
@@ -947,29 +952,23 @@ def build_trabalhe_conosco():
               <ul class="lista-marcada">{req}</ul>
             </div>
           </div>
-          <a class="btn btn-primary" href="#candidatura" data-vaga="{v['titulo']}">Candidatar-se a esta vaga</a>
+          <a class="btn btn-primary" href="#candidatura">Candidatar-se a esta vaga</a>
         </article>"""
-    if not VAGAS:
-        vagas_html = ('<p class="note-block">No momento não temos vagas abertas. '
-                      'Cadastre-se no banco de talentos abaixo: é por lá que procuramos '
-                      'primeiro quando surge uma oportunidade.</p>')
-
-    opcoes = [v["titulo"] for v in VAGAS] + [BANCO]
-    campos = (
-        seletor("Vaga", "Vaga de interesse", opcoes)
-        + seletor("Area", "Área de atuação", AREAS_TALENTO)
-        + campo("Nome", "Nome completo")
-        + campo("email", "E-mail", "email")
-        + campo("WhatsApp", "WhatsApp", "tel")
-        + campo("Cidade", "Cidade e estado")
-        + campo("Portfolio", "Link do portfólio", "url", extra=' placeholder="Behance, Drive, Instagram ou site"')
-        + campo("LinkedIn", "LinkedIn ou Instagram profissional", obrigatorio=False)
-        + campo("Mensagem", "Conta um pouco sobre você e sua experiência", "textarea")
-    )
-    form = formulario("Trabalhe conosco", "[Candidatura]", campos, "Enviar candidatura", "candidatura")
+        vagas_secao = f"""
+  <section class="section section-alt" id="vagas">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Oportunidades</span>
+        <h2>Vagas abertas</h2>
+      </div>
+      <div class="vaga-lista">{vagas_html}</div>
+    </div>
+  </section>
+"""
 
     n = len(VAGAS)
     desc_vagas = (f"{n} vaga aberta" if n == 1 else f"{n} vagas abertas") if n else "Banco de talentos aberto"
+    botao_vagas = '<a class="btn btn-outline" href="#vagas">Ver vagas abertas</a>' if VAGAS else ""
     html = head(
         "Trabalhe conosco: vagas e banco de talentos da Bertoluchi",
         f"Trabalhe na Bertoluchi, agência de marketing digital de Joinville (SC). {desc_vagas}. "
@@ -987,32 +986,22 @@ def build_trabalhe_conosco():
         <p>A Bertoluchi é uma agência de marketing digital com atuação em Joinville (SC) e São Paulo. Atendemos clientes de diversos segmentos, com uma atuação direta e estratégica, sempre buscando gerar resultado real e fortalecer o posicionamento de cada marca.</p>
       </div>
       <div class="hero-actions reveal">
-        <a class="btn btn-primary" href="#vagas">Ver vagas abertas</a>
-        <a class="btn btn-outline" href="#candidatura" data-vaga="{BANCO}">Cadastrar no banco de talentos</a>
+        <a class="btn btn-primary" href="#candidatura">Preencher o formulário</a>
+        {botao_vagas}
       </div>
     </div>
   </section>
-
-  <section class="section section-alt" id="vagas">
+{vagas_secao}
+  <section class="section{'' if VAGAS else ' section-alt'}" id="candidatura-secao">
     <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Oportunidades</span>
-        <h2>Vagas abertas</h2>
-      </div>
-      <div class="vaga-lista">{vagas_html}</div>
-    </div>
-  </section>
-
-  <section class="section" id="candidatura-secao">
-    <div class="container">
-      <div class="form-split">
+      <div class="form-split" id="candidatura">
         <div class="section-head reveal">
           <span class="eyebrow">Banco de talentos</span>
-          <h2>Candidate-se ou deixe seu perfil com a gente</h2>
-          <p>Escolha uma vaga aberta ou cadastre-se no banco de talentos, mesmo que hoje não tenha vaga para a sua área. Quando surge uma oportunidade, é no banco de talentos que procuramos primeiro.</p>
+          <h2>Deixe seu perfil com a gente</h2>
+          <p>Mesmo que hoje não tenha vaga para a sua área, preencha o formulário. Quando surge uma oportunidade, é no banco de talentos que procuramos primeiro.</p>
           <p class="destaque-portfolio"><strong>Portfólio:</strong> deixe um link (Behance, Instagram, Drive ou site) com os seus trabalhos, é o que a gente usa pra avaliar sua candidatura.</p>
         </div>
-        {form}
+        {jotform_embed(JOTFORM_ID, "Formulário Trabalhe Conosco da Bertoluchi")}
       </div>
       <div class="vaga-rodape reveal">
         <p>Dúvidas? Fale com a Beatriz: <a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
@@ -1023,6 +1012,79 @@ def build_trabalhe_conosco():
 """
     html += footer()
     write("/trabalhe-conosco.html", html)
+
+
+# ------------------------------------------------- AREA DA INFLUENCIADORA
+# Login e painel ficam na mesma pagina; o JS consulta /api/oportunidades e
+# mostra o painel quando a sessao existe. Contas e oportunidades moram no
+# Global Config da Vercel (ver api/_area.js), nunca neste repositorio publico.
+def build_area_influenciadora():
+    html = head(
+        "Área da influenciadora: Bertoluchi Agência",
+        "Acesso exclusivo das influenciadoras assessoradas pela Bertoluchi às oportunidades de campanha.",
+        "/area-da-influenciadora.html",
+        extra_head='<meta name="robots" content="noindex, nofollow">\n',
+    )
+    html += header("")
+    html += f"""
+<main id="conteudo">
+  <section class="section page-hero area-hero">
+    <div class="container">
+      <div class="area-grid" data-area>
+        <div class="section-head reveal">
+          <span class="eyebrow">Área da influenciadora</span>
+          <h1>Suas oportunidades, num só lugar</h1>
+          <p>Aqui você acompanha as campanhas que a Bertoluchi está fechando para você: marca, formato, cachê e prazo de cada uma.</p>
+          <ul class="area-pontos">
+            <li><strong>Exclusivo</strong> para influenciadoras do nosso casting</li>
+            <li><strong>Atualizado</strong> sempre que surge uma nova proposta</li>
+            <li><strong>Sem acesso?</strong> Peça seu usuário para a equipe pelo WhatsApp</li>
+          </ul>
+        </div>
+
+        <form class="contact-form site-form area-login reveal" data-area-login novalidate>
+          <h2 class="area-login-titulo">Entrar</h2>
+          <div class="form-field">
+            <label for="area-usuario">Usuário</label>
+            <input type="text" id="area-usuario" name="usuario" autocomplete="username" autocapitalize="none" spellcheck="false" required placeholder="seu @ do Instagram">
+          </div>
+          <div class="form-field">
+            <label for="area-senha">Senha</label>
+            <div class="area-senha">
+              <input type="password" id="area-senha" name="senha" autocomplete="current-password" required>
+              <button type="button" class="area-ver-senha" data-ver-senha aria-label="Mostrar senha">Mostrar</button>
+            </div>
+          </div>
+          <p class="area-erro" data-area-erro role="alert" hidden></p>
+          <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+          <p class="form-note">Esqueceu a senha? <a href="{whatsapp('Olá! Sou influenciadora da Bertoluchi e preciso de ajuda com o acesso à área da influenciadora.')}" target="_blank" rel="noopener">Fale com a equipe</a>.</p>
+        </form>
+      </div>
+
+      <div class="area-painel" data-area-painel hidden>
+        <div class="area-painel-topo">
+          <div>
+            <span class="eyebrow">Área da influenciadora</span>
+            <h1 data-area-ola>Olá!</h1>
+          </div>
+          <button type="button" class="btn btn-outline" data-area-sair>Sair</button>
+        </div>
+        <div class="area-resumo" data-area-resumo></div>
+        <div class="area-filtros" role="tablist" data-area-filtros>
+          <button type="button" class="area-filtro is-ativo" data-filtro="todas">Todas</button>
+          <button type="button" class="area-filtro" data-filtro="aberta">Abertas</button>
+          <button type="button" class="area-filtro" data-filtro="em andamento">Em andamento</button>
+          <button type="button" class="area-filtro" data-filtro="encerrada">Encerradas</button>
+        </div>
+        <div class="area-lista" data-area-lista></div>
+      </div>
+    </div>
+  </section>
+</main>
+"""
+    html += footer().replace('<script src="/assets/js/main.js"></script>',
+                             '<script src="/assets/js/main.js"></script>\n<script src="/assets/js/area-influenciadora.js"></script>')
+    write("/area-da-influenciadora.html", html)
 
 
 # ---------------------------------------------------------------- OBRIGADO
@@ -1133,6 +1195,7 @@ def main():
         build_blog_post(_p)
     build_contato()
     build_trabalhe_conosco()
+    build_area_influenciadora()
     build_obrigado()
     build_privacidade()
 

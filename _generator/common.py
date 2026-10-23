@@ -22,7 +22,6 @@ SITE = {
     "instagram": "https://www.instagram.com/bertoluchiagencia/",
     "linkedin": "https://www.linkedin.com/company/bertoluchi/",
     "behance": "https://www.behance.net/beatrizbertolu",
-    "whatsapp_link_vaga_designer": "https://wa.me/5547992545015?text=Ol%C3%A1%21%20Tenho%20interesse%20na%20vaga%20de%20Designer%20Gr%C3%A1fico%20para%20Social%20Media.%20Meu%20portf%C3%B3lio%3A%20",
     # Formularios do site enviam para este e-mail via FormSubmit.co
     # (sem chave; o primeiro envio pede ativacao no proprio e-mail).
     "form_email": "beatriz@bertoluchiagencia.com.br",
@@ -554,6 +553,7 @@ def footer():
         <li><a href="/blog.html">Blog</a></li>
         <li><a href="/contato.html">Contato</a></li>
         <li><a href="/trabalhe-conosco.html">Trabalhe conosco</a></li>
+        <li><a href="/area-da-influenciadora.html">Área da influenciadora</a></li>
       </ul>
     </div>
     <div class="footer-col">
