@@ -910,22 +910,20 @@ def build_clientes_social_media():
 # (vaga de Designer Grafico para Social Media encerrada em 2026-10-23)
 VAGAS = []
 
-# Candidaturas chegam pelo Jotform da agencia, nao mais pelo FormSubmit.
-JOTFORM_ID = "262935108328056"
+# Candidaturas chegam pelo Jotform da agencia; a pagina so apresenta o
+# banco de talentos e leva a pessoa ao formulario em outra aba.
+JOTFORM_URL = "https://form.jotform.com/262935108328056"
 
+AREAS_TALENTO = [
+    "Design gráfico", "Social media e estratégia", "Captação e edição de vídeo",
+    "Redação e copy", "Atendimento e comercial", "Tráfego pago",
+]
 
-def jotform_embed(form_id, titulo):
-    return f"""
-        <div class="jotform-wrap reveal">
-          <iframe id="JotFormIFrame-{form_id}" title="{titulo}"
-            onload="window.parent.scrollTo(0,0)" allowtransparency="true"
-            allow="geolocation; microphone; camera; fullscreen"
-            src="https://form.jotform.com/{form_id}"
-            frameborder="0" scrolling="no" loading="lazy"></iframe>
-          <p class="form-note">O formulário não carregou? <a href="https://form.jotform.com/{form_id}" target="_blank" rel="noopener">Abra em uma nova aba</a>.</p>
-        </div>
-        <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
-        <script>window.jotformEmbedHandler && window.jotformEmbedHandler("iframe[id='JotFormIFrame-{form_id}']", "https://form.jotform.com/");</script>"""
+PASSOS_CANDIDATURA = [
+    ("Preencha o formulário", "Seus dados, sua área e o link do seu portfólio. O formulário abre em uma nova aba."),
+    ("A equipe avalia", "Olhamos cada portfólio com calma, pensando nas demandas dos nossos clientes."),
+    ("A gente te chama", "Quando surgir uma oportunidade com o seu perfil, entramos em contato pelo WhatsApp ou e-mail."),
+]
 
 
 def build_trabalhe_conosco():
@@ -952,7 +950,7 @@ def build_trabalhe_conosco():
               <ul class="lista-marcada">{req}</ul>
             </div>
           </div>
-          <a class="btn btn-primary" href="#candidatura">Candidatar-se a esta vaga</a>
+          <a class="btn btn-primary" href="{JOTFORM_URL}" target="_blank" rel="noopener">Candidatar-se a esta vaga</a>
         </article>"""
         vagas_secao = f"""
   <section class="section section-alt" id="vagas">
@@ -965,6 +963,11 @@ def build_trabalhe_conosco():
     </div>
   </section>
 """
+
+    passos = "".join(
+        f'<li class="talentos-passo"><span class="talentos-num">{i:02d}</span><div><h3>{t}</h3><p>{d}</p></div></li>'
+        for i, (t, d) in enumerate(PASSOS_CANDIDATURA, start=1))
+    areas = "".join(f"<li>{a}</li>" for a in AREAS_TALENTO)
 
     n = len(VAGAS)
     desc_vagas = (f"{n} vaga aberta" if n == 1 else f"{n} vagas abertas") if n else "Banco de talentos aberto"
@@ -986,23 +989,39 @@ def build_trabalhe_conosco():
         <p>A Bertoluchi é uma agência de marketing digital com atuação em Joinville (SC) e São Paulo. Atendemos clientes de diversos segmentos, com uma atuação direta e estratégica, sempre buscando gerar resultado real e fortalecer o posicionamento de cada marca.</p>
       </div>
       <div class="hero-actions reveal">
-        <a class="btn btn-primary" href="#candidatura">Preencher o formulário</a>
+        <a class="btn btn-primary" href="#banco-de-talentos">Quero fazer parte</a>
         {botao_vagas}
       </div>
     </div>
   </section>
 {vagas_secao}
-  <section class="section{'' if VAGAS else ' section-alt'}" id="candidatura-secao">
+  <section class="section{'' if VAGAS else ' section-alt'}" id="banco-de-talentos">
     <div class="container">
-      <div class="form-split" id="candidatura">
-        <div class="section-head reveal">
+      <div class="talentos reveal">
+        <div class="talentos-cta">
           <span class="eyebrow">Banco de talentos</span>
           <h2>Deixe seu perfil com a gente</h2>
-          <p>Mesmo que hoje não tenha vaga para a sua área, preencha o formulário. Quando surge uma oportunidade, é no banco de talentos que procuramos primeiro.</p>
-          <p class="destaque-portfolio"><strong>Portfólio:</strong> deixe um link (Behance, Instagram, Drive ou site) com os seus trabalhos, é o que a gente usa pra avaliar sua candidatura.</p>
+          <p>Mesmo que hoje não tenha vaga para a sua área, cadastre-se. Quando surge uma oportunidade, é no banco de talentos que procuramos primeiro.</p>
+          <a class="btn btn-primary btn-talentos" href="{JOTFORM_URL}" target="_blank" rel="noopener">
+            Preencher formulário
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+          </a>
+          <p class="talentos-nota">Abre em uma nova aba.</p>
         </div>
-        {jotform_embed(JOTFORM_ID, "Formulário Trabalhe Conosco da Bertoluchi")}
+        <ol class="talentos-passos">{passos}</ol>
       </div>
+
+      <div class="talentos-extra">
+        <div class="talentos-bloco reveal">
+          <h3>Áreas em que buscamos talentos</h3>
+          <ul class="talentos-areas">{areas}</ul>
+        </div>
+        <div class="talentos-bloco talentos-bloco--destaque reveal">
+          <h3>Capriche no portfólio</h3>
+          <p>Deixe um link do Behance, Instagram, Drive ou site com os seus trabalhos. É o que a gente usa para avaliar sua candidatura.</p>
+        </div>
+      </div>
+
       <div class="vaga-rodape reveal">
         <p>Dúvidas? Fale com a Beatriz: <a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
       </div>
