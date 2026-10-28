@@ -8,6 +8,9 @@
   var resumo = document.querySelector("[data-area-resumo]");
   var ola = document.querySelector("[data-area-ola]");
   var WHATS = "https://wa.me/5547992545015?text=";
+  var publisBox = document.querySelector("[data-area-publis]");
+  var publisLista = document.querySelector("[data-publis-lista]");
+  var publisResumo = document.querySelector("[data-publis-resumo]");
   var dados = [];
   var filtro = "todas";
 
@@ -54,12 +57,49 @@
         "Ainda não há oportunidades para você. Assim que a Bertoluchi fechar uma nova proposta, ela aparece aqui.") + "</p>";
   }
 
+  function dataBr(ms) {
+    if (!ms) return "";
+    return new Date(ms).toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
+  }
+
+  function cartaoPubli(p) {
+    var st = status(p);
+    var meta = [["Data", dataBr(p.data)], ["Prazo", dataBr(p.prazo)]]
+      .filter(function (m) { return m[1]; })
+      .map(function (m) { return "<div><dt>" + m[0] + "</dt><dd>" + esc(m[1]) + "</dd></div>"; }).join("");
+    return '<article class="area-op">' +
+      '<div class="area-op-topo"><span class="area-op-marca">Publi</span>' +
+      '<span class="area-status area-status--' + st.replace(/\s+/g, "-") + '">' + esc(st) + "</span></div>" +
+      "<h3>" + esc(p.marca) + "</h3>" +
+      (p.etapa ? '<span class="area-publi-etapa">Etapa: ' + esc(p.etapa) + "</span>" : "") +
+      (meta ? '<dl class="area-op-meta">' + meta + "</dl>" : "") + "</article>";
+  }
+
+  // publis vêm do ClickUp da Bertoluchi; null = sincronização indisponível
+  function renderPublis(publis) {
+    if (!publis) { publisBox.hidden = true; return; }
+    publisBox.hidden = false;
+    var ordem = { aberta: 0, "em andamento": 1, encerrada: 2 };
+    publis.sort(function (a, b) {
+      return (ordem[status(a)] - ordem[status(b)]) || ((a.prazo || Infinity) - (b.prazo || Infinity));
+    });
+    var cont = { aberta: 0, "em andamento": 0, encerrada: 0 };
+    publis.forEach(function (p) { if (cont[status(p)] != null) cont[status(p)]++; });
+    publisResumo.innerHTML = [
+      [publis.length, "publis"], [cont.aberta, "a fazer"],
+      [cont["em andamento"], "em andamento"], [cont.encerrada, "concluídas"]
+    ].map(function (r) { return '<div class="area-num"><strong>' + r[0] + "</strong><span>" + r[1] + "</span></div>"; }).join("");
+    publisLista.innerHTML = publis.length ? publis.map(cartaoPubli).join("") :
+      '<p class="note-block">Ainda não há publis no seu cadastro. Assim que a equipe registrar uma, ela aparece aqui.</p>';
+  }
+
   function abrirPainel(json) {
     dados = json.oportunidades || [];
     ola.textContent = "Olá, " + (json.nome || "tudo bem") + "!";
     raiz.hidden = true;
     painel.hidden = false;
     render();
+    renderPublis(json.publis);
   }
 
   function carregar() {

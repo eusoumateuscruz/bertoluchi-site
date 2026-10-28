@@ -1373,6 +1373,10 @@ a.story-card:hover .story-cta{ background: #fff; color: var(--color-text); -webk
 .area-status--aberta{ background: #DDF2E3; color: #1D6B35; -webkit-text-fill-color: #1D6B35; }
 .area-status--em-andamento{ background: #FFF0CC; color: #7A5300; -webkit-text-fill-color: #7A5300; }
 .area-status--encerrada{ background: #ECE6E1; color: #6E5A4B; -webkit-text-fill-color: #6E5A4B; }
+.area-publis{ margin-top: clamp(48px, 7vw, 80px); padding-top: clamp(40px, 6vw, 64px); border-top: 1px solid var(--color-border); }
+.area-publis-topo{ margin-bottom: 28px; }
+.area-publis-topo h2{ margin: 6px 0 0; }
+.area-publi-etapa{ font-size: 0.85rem; color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted); }
 
 .area-chamada{
   display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap;

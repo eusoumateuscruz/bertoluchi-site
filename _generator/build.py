@@ -1100,6 +1100,15 @@ def build_area_influenciadora():
           <button type="button" class="area-filtro" data-filtro="encerrada">Encerradas</button>
         </div>
         <div class="area-lista" data-area-lista></div>
+
+        <div class="area-publis" data-area-publis hidden>
+          <div class="area-publis-topo">
+            <span class="eyebrow">Direto do seu cadastro na Bertoluchi</span>
+            <h2>Suas publis</h2>
+          </div>
+          <div class="area-resumo" data-publis-resumo></div>
+          <div class="area-lista" data-publis-lista></div>
+        </div>
       </div>
     </div>
   </section>
