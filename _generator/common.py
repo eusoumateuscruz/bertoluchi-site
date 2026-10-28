@@ -200,6 +200,9 @@ INFLUENCERS = [
      "niche": "Lifestyle | Fitness", "img": "influ-yasmin-andrade"},
     {"name": "ÉÉÉguaaa", "handle": "@eeeguaaa", "city": "Joinville, SC",
      "niche": "Dicas de locais em Joinville e região", "img": "influ-eeeguaaa"},
+    # Nova em 2026-10-28 (foto enviada pelo Mateus). Cidade ainda não informada.
+    {"name": "Renata Seliprim", "handle": "@renataseliprim",
+     "niche": "Jornalismo | Lifestyle", "img": "influ-renata-seliprim"},
 ]
 
 # Clientes ativos de social media (lista enviada por Mateus).
