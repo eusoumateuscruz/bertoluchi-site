@@ -1086,7 +1086,18 @@ a.wordmark:hover, a.wordmark:focus-visible{
 .vaga-card-corpo{ display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 28px; }
 .vaga-card h4{ font-family: var(--font-heading); font-size: 1rem; margin: 0 0 8px; }
 .vaga-card-corpo p{ color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted); margin: 0 0 20px; }
-@media (max-width: 760px){ .vaga-card-corpo{ grid-template-columns: 1fr; gap: 8px; } }
+.vaga-intro{ max-width: 68ch; margin-bottom: 36px; }
+.vaga-intro p, .vaga-notas p, .vaga-chamada p{ color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted); margin: 0 0 14px; }
+.vaga-intro strong, .vaga-notas strong{ color: var(--color-text); -webkit-text-fill-color: var(--color-text); }
+.vaga-notas{ max-width: 68ch; margin-bottom: 36px; }
+.vaga-infos{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 32px; margin: 16px 0 36px; }
+.vaga-infos dt{ font-family: var(--font-heading); font-weight: 700; font-size: .95rem; margin-bottom: 4px; }
+.vaga-infos dd{ margin: 0; color: var(--color-text-muted); -webkit-text-fill-color: var(--color-text-muted); }
+.vaga-infos div:last-child{ grid-column: 1 / -1; }
+.vaga-chamada{ border-top: 1px solid rgba(0,0,0,.1); padding-top: 28px; }
+.vaga-chamada p{ max-width: 68ch; margin-bottom: 20px; }
+.vaga-card .lista-marcada{ margin: 0 0 20px; }
+@media (max-width: 760px){ .vaga-card-corpo{ grid-template-columns: 1fr; gap: 8px; } .vaga-infos{ grid-template-columns: 1fr; } }
 #candidatura-secao .destaque-portfolio{ margin-top: 20px; }
 
 /* ---------- Faixa de logos das marcas ---------- */

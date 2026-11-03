@@ -204,7 +204,12 @@ def build_home():
           <a class="pillar-link" href="/servicos/{s['slug']}.html">Saiba mais →</a>
         </div>"""
 
-    influencer_preview = coverflow(INFLUENCERS, "home")
+    # Renata Seliprim no centro do carrossel da home (pedido da cliente, 28/10).
+    # O carrossel abre no card do meio, então a posição dela é a metade da lista.
+    outras = [i for i in INFLUENCERS if i["name"] != "Renata Seliprim"]
+    renata = [i for i in INFLUENCERS if i["name"] == "Renata Seliprim"]
+    meio = len(INFLUENCERS) // 2
+    influencer_preview = coverflow(outras[:meio] + renata + outras[meio:], "home")
     client_preview = client_marquee(SOCIAL_MEDIA_CLIENTS)
 
     testimonial_preview = testimonial_marquee(TESTIMONIALS)
@@ -908,7 +913,47 @@ def build_clientes_social_media():
 # Vagas abertas. Para abrir uma vaga nova, acrescente um item; para fechar,
 # remova. Sem vaga, a secao some e a pagina fica so com o formulario.
 # (vaga de Designer Grafico para Social Media encerrada em 2026-10-23)
-VAGAS = []
+VAGAS = [
+    {
+        "titulo": "Videomaker",
+        "tags": ["Joinville/SC", "Híbrido", "PJ", "Início imediato"],
+        "paragrafos": [
+            "A <strong>Bertoluchi Agência</strong> está em busca de um(a) Videomaker para integrar nosso time!",
+            "Procuramos uma pessoa criativa, organizada, proativa e com olhar atento para produzir conteúdos que conectem marcas e pessoas.",
+            "O foco principal da função será a <strong>captação de vídeos para nossos clientes de Joinville e região</strong>, mas também buscamos alguém que possa contribuir com a edição de vídeos e outras demandas relacionadas à produção de conteúdo para redes sociais.",
+        ],
+        "responsabilidades": [
+            "Realizar captações de vídeos para clientes em Joinville e cidades próximas;",
+            "Planejar e executar gravações de acordo com os roteiros e direcionamentos da equipe;",
+            "Apoiar a edição de vídeos e Reels produzidos pela agência;",
+            "Contribuir com demandas internas de produção de conteúdo e social media;",
+            "Organizar os materiais captados e garantir a qualidade das entregas;",
+            "Trabalhar em conjunto com a equipe criativa para desenvolver conteúdos alinhados à estratégia de cada cliente.",
+        ],
+        "requisitos": [
+            "Residir obrigatoriamente em Joinville/SC;",
+            "Possuir celular próprio com boa qualidade de gravação;",
+            "Ter conhecimento em captação e edição de vídeos;",
+            "Ter disponibilidade para deslocamentos e gravações externas em Joinville e região;",
+            "Ser organizado(a), responsável e ter facilidade para trabalhar em equipe;",
+            "Ter familiaridade com formatos e tendências de conteúdo para redes sociais.",
+        ],
+        "notas": [
+            "<strong>Diferencial:</strong> possuir iPhone 16 ou superior e experiência com produção de vídeos para marcas e empresas.",
+            "Microfones, iluminação, carregadores externos e demais acessórios necessários para as gravações serão disponibilizados pela agência.",
+        ],
+        "informacoes": [
+            ("Modelo de contratação", "Pessoa Jurídica (PJ)"),
+            ("Formato", "Híbrido, com atividades internas e gravações externas."),
+            ("Horário de funcionamento da agência", "Segunda a sexta-feira, das 9h às 17h."),
+            ("Remuneração", "A combinar."),
+            ("Início", "Imediato."),
+            ("Condição inicial", "A contratação contará com uma remuneração inicial diferenciada durante os meses de novembro e dezembro de 2026 e janeiro de 2027. A partir de fevereiro de 2027, o valor será ajustado conforme condições previamente acordadas entre as partes."),
+        ],
+        "chamada_titulo": "Quer fazer parte da Bertoluchi?",
+        "chamada": "Envie seu currículo, portfólio ou exemplos de vídeos produzidos e venha fazer parte do nosso time!",
+    },
+]
 
 # Candidaturas chegam pelo Jotform da agencia; a pagina so apresenta o
 # banco de talentos e leva a pessoa ao formulario em outra aba.
@@ -933,24 +978,34 @@ def build_trabalhe_conosco():
         for v in VAGAS:
             tags_html = "".join(f'<li class="vaga-tag">{t}</li>' for t in v["tags"])
             req = "".join(f"<li>{r}</li>" for r in v["requisitos"])
+            resp = "".join(f"<li>{r}</li>" for r in v["responsabilidades"])
+            intro = "".join(f"<p>{p}</p>" for p in v["paragrafos"])
+            notas = "".join(f"<p>{p}</p>" for p in v["notas"])
+            infos = "".join(f"<div><dt>{k}</dt><dd>{d}</dd></div>" for k, d in v["informacoes"])
             vagas_html += f"""
         <article class="vaga-card reveal">
-          <span class="eyebrow">Vaga aberta · {v['area']}</span>
+          <span class="eyebrow">Vaga aberta</span>
           <h3>{v['titulo']}</h3>
           <ul class="vaga-tags">{tags_html}</ul>
+          <div class="vaga-intro">{intro}</div>
           <div class="vaga-card-corpo">
             <div>
-              <h4>Sobre a vaga</h4>
-              <p>{v['resumo']}</p>
-              <h4>O que você vai fazer</h4>
-              <p>{v['atividades']}</p>
+              <h4>Principais responsabilidades</h4>
+              <ul class="lista-marcada">{resp}</ul>
             </div>
             <div>
-              <h4>O que buscamos</h4>
+              <h4>Requisitos</h4>
               <ul class="lista-marcada">{req}</ul>
             </div>
           </div>
-          <a class="btn btn-primary" href="{JOTFORM_URL}" target="_blank" rel="noopener">Candidatar-se a esta vaga</a>
+          <div class="vaga-notas">{notas}</div>
+          <h4>Informações da vaga</h4>
+          <dl class="vaga-infos">{infos}</dl>
+          <div class="vaga-chamada">
+            <h4>{v['chamada_titulo']}</h4>
+            <p>{v['chamada']}</p>
+            <a class="btn btn-primary" href="{JOTFORM_URL}" target="_blank" rel="noopener">Candidatar-se a esta vaga</a>
+          </div>
         </article>"""
         vagas_secao = f"""
   <section class="section section-alt" id="vagas">
