@@ -2,7 +2,9 @@
 //
 // No ClickUp, a lista "Influenciadoras" tem um cartão por influenciadora
 // ("[INFLUENCIADORA] - Nome"). Dentro dele há a subtarefa "PUBLICIDADES 2026",
-// e cada publi é uma subtarefa dela. Só os cartões com status "Influ Ativas"
+// que tem um cartão por mês ("OUTUBRO"), e cada publi é uma subtarefa do mês
+// (o Sistema Bertoluchi grava assim: "Publicidade - [marca] : 📌"). Publi que
+// esteja direto em PUBLICIDADES, sem mês, também conta. Só os cartões com status "Influ Ativas"
 // entram no portal, e só nome, status, data e prazo de cada publi saem daqui:
 // contrato, precificação e dados bancários nunca são lidos.
 //
@@ -12,6 +14,8 @@
 const LISTA = "901306280507";
 const STATUS_ATIVO = "influ ativas";
 const CACHE_MS = 60 * 1000;
+const MESES = ["janeiro", "fevereiro", "marco", "abril", "maio", "junho", "julho",
+  "agosto", "setembro", "outubro", "novembro", "dezembro"];
 
 let cacheCartoes = { quando: 0, dados: null };
 
@@ -52,6 +56,12 @@ function acharCartao(lista, usuario, conta) {
   }) || null;
 }
 
+// "Publicidade - [Marca] :  📌 " vira "Marca"; outro formato fica como está
+function nomeDaMarca(nome) {
+  const m = String(nome || "").match(/^\s*publicidade\s*-\s*\[([^\]]+)\]/i);
+  return (m ? m[1] : String(nome || "")).trim();
+}
+
 function grupo(status) {
   const tipo = (status && status.type) || "";
   if (tipo === "closed" || tipo === "done") return "encerrada";
@@ -66,14 +76,18 @@ async function publisDe(usuario, conta) {
   const completo = await api(`/task/${cartao.id}?include_subtasks=true`);
   const pastas = (completo.subtasks || []).filter((s) => /^\s*publicidades/i.test(s.name));
   const blocos = await Promise.all(pastas.map((p) => api(`/task/${p.id}?include_subtasks=true`)));
-  return blocos.flatMap((b) => (b.subtasks || []).map((s) => ({
+  const itens = blocos.flatMap((b) => b.subtasks || []);
+  const ehMes = (t) => MESES.includes(normalizar(t.name));
+  const meses = await Promise.all(itens.filter(ehMes).map((t) => api(`/task/${t.id}?include_subtasks=true`)));
+  const publis = itens.filter((t) => !ehMes(t)).concat(meses.flatMap((m) => m.subtasks || []));
+  return publis.map((s) => ({
     id: s.id,
-    marca: s.name,
+    marca: nomeDaMarca(s.name),
     status: grupo(s.status),
     etapa: (s.status && s.status.status) || "",
     data: s.start_date ? Number(s.start_date) : null,
     prazo: s.due_date ? Number(s.due_date) : null,
-  })));
+  }));
 }
 
 module.exports = { publisDe };
