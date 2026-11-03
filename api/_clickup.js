@@ -79,7 +79,9 @@ async function publisDe(usuario, conta) {
   const itens = blocos.flatMap((b) => b.subtasks || []);
   const ehMes = (t) => MESES.includes(normalizar(t.name));
   const meses = await Promise.all(itens.filter(ehMes).map((t) => api(`/task/${t.id}?include_subtasks=true`)));
-  const publis = itens.filter((t) => !ehMes(t)).concat(meses.flatMap((m) => m.subtasks || []));
+  // cada mês traz um cartão-modelo ("MARCA", status "template") que não é publi
+  const ehModelo = (t) => normalizar(t.status && t.status.status) === "template" || normalizar(t.name) === "marca";
+  const publis = itens.filter((t) => !ehMes(t)).concat(meses.flatMap((m) => m.subtasks || [])).filter((t) => !ehModelo(t));
   return publis.map((s) => ({
     id: s.id,
     marca: nomeDaMarca(s.name),
