@@ -11,6 +11,12 @@
   var publisBox = document.querySelector("[data-area-publis]");
   var publisLista = document.querySelector("[data-publis-lista]");
   var publisResumo = document.querySelector("[data-publis-resumo]");
+  var publisCal = document.querySelector("[data-publis-cal]");
+  var MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+    "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+  var publisTodas = [];
+  var anoSel = null;
+  var mesSel = null;
   var carregando = document.querySelector("[data-area-carregando]");
   var dados = [];
   var filtro = "todas";
@@ -79,19 +85,84 @@
   function renderPublis(publis) {
     if (!publis) { publisBox.hidden = true; return; }
     publisBox.hidden = false;
-    var ordem = { aberta: 0, "em andamento": 1, encerrada: 2 };
-    publis.sort(function (a, b) {
-      return (ordem[status(a)] - ordem[status(b)]) || ((a.prazo || Infinity) - (b.prazo || Infinity));
-    });
+    publisTodas = publis;
+    escolherPeriodo();
+    desenharPublis();
+  }
+
+  // abre no mês atual; sem publi nele, no mês mais recente que tiver alguma
+  function escolherPeriodo() {
+    var hoje = new Date();
+    var ano = hoje.getFullYear();
+    var mes = hoje.getMonth() + 1;
+    var temAgora = publisTodas.some(function (p) { return p.ano === ano && p.mes === mes; });
+    if (temAgora || !publisTodas.length) { anoSel = ano; mesSel = mes; return; }
+    var recente = publisTodas.filter(function (p) { return p.ano && p.mes; }).sort(function (x, y) {
+      return (y.ano - x.ano) || (y.mes - x.mes);
+    })[0];
+    if (recente) { anoSel = recente.ano; mesSel = recente.mes; return; }
+    anoSel = (publisTodas[0] && publisTodas[0].ano) || ano;
+    mesSel = 0;
+  }
+
+  function desenharPublis() {
+    var doAno = publisTodas.filter(function (p) { return p.ano === anoSel; });
     var cont = { aberta: 0, "em andamento": 0, encerrada: 0 };
-    publis.forEach(function (p) { if (cont[status(p)] != null) cont[status(p)]++; });
+    doAno.forEach(function (p) { if (cont[status(p)] != null) cont[status(p)]++; });
     publisResumo.innerHTML = [
-      [publis.length, "publis"], [cont.aberta, "a fazer"],
+      [doAno.length, (doAno.length === 1 ? "publi em " : "publis em ") + anoSel], [cont.aberta, "a fazer"],
       [cont["em andamento"], "em andamento"], [cont.encerrada, "concluídas"]
     ].map(function (r) { return '<div class="area-num"><strong>' + r[0] + "</strong><span>" + r[1] + "</span></div>"; }).join("");
-    publisLista.innerHTML = publis.length ? publis.map(cartaoPubli).join("") :
-      '<p class="note-block">Ainda não há publis no seu cadastro. Assim que a equipe registrar uma, ela aparece aqui.</p>';
+
+    var anos = publisTodas.map(function (p) { return p.ano; }).filter(Boolean);
+    if (anos.indexOf(anoSel) < 0) anos.push(anoSel);
+    anos = anos.filter(function (a, i) { return anos.indexOf(a) === i; }).sort();
+    var i = anos.indexOf(anoSel);
+    var chips = MESES.map(function (nome, n) {
+      var qtd = doAno.filter(function (p) { return p.mes === n + 1; }).length;
+      return '<button type="button" class="area-cal-mes' + (qtd ? "" : " is-vazio") + (mesSel === n + 1 ? " is-ativo" : "") +
+        '" data-cal-mes="' + (n + 1) + '" aria-pressed="' + (mesSel === n + 1) + '" aria-label="' + nome + ", " + qtd + (qtd === 1 ? " publi" : " publis") + '">' +
+        "<span>" + nome.slice(0, 3) + "</span><b>" + (qtd || "·") + "</b></button>";
+    }).join("");
+    var semMes = doAno.filter(function (p) { return !p.mes; }).length;
+    if (semMes) {
+      chips += '<button type="button" class="area-cal-mes' + (mesSel === 0 ? " is-ativo" : "") + '" data-cal-mes="0" aria-pressed="' + (mesSel === 0) + '"><span>Outras</span><b>' + semMes + "</b></button>";
+    }
+    publisCal.innerHTML = '<div class="area-cal-ano">' +
+      '<button type="button" data-cal-ano="-1" aria-label="Ano anterior"' + (i <= 0 ? " disabled" : "") + ">&lsaquo;</button>" +
+      "<strong>" + anoSel + "</strong>" +
+      '<button type="button" data-cal-ano="1" aria-label="Próximo ano"' + (i >= anos.length - 1 ? " disabled" : "") + ">&rsaquo;</button></div>" +
+      '<div class="area-cal-meses">' + chips + "</div>" +
+      '<h3 class="area-cal-titulo">' + (mesSel ? MESES[mesSel - 1] + " de " + anoSel : "Outras publis de " + anoSel) + "</h3>";
+
+    var ordem = { aberta: 0, "em andamento": 1, encerrada: 2 };
+    var doMes = doAno.filter(function (p) { return mesSel ? p.mes === mesSel : !p.mes; }).sort(function (x, y) {
+      return (ordem[status(x)] - ordem[status(y)]) || ((x.prazo || Infinity) - (y.prazo || Infinity));
+    });
+    publisLista.innerHTML = doMes.length ? doMes.map(cartaoPubli).join("") :
+      '<p class="note-block">' + (publisTodas.length ? "Nenhuma publi neste mês." :
+        "Ainda não há publis no seu cadastro. Assim que a equipe registrar uma, ela aparece aqui.") + "</p>";
+    var ativo = publisCal.querySelector(".is-ativo");
+    var faixa = publisCal.querySelector(".area-cal-meses");
+    if (ativo && faixa && faixa.scrollWidth > faixa.clientWidth) faixa.scrollLeft = ativo.offsetLeft - faixa.offsetLeft - faixa.clientWidth / 2 + ativo.clientWidth / 2;
   }
+
+  publisCal.addEventListener("click", function (e) {
+    var alvo = e.target.closest ? e.target.closest("button") : null;
+    if (!alvo || alvo.disabled) return;
+    if (alvo.hasAttribute("data-cal-mes")) {
+      mesSel = Number(alvo.getAttribute("data-cal-mes"));
+    } else if (alvo.hasAttribute("data-cal-ano")) {
+      var anos = publisTodas.map(function (p) { return p.ano; }).filter(Boolean);
+      anos = anos.filter(function (a, i) { return anos.indexOf(a) === i; }).sort();
+      var novo = anos[anos.indexOf(anoSel) + Number(alvo.getAttribute("data-cal-ano"))];
+      if (!novo) return;
+      anoSel = novo;
+      var meses = publisTodas.filter(function (p) { return p.ano === novo && p.mes; }).map(function (p) { return p.mes; });
+      mesSel = meses.length ? Math.max.apply(null, meses) : 0;
+    }
+    desenharPublis();
+  });
 
   function abrirPainel(json) {
     dados = json.oportunidades || [];

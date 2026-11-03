@@ -76,14 +76,21 @@ async function publisDe(usuario, conta) {
   const completo = await api(`/task/${cartao.id}?include_subtasks=true`);
   const pastas = (completo.subtasks || []).filter((s) => /^\s*publicidades/i.test(s.name));
   const blocos = await Promise.all(pastas.map((p) => api(`/task/${p.id}?include_subtasks=true`)));
-  const itens = blocos.flatMap((b) => b.subtasks || []);
+  // o ano vem do nome da pasta ("PUBLICIDADES 2026") e o mês, do cartão do mês
+  const anoDe = (nome) => { const m = String(nome || "").match(/\b(20\d\d)\b/); return m ? Number(m[1]) : null; };
+  const itens = blocos.flatMap((b, i) => (b.subtasks || []).map((t) => ({ t, ano: anoDe(pastas[i].name), mes: null })));
   const ehMes = (t) => MESES.includes(normalizar(t.name));
-  const meses = await Promise.all(itens.filter(ehMes).map((t) => api(`/task/${t.id}?include_subtasks=true`)));
+  const doMes = await Promise.all(itens.filter((x) => ehMes(x.t)).map(async (x) => {
+    const m = await api(`/task/${x.t.id}?include_subtasks=true`);
+    return (m.subtasks || []).map((t) => ({ t, ano: x.ano, mes: MESES.indexOf(normalizar(x.t.name)) + 1 }));
+  }));
   // cada mês traz um cartão-modelo ("MARCA", status "template") que não é publi
   const ehModelo = (t) => normalizar(t.status && t.status.status) === "template" || normalizar(t.name) === "marca";
-  const publis = itens.filter((t) => !ehMes(t)).concat(meses.flatMap((m) => m.subtasks || [])).filter((t) => !ehModelo(t));
-  return publis.map((s) => ({
+  const publis = itens.filter((x) => !ehMes(x.t)).concat(doMes.flat()).filter((x) => !ehModelo(x.t));
+  return publis.map(({ t: s, ano, mes }) => ({
     id: s.id,
+    ano,
+    mes,
     marca: nomeDaMarca(s.name),
     status: grupo(s.status),
     etapa: (s.status && s.status.status) || "",

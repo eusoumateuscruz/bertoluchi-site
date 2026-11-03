@@ -1155,6 +1155,7 @@ def build_area_influenciadora():
             <h2>Suas publis</h2>
           </div>
           <div class="area-resumo" data-publis-resumo></div>
+          <div class="area-cal" data-publis-cal></div>
           <div class="area-lista" data-publis-lista></div>
         </div>
 
