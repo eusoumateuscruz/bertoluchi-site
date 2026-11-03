@@ -1104,6 +1104,8 @@ def build_area_influenciadora():
 <main id="conteudo">
   <section class="section page-hero area-hero">
     <div class="container">
+      <p class="area-carregando" data-area-carregando role="status" hidden>Carregando seu portal...</p>
+
       <div class="area-grid" data-area>
         <div class="section-head reveal">
           <span class="eyebrow">Portal do influenciador</span>

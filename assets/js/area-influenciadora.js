@@ -11,6 +11,7 @@
   var publisBox = document.querySelector("[data-area-publis]");
   var publisLista = document.querySelector("[data-publis-lista]");
   var publisResumo = document.querySelector("[data-publis-resumo]");
+  var carregando = document.querySelector("[data-area-carregando]");
   var dados = [];
   var filtro = "todas";
 
@@ -111,6 +112,24 @@
     }).catch(function () { return null; });
   }
 
+  // Ao abrir a página, o aviso de carregamento fica no lugar do login: quem já
+  // está conectado não vê o formulário enquanto os dados chegam. Sem sessão, a
+  // resposta é imediata e o login aparece. Se demorar demais, o login aparece
+  // assim mesmo, e o painel toma o lugar dele se os dados chegarem depois.
+  function iniciar() {
+    raiz.hidden = true;
+    carregando.hidden = false;
+    var limite = setTimeout(function () {
+      carregando.hidden = true;
+      if (painel.hidden) raiz.hidden = false;
+    }, 15000);
+    carregar().then(function (json) {
+      clearTimeout(limite);
+      carregando.hidden = true;
+      if (!json) raiz.hidden = false;
+    });
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     mostrarErro("");
@@ -160,5 +179,5 @@
     });
   });
 
-  carregar();
+  iniciar();
 })();
