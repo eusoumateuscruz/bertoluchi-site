@@ -1147,15 +1147,6 @@ def build_area_influenciadora():
           </div>
           <button type="button" class="btn btn-outline" data-area-sair>Sair</button>
         </div>
-        <div class="area-resumo" data-area-resumo></div>
-        <div class="area-filtros" role="tablist" data-area-filtros>
-          <button type="button" class="area-filtro is-ativo" data-filtro="todas">Todas</button>
-          <button type="button" class="area-filtro" data-filtro="aberta">Abertas</button>
-          <button type="button" class="area-filtro" data-filtro="em andamento">Em andamento</button>
-          <button type="button" class="area-filtro" data-filtro="encerrada">Encerradas</button>
-        </div>
-        <div class="area-lista" data-area-lista></div>
-
         <div class="area-publis" data-area-publis hidden>
           <div class="area-publis-topo">
             <span class="eyebrow">Direto do seu cadastro na Bertoluchi</span>
@@ -1163,6 +1154,21 @@ def build_area_influenciadora():
           </div>
           <div class="area-resumo" data-publis-resumo></div>
           <div class="area-lista" data-publis-lista></div>
+        </div>
+
+        <div class="area-oportunidades">
+          <div class="area-publis-topo">
+            <span class="eyebrow">Novas propostas</span>
+            <h2>Oportunidades</h2>
+          </div>
+          <div class="area-resumo" data-area-resumo></div>
+          <div class="area-filtros" role="tablist" data-area-filtros>
+            <button type="button" class="area-filtro is-ativo" data-filtro="todas">Todas</button>
+            <button type="button" class="area-filtro" data-filtro="aberta">Abertas</button>
+            <button type="button" class="area-filtro" data-filtro="em andamento">Em andamento</button>
+            <button type="button" class="area-filtro" data-filtro="encerrada">Encerradas</button>
+          </div>
+          <div class="area-lista" data-area-lista></div>
         </div>
       </div>
     </div>

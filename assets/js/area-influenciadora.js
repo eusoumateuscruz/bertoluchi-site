@@ -71,7 +71,6 @@
       '<div class="area-op-topo"><span class="area-op-marca">Publi</span>' +
       '<span class="area-status area-status--' + st.replace(/\s+/g, "-") + '">' + esc(st) + "</span></div>" +
       "<h3>" + esc(p.marca) + "</h3>" +
-      (p.etapa ? '<span class="area-publi-etapa">Etapa: ' + esc(p.etapa) + "</span>" : "") +
       (meta ? '<dl class="area-op-meta">' + meta + "</dl>" : "") + "</article>";
   }
 
