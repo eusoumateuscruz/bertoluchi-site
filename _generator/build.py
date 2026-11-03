@@ -1149,6 +1149,8 @@ def build_area_influenciadora():
           </div>
           <button type="button" class="btn btn-outline" data-area-sair>Sair</button>
         </div>
+        <div class="area-links" data-area-links hidden></div>
+
         <div class="area-publis" data-area-publis hidden>
           <div class="area-publis-topo">
             <span class="eyebrow">Direto do seu cadastro na Bertoluchi</span>

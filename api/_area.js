@@ -6,7 +6,9 @@
 // assinatura do cookie usa a variável SESSAO_SEGREDO.
 //
 // Global Config, item "influenciadoras":
-//   { "usuario": { "nome": "...", "sal": "<hex>", "hash": "<hex>", "ativo": true } }
+//   { "usuario": { "nome": "...", "sal": "<hex>", "hash": "<hex>", "ativo": true,
+//                  "drive": "<url>", "midiakit": "<url>" } }
+//   drive e midiakit são opcionais; cópia manual do que está no Sistema Bertoluchi
 //   hash = scrypt(senha, sal, 32), gerado por _generator/senha_influenciadora.py
 // Global Config, item "oportunidades":
 //   [ { "id", "marca", "titulo", "descricao", "formato", "cache", "prazo",

@@ -1,6 +1,11 @@
 const { lerConfig, lerSessao, criarSessao, semCache } = require("./_area");
 const { publisDe } = require("./_clickup");
 
+// só devolve endereço https; cada pessoa recebe apenas os links da própria conta
+function linkSeguro(url) {
+  return typeof url === "string" && /^https:\/\//i.test(url) ? url : null;
+}
+
 module.exports = async (req, res) => {
   semCache(res);
   const sessao = lerSessao(req);
@@ -23,7 +28,12 @@ module.exports = async (req, res) => {
     }
     // quem marcou "Manter conectado" ganha mais 90 dias a cada visita
     if (sessao.lembrar) criarSessao(res, usuario, true);
-    return res.status(200).json({ nome: conta.nome || usuario, oportunidades: minhas, publis });
+    const links = {
+      instagram: `https://www.instagram.com/${encodeURIComponent(usuario)}/`,
+      drive: linkSeguro(conta.drive),
+      midiakit: linkSeguro(conta.midiakit),
+    };
+    return res.status(200).json({ nome: conta.nome || usuario, oportunidades: minhas, publis, links });
   } catch (e) {
     console.error(e);
     return res.status(500).json({ erro: "Não foi possível carregar as oportunidades." });

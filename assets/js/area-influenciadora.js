@@ -18,6 +18,7 @@
   var anoSel = null;
   var mesSel = null;
   var carregando = document.querySelector("[data-area-carregando]");
+  var linksBox = document.querySelector("[data-area-links]");
   var dados = [];
   var filtro = "todas";
 
@@ -164,12 +165,23 @@
     desenharPublis();
   });
 
+  function renderLinks(links) {
+    links = links || {};
+    var lista = [["Meu Instagram", links.instagram], ["Minha pasta no Drive", links.drive], ["Meu mídia kit", links.midiakit]]
+      .filter(function (l) { return /^https:\/\//i.test(l[1] || ""); });
+    linksBox.hidden = !lista.length;
+    linksBox.innerHTML = lista.map(function (l) {
+      return '<a class="area-link" href="' + esc(l[1]) + '" target="_blank" rel="noopener">' + esc(l[0]) + "</a>";
+    }).join("");
+  }
+
   function abrirPainel(json) {
     dados = json.oportunidades || [];
     ola.textContent = "Olá, " + (json.nome || "tudo bem") + "!";
     raiz.hidden = true;
     painel.hidden = false;
     render();
+    renderLinks(json.links);
     renderPublis(json.publis);
   }
 
