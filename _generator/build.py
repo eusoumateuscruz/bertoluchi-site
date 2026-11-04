@@ -152,9 +152,9 @@ def form_casting():
         + campo("WhatsApp", "WhatsApp", "tel")
         + campo("email", "E-mail", "email")
         + campo("Midia kit", "Link do mídia kit", "url", obrigatorio=False, extra=' placeholder="https://"')
-        + campo("Mensagem", "Conta um pouco sobre você e por que quer ser assessorada pela Bertoluchi", "textarea")
+        + campo("Mensagem", "Conta um pouco sobre você e por que quer ser assessorado pela Bertoluchi", "textarea")
     )
-    return formulario("Casting", "[Casting] Nova inscrição de influenciadora", campos, "Enviar inscrição", "casting")
+    return formulario("Casting", "[Casting] Nova inscrição de influenciador", campos, "Enviar inscrição", "casting")
 
 
 def schema_empresa():
@@ -168,7 +168,7 @@ def schema_empresa():
         "url": SITE["domain"] + "/",
         "logo": SITE["domain"] + "/assets/img/logo.png",
         "image": SITE["domain"] + "/assets/img/hero-desktop.jpg",
-        "description": "Agência de publicidade e marketing digital em Joinville: social media, branding e gestão de influenciadoras.",
+        "description": "Agência de publicidade e marketing digital em Joinville: social media, branding e gestão de influenciadores.",
         "email": SITE["email"],
         "telephone": SITE["phone_tel"],
         "address": {
@@ -215,8 +215,8 @@ def build_home():
     testimonial_preview = testimonial_marquee(TESTIMONIALS)
 
     html = head(
-        "Bertoluchi Agência: Gestão de Influenciadoras e Social Media em Joinville",
-        "Social media, branding e gestão de influenciadoras em Joinville. Torne seu negócio uma referência nas redes sociais com a Bertoluchi Agência.",
+        "Bertoluchi Agência: Gestão de Influenciadores e Social Media em Joinville",
+        "Social media, branding e gestão de influenciadores em Joinville. Torne seu negócio uma referência nas redes sociais com a Bertoluchi Agência.",
         "/index.html",
         extra_head=schema_empresa(),
     )
@@ -239,7 +239,7 @@ def build_home():
         <div class="hero-painel">
         <span class="eyebrow">Publicidade e marketing digital</span>
         <h1 class="hero-headline">Referência nas redes sociais em Joinville</h1>
-        <p class="hero-sub">Social media com estratégia, criação de conteúdo de alta qualidade e branding, para marcas que querem crescer com consistência. E, quando faz sentido, conectamos sua marca às influenciadoras certas.</p>
+        <p class="hero-sub">Social media com estratégia, criação de conteúdo de alta qualidade e branding, para marcas que querem crescer com consistência. E, quando faz sentido, conectamos sua marca aos influenciadores certos.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
           <a class="btn btn-outline-invert" href="/servicos.html">Conhecer serviços</a>
@@ -292,7 +292,7 @@ def build_home():
           <span class="eyebrow">Talentos</span>
           <h2>Influenciadores que assessoramos</h2>
         </div>
-        <a class="btn btn-outline" href="/influenciadoras.html">Ver todas</a>
+        <a class="btn btn-outline" href="/influenciadoras.html">Ver todos</a>
       </div>
       <div class="mt-lg reveal">{influencer_preview}</div>
     </div>
@@ -355,7 +355,7 @@ def build_sobre():
         <div class="bio-copy">
           <h2>Beatriz Bertoluchi</h2>
           <p>Beatriz começou como influenciadora, quando uma marca lhe deu a oportunidade de apresentar um produto ao seu público. <strong>Deu certo</strong>, e, no mesmo período em que se tornou mãe, passou a compartilhar sua experiência com quem também queria entender o universo da criação de conteúdo, oferecendo cursos e mentorias.</p>
-          <p>O <strong>currículo</strong> ganhou corpo com especializações em marketing e mídias sociais. E o passo seguinte veio naturalmente: gerenciar a carreira de outras influenciadoras e prestar serviço para marcas de branding e social media.</p>
+          <p>O <strong>currículo</strong> ganhou corpo com especializações em marketing e mídias sociais. E o passo seguinte veio naturalmente: gerenciar a carreira de outros influenciadores e prestar serviço para marcas de branding e social media.</p>
           <p><strong>Assim nasceu a Bertoluchi Publicidade e Marketing Digital</strong>, uma agência que entende o criador de conteúdo por dentro, porque começou sendo um.</p>
         </div>
       </div>
@@ -371,11 +371,11 @@ def build_sobre():
       <div class="values-grid reveal">
         <div class="value-card">
           <h3>Missão</h3>
-          <p>Impulsionar empresas e criadoras de conteúdo no ramo digital, com estratégia, criatividade e acompanhamento próximo em cada etapa do crescimento.</p>
+          <p>Impulsionar empresas e criadores de conteúdo no ramo digital, com estratégia, criatividade e acompanhamento próximo em cada etapa do crescimento.</p>
         </div>
         <div class="value-card">
           <h3>Visão</h3>
-          <p>Ser a ponte de confiança entre marcas e influenciadoras, construindo parcerias que geram resultado real para os dois lados.</p>
+          <p>Ser a ponte de confiança entre marcas e influenciadores, construindo parcerias que geram resultado real para os dois lados.</p>
         </div>
         <div class="value-card">
           <h3>Valores</h3>
@@ -411,7 +411,7 @@ def build_servicos_hub():
 
     html = head(
         "Serviços: Bertoluchi Agência",
-        "Social media, branding, gestão de influenciadoras, criação de sites, tráfego pago, consultoria e mentoria: conheça os serviços da Bertoluchi Agência.",
+        "Social media, branding, gestão de influenciadores, criação de sites, tráfego pago, consultoria e mentoria: conheça os serviços da Bertoluchi Agência.",
         "/servicos.html",
     )
     html += header("/servicos.html")
@@ -480,7 +480,7 @@ def build_service_detail(s):
       <div class="form-split">
         <div class="section-head reveal">
           <span class="eyebrow">Casting</span>
-          <h2>Quer ser assessorada pela Bertoluchi?</h2>
+          <h2>Quer ser assessorado pela Bertoluchi?</h2>
           <p>Nosso casting está fechado no momento. Preencha o formulário para entrar na nossa lista: avaliamos cada perfil com cuidado e entramos em contato quando abrirmos novas vagas.</p>
         </div>
         {form_casting()}
@@ -550,8 +550,8 @@ def build_influenciadoras():
                 'enviadas, esta seção é atualizada.</p>')
 
     html = head(
-        "Influenciadoras: Bertoluchi Agência",
-        "Conheça as influenciadoras assessoradas pela Bertoluchi Agência.",
+        "Influenciadores: Bertoluchi Agência",
+        "Conheça os influenciadores assessorados pela Bertoluchi Agência.",
         "/influenciadoras.html",
     )
     html += header("/influenciadoras.html")
@@ -560,9 +560,9 @@ def build_influenciadoras():
   <section class="section page-hero">
     <div class="container">
       <div class="section-head reveal">
-        <span class="eyebrow">Influenciadoras</span>
+        <span class="eyebrow">Influenciadores</span>
         <h1>Influenciadores que assessoramos</h1>
-        <p>Cada uma com um nicho, um público e uma forma própria de se conectar. A gente cuida da parte comercial para que elas continuem focadas em criar.</p>
+        <p>Cada um com um nicho, um público e uma forma própria de se conectar. A gente cuida da parte comercial para que eles continuem focados em criar.</p>
       </div>
       <div class="influencer-grid mt-lg">{cards}</div>
       {nota}
@@ -573,27 +573,14 @@ def build_influenciadoras():
     <div class="container">
       <div class="section-head center reveal">
         <span class="eyebrow">Campanhas</span>
-        <h2>Marcas que já confiaram em nossas influenciadoras</h2>
+        <h2>Marcas que já confiaram em nossos influenciadores</h2>
         <p>Empresas que já rodaram campanha publicitária com os perfis que assessoramos.</p>
       </div>
       <div class="reveal">{brand_list()}</div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="area-chamada reveal">
-        <div>
-          <span class="eyebrow">Já faz parte do casting?</span>
-          <h2>Portal do influenciador</h2>
-          <p>Entre com seu usuário e senha para ver as oportunidades de campanha que a Bertoluchi está fechando para você.</p>
-        </div>
-        <a class="btn btn-primary" href="/portal-do-influenciador.html">Entrar no portal</a>
-      </div>
-    </div>
-  </section>
-
-  {cta_band("É influenciadora e quer assessoria?", "Nosso casting está fechado no momento, mas você pode se inscrever na lista e ser avaliada nas próximas aberturas.", "/servicos/gestao-de-influenciadores.html#casting", "Quero me inscrever")}
+  {cta_band("É influenciador e quer assessoria?", "Nosso casting está fechado no momento, mas você pode se inscrever na lista e ser avaliado nas próximas aberturas.", "/servicos/gestao-de-influenciadores.html#casting", "Quero me inscrever")}
 </main>
 """
     html += footer()
@@ -625,7 +612,7 @@ def build_resultados():
       <div class="behance-callout reveal mt-lg">
         <div>
           <span class="eyebrow">Portfólio</span>
-          <p class="behance-text">Branding, identidade visual e mídia kit para influenciadoras: veja o portfólio completo no Behance</p>
+          <p class="behance-text">Branding, identidade visual e mídia kit para influenciadores: veja o portfólio completo no Behance</p>
         </div>
         <a class="btn btn-primary" href="{SITE['behance']}" target="_blank" rel="noopener">Ver portfólio no Behance</a>
       </div>
@@ -680,8 +667,8 @@ def build_blog():
                     f'data-filtro="{CATEGORY_SLUGS[c]}">{c}</button>')
 
     html = head(
-        "Blog: marketing digital, social media e influenciadoras",
-        f"Artigos práticos sobre gestão de influenciadoras, social media, branding e "
+        "Blog: marketing digital, social media e influenciadores",
+        f"Artigos práticos sobre gestão de influenciadores, social media, branding e "
         f"marketing digital, escritos pela equipe da Bertoluchi Agência.",
         "/blog.html",
     )
@@ -693,7 +680,7 @@ def build_blog():
       <div class="section-head reveal">
         <span class="eyebrow">Blog</span>
         <h1>Conteúdo sobre marketing digital e redes sociais</h1>
-        <p>Artigos práticos sobre gestão de influenciadoras, social media e branding, escritos a partir do que a gente vê no dia a dia com clientes e criadoras.</p>
+        <p>Artigos práticos sobre gestão de influenciadores, social media e branding, escritos a partir do que a gente vê no dia a dia com clientes e criadores.</p>
       </div>
 
       <div class="filtros reveal" role="group" aria-label="Filtrar artigos por categoria">
@@ -1088,103 +1075,6 @@ def build_trabalhe_conosco():
     write("/trabalhe-conosco.html", html)
 
 
-# ------------------------------------------------- AREA DA INFLUENCIADORA
-# Login e painel ficam na mesma pagina; o JS consulta /api/oportunidades e
-# mostra o painel quando a sessao existe. Contas e oportunidades moram no
-# Global Config da Vercel (ver api/_area.js), nunca neste repositorio publico.
-def build_area_influenciadora():
-    html = head(
-        "Portal do influenciador: Bertoluchi Agência",
-        "Acesso exclusivo dos influenciadores assessorados pela Bertoluchi às oportunidades de campanha.",
-        "/portal-do-influenciador.html",
-        extra_head='<meta name="robots" content="noindex, nofollow">\n',
-    )
-    html += header("/portal-do-influenciador.html")
-    html += f"""
-<main id="conteudo">
-  <section class="section page-hero area-hero">
-    <div class="container">
-      <p class="area-carregando" data-area-carregando role="status" hidden>Carregando seu portal...</p>
-
-      <div class="area-grid" data-area>
-        <div class="section-head reveal">
-          <span class="eyebrow">Portal do influenciador</span>
-          <h1>Suas oportunidades, num só lugar</h1>
-          <p>Aqui você acompanha as campanhas que a Bertoluchi está fechando para você: marca, formato, cachê e prazo de cada uma.</p>
-          <ul class="area-pontos">
-            <li><strong>Exclusivo</strong> para quem faz parte do nosso casting</li>
-            <li><strong>Atualizado</strong> sempre que surge uma nova proposta</li>
-            <li><strong>Sem acesso?</strong> Peça seu usuário para a equipe pelo WhatsApp</li>
-          </ul>
-        </div>
-
-        <form class="contact-form site-form area-login reveal" data-area-login novalidate>
-          <h2 class="area-login-titulo">Entrar</h2>
-          <div class="form-field">
-            <label for="area-usuario">Usuário</label>
-            <input type="text" id="area-usuario" name="usuario" autocomplete="username" autocapitalize="none" spellcheck="false" required placeholder="seu @ do Instagram">
-          </div>
-          <div class="form-field">
-            <label for="area-senha">Senha</label>
-            <div class="area-senha">
-              <input type="password" id="area-senha" name="senha" autocomplete="current-password" required>
-              <button type="button" class="area-ver-senha" data-ver-senha aria-label="Mostrar senha">Mostrar</button>
-            </div>
-          </div>
-          <label class="area-lembrar">
-            <input type="checkbox" name="lembrar" checked>
-            <span>Manter conectado neste aparelho</span>
-          </label>
-          <p class="area-erro" data-area-erro role="alert" hidden></p>
-          <button type="submit" class="btn btn-primary btn-full">Entrar</button>
-          <p class="form-note">Esqueceu a senha? <a href="{whatsapp('Olá! Faço parte do casting da Bertoluchi e preciso de ajuda com o acesso ao portal do influenciador.')}" target="_blank" rel="noopener">Fale com a equipe</a>.</p>
-        </form>
-      </div>
-
-      <div class="area-painel" data-area-painel hidden>
-        <div class="area-painel-topo">
-          <div>
-            <span class="eyebrow">Portal do influenciador</span>
-            <h1 data-area-ola>Olá!</h1>
-          </div>
-          <button type="button" class="btn btn-outline" data-area-sair>Sair</button>
-        </div>
-        <div class="area-links" data-area-links hidden></div>
-
-        <div class="area-publis" data-area-publis hidden>
-          <div class="area-publis-topo">
-            <span class="eyebrow">Direto do seu cadastro na Bertoluchi</span>
-            <h2>Suas publis</h2>
-          </div>
-          <div class="area-resumo" data-publis-resumo></div>
-          <div class="area-cal" data-publis-cal></div>
-          <div class="area-lista" data-publis-lista></div>
-        </div>
-
-        <div class="area-oportunidades">
-          <div class="area-publis-topo">
-            <span class="eyebrow">Novas propostas</span>
-            <h2>Oportunidades</h2>
-          </div>
-          <div class="area-resumo" data-area-resumo></div>
-          <div class="area-filtros" role="tablist" data-area-filtros>
-            <button type="button" class="area-filtro is-ativo" data-filtro="todas">Todas</button>
-            <button type="button" class="area-filtro" data-filtro="aberta">Abertas</button>
-            <button type="button" class="area-filtro" data-filtro="em andamento">Em andamento</button>
-            <button type="button" class="area-filtro" data-filtro="encerrada">Encerradas</button>
-          </div>
-          <div class="area-lista" data-area-lista></div>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-"""
-    html += footer().replace('<script src="/assets/js/main.js"></script>',
-                             '<script src="/assets/js/main.js"></script>\n<script src="/assets/js/area-influenciadora.js"></script>')
-    write("/portal-do-influenciador.html", html)
-
-
 # ---------------------------------------------------------------- OBRIGADO
 def build_obrigado():
     html = head(
@@ -1243,7 +1133,7 @@ def build_privacidade():
 
         <h2>Quais dados coletamos</h2>
         <ul>
-          <li>Dados que você envia pelos formulários: nome, e-mail, WhatsApp, assunto e mensagem. Na inscrição de influenciadoras, também o perfil no Instagram, o número aproximado de seguidores, o nicho, a cidade e o link do mídia kit.</li>
+          <li>Dados que você envia pelos formulários: nome, e-mail, WhatsApp, assunto e mensagem. Na inscrição de influenciadores, também o perfil no Instagram, o número aproximado de seguidores, o nicho, a cidade e o link do mídia kit.</li>
           <li>Dados que você compartilha quando fala com a gente pelo WhatsApp ou por e-mail.</li>
           <li>Dados técnicos de navegação, como endereço IP e tipo de navegador, registrados pelos serviços que mantêm o site no ar e carregam as fontes do site.</li>
         </ul>
@@ -1251,7 +1141,7 @@ def build_privacidade():
         <h2>Para que usamos os dados</h2>
         <ul>
           <li>Responder ao seu contato e enviar propostas que você pediu.</li>
-          <li>Avaliar inscrições de influenciadoras e candidaturas a vagas.</li>
+          <li>Avaliar inscrições de influenciadores e candidaturas a vagas.</li>
           <li>Cumprir obrigações legais e manter o site funcionando com segurança.</li>
         </ul>
         <p>Não vendemos dados pessoais e não usamos os dados enviados pelo site para outras finalidades sem avisar você.</p>
@@ -1293,7 +1183,6 @@ def main():
         build_blog_post(_p)
     build_contato()
     build_trabalhe_conosco()
-    build_area_influenciadora()
     build_obrigado()
     build_privacidade()
 

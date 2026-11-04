@@ -284,7 +284,7 @@
 
     frame.setAttribute("tabindex", "0");
     frame.setAttribute("role", "group");
-    frame.setAttribute("aria-label", "Influenciadoras assessoradas, use as setas do teclado");
+    frame.setAttribute("aria-label", "Influenciadores assessorados, use as setas do teclado");
     frame.addEventListener("keydown", function (e) {
       if (e.key === "ArrowLeft") { irPara(index - 1); e.preventDefault(); }
       if (e.key === "ArrowRight") { irPara(index + 1); e.preventDefault(); }

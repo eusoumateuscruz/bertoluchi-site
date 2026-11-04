@@ -1,5 +1,6 @@
 {
   "redirects": [
-    { "source": "/area-da-influenciadora.html", "destination": "/portal-do-influenciador.html", "permanent": true }
+    { "source": "/area-da-influenciadora.html", "destination": "/influenciadoras.html", "permanent": true },
+    { "source": "/portal-do-influenciador.html", "destination": "/influenciadoras.html", "permanent": true }
   ]
 }

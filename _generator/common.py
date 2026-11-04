@@ -45,7 +45,7 @@ NAV = [
     ("Início", "/index.html"),
     ("Sobre", "/sobre.html"),
     ("Serviços", "/servicos.html"),
-    ("Influenciadoras", "/influenciadoras.html"),
+    ("Influenciadores", "/influenciadoras.html"),
     ("Resultados", "/resultados.html"),
     ("Blog", "/blog.html"),
     ("Trabalhe conosco", "/trabalhe-conosco.html"),
@@ -90,11 +90,11 @@ SERVICES = [
     },
     {
         "slug": "gestao-de-influenciadores",
-        "title": "Gestão de Influenciadoras",
+        "title": "Gestão de Influenciadores",
         "short": "Assessoria completa para quem vive de criar conteúdo.",
-        "summary": "Cuidamos das parcerias comerciais, negociações e crescimento de marca pessoal de influenciadoras digitais, para que a criação de conteúdo continue sendo o foco.",
+        "summary": "Cuidamos das parcerias comerciais, negociações e crescimento de marca pessoal de influenciadores digitais, para que a criação de conteúdo continue sendo o foco.",
         "body": [
-            "A assessoria de influenciadoras existe para tirar da sua frente o que não é criação: negociação de parceria, alinhamento comercial e organização da rotina de entregas.",
+            "A assessoria de influenciadores existe para tirar da sua frente o que não é criação: negociação de parceria, alinhamento comercial e organização da rotina de entregas.",
             "Acompanhamos métricas de engajamento e alcance para embasar cada negociação com dado real, não com achismo. E cuidamos do desenvolvimento da marca pessoal a médio e longo prazo, para que cada parceria feche com marcas que fazem sentido para o seu público.",
             "Fazem parte do serviço: mídia kit atualizado, apoio em negociação comercial, curadoria de propostas e organização de calendário de entregas.",
         ],
@@ -203,6 +203,10 @@ INFLUENCERS = [
     # Nova em 2026-10-28 (foto enviada pelo Mateus). Cidade ainda não informada.
     {"name": "Renata Seliprim", "handle": "@renataseliprim",
      "niche": "Jornalismo | Lifestyle", "img": "influ-renata-seliprim"},
+    # Novo em 2026-11-04 (foto e perfil enviados pelo Mateus). Nome e nicho
+    # como aparecem no proprio perfil do Instagram.
+    {"name": "Diego Maia", "handle": "@diegobdamaia", "city": "Joinville, SC",
+     "niche": "Humor", "img": "influ-diego-maia"},
 ]
 
 # Clientes ativos de social media (lista enviada por Mateus).
@@ -299,7 +303,7 @@ def influencer_card(inf, reveal=True):
     if inf.get("img"):
         visual = f"""<picture>
             <source srcset="/assets/img/{inf['img']}.webp" type="image/webp">
-            <img src="/assets/img/{inf['img']}.jpg" alt="{inf['name']}, influenciadora assessorada pela Bertoluchi" loading="lazy" decoding="async">
+            <img src="/assets/img/{inf['img']}.jpg" alt="{inf['name']}, perfil assessorado pela Bertoluchi" loading="lazy" decoding="async">
           </picture>"""
     else:
         cls += " influencer-card--placeholder"
@@ -328,7 +332,7 @@ def coverflow(items, id_suffix="home"):
         if it.get("img"):
             visual = f"""<picture>
                <source srcset="/assets/img/{it['img']}.webp" type="image/webp">
-               <img src="/assets/img/{it['img']}.jpg" alt="{title}, influenciadora assessorada pela Bertoluchi" loading="lazy" decoding="async">
+               <img src="/assets/img/{it['img']}.jpg" alt="{title}, perfil assessorado pela Bertoluchi" loading="lazy" decoding="async">
              </picture>"""
         else:
             visual = (f'<span class="coverflow-initials" aria-hidden="true">'
@@ -422,7 +426,7 @@ def brand_list():
             partes.append(f'<span class="logo-tile"{marca}>{conteudo}</span>')
         return "".join(partes)
 
-    return f"""<div class="marquee marquee--logos" role="group" aria-label="Marcas que já fizeram campanha com nossas influenciadoras">
+    return f"""<div class="marquee marquee--logos" role="group" aria-label="Marcas que já fizeram campanha com nossos influenciadores">
         <div class="marquee-track">{bloco(False)}{bloco(True)}</div>
       </div>"""
 
@@ -503,7 +507,6 @@ def header(active_path):
     <nav class="main-nav" aria-label="Navegação principal">
       <ul class="nav-list">{links}</ul>
     </nav>
-    <a class="btn btn-outline btn-header btn-portal" href="/portal-do-influenciador.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg><span class="longo">Portal do influenciador</span><span class="curto">Portal</span></a>
     <a class="btn btn-primary btn-header" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
     <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu">
       <span></span><span></span><span></span>
@@ -524,7 +527,6 @@ def header(active_path):
     <ul class="mobile-nav-list">{mobile_links}</ul>
   </nav>
   <div class="mobile-menu-foot">
-    <a class="btn btn-outline mobile-menu-cta btn-portal" href="/portal-do-influenciador.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg><span>Portal do influenciador</span></a>
     <a class="btn btn-primary mobile-menu-cta" href="{SITE['whatsapp_link']}" target="_blank" rel="noopener">Fale com a gente</a>
     <div class="mobile-menu-social">
       <a href="{SITE['instagram']}" target="_blank" rel="noopener">Instagram</a>
@@ -542,7 +544,7 @@ def footer():
   <div class="container footer-grid">
     <div class="footer-brand">
       <img src="/assets/img/logo-claro.svg" alt="Bertoluchi, Publicidade e marketing digital" width="231" height="46" class="footer-logo">
-      <p>Social media, branding e gestão de influenciadoras para marcas que querem se tornar referência nas redes sociais.</p>
+      <p>Social media, branding e gestão de influenciadores para marcas que querem se tornar referência nas redes sociais.</p>
       <div class="footer-social">
         <a href="{SITE['instagram']}" target="_blank" rel="noopener" aria-label="Instagram da Bertoluchi">Instagram</a>
         <a href="{SITE['linkedin']}" target="_blank" rel="noopener" aria-label="LinkedIn da Bertoluchi">LinkedIn</a>
@@ -554,12 +556,11 @@ def footer():
       <ul>
         <li><a href="/sobre.html">Sobre</a></li>
         <li><a href="/servicos.html">Serviços</a></li>
-        <li><a href="/influenciadoras.html">Influenciadoras</a></li>
+        <li><a href="/influenciadoras.html">Influenciadores</a></li>
         <li><a href="/resultados.html">Resultados</a></li>
         <li><a href="/blog.html">Blog</a></li>
         <li><a href="/contato.html">Contato</a></li>
         <li><a href="/trabalhe-conosco.html">Trabalhe conosco</a></li>
-        <li><a href="/portal-do-influenciador.html">Portal do influenciador</a></li>
       </ul>
     </div>
     <div class="footer-col">

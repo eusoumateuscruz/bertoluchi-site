@@ -12,13 +12,13 @@ Nenhum numero de mercado foi inventado: quando o texto cita dado da
 agencia, ele vem de common.py (SITE, INFLUENCERS, SOCIAL_MEDIA_CLIENTS).
 """
 
-GESTAO = "Gestão de Influenciadoras"
+GESTAO = "Gestão de Influenciadores"
 SOCIAL = "Social Media"
 BRANDING = "Branding"
 CONSULTORIA = "Consultoria"
 MENTORIA = "Mentoria"
 
-CTA_GESTAO = {"label": "Conhecer a gestão de influenciadoras",
+CTA_GESTAO = {"label": "Conhecer a gestão de influenciadores",
               "href": "/servicos/gestao-de-influenciadores.html"}
 CTA_SOCIAL = {"label": "Ver o serviço de social media",
               "href": "/servicos/social-media.html"}
@@ -33,28 +33,28 @@ BLOG_POSTS = [
 
 {
 "slug": "como-escolher-influenciador-para-marca",
-"title": "Como escolher a influenciadora certa para sua marca",
-"meta_description": "Critérios práticos para escolher influenciadora: fit de nicho, engajamento real, valores da marca e os erros de quem decide só pelo número de seguidores.",
+"title": "Como escolher o influenciador certo para sua marca",
+"meta_description": "Critérios práticos para escolher influenciador: fit de nicho, engajamento real, valores da marca e os erros de quem decide só pelo número de seguidores.",
 "category": GESTAO,
 "date": "2026-09-05",
 "excerpt": "Seguidor não é audiência. Os critérios que realmente preveem se uma parceria vai funcionar, e o erro que quase todo mundo comete na primeira contratação.",
 "cta": CTA_GESTAO,
 "body": [
   {"p": [
-    "A pergunta chega sempre no mesmo formato: quanto custa fechar com uma influenciadora que tem cem mil seguidores. É a pergunta errada, e ela explica boa parte das campanhas que não dão retorno.",
-    "Escolher influenciadora é decisão de encaixe, não de tamanho. Uma criadora com público menor e muito bem definido costuma vender mais do que um perfil grande e genérico, porque quem a segue confia nela sobre um assunto específico. Abaixo estão os critérios que a gente usa na prática, na ordem em que eles importam."]},
+    "A pergunta chega sempre no mesmo formato: quanto custa fechar com um influenciador que tem cem mil seguidores. É a pergunta errada, e ela explica boa parte das campanhas que não dão retorno.",
+    "Escolher influenciador é decisão de encaixe, não de tamanho. Um criador com público menor e muito bem definido costuma vender mais do que um perfil grande e genérico, porque quem o segue confia nele sobre um assunto específico. Abaixo estão os critérios que a gente usa na prática, na ordem em que eles importam."]},
 
   {"h2": "Nicho antes de alcance",
    "p": [
     "Comece descrevendo quem você quer atingir, com detalhe. Não vale dizer mulheres de 25 a 45 anos. Vale dizer quem faz depilação a laser pela primeira vez e tem medo de doer, ou quem procura clínica odontológica perto do trabalho no centro da cidade.",
-    "Com essa descrição na mão, procure criadoras cujo conteúdo já conversa com aquela pessoa. Se o perfil precisa forçar a barra para encaixar seu produto, o público vai perceber. Conteúdo que soa deslocado não converte, e ainda queima a criadora com a audiência dela."]},
+    "Com essa descrição na mão, procure criadores cujo conteúdo já conversa com aquela pessoa. Se o perfil precisa forçar a barra para encaixar seu produto, o público vai perceber. Conteúdo que soa deslocado não converte, e ainda queima o criador com a audiência dele."]},
 
   {"h2": "Engajamento: o que olhar de verdade",
    "p": [
     "Curtida é o indicador mais fácil de inflar e o menos informativo. O que diz mais sobre uma audiência viva:"],
    "ul": [
     "Comentários com frase inteira, não só emoji, e principalmente perguntas sobre o produto ou o serviço",
-    "Respostas da própria criadora nos comentários e no direct, sinal de relação real com quem segue",
+    "Respostas do próprio criador nos comentários e no direct, sinal de relação real com quem segue",
     "Salvamentos e compartilhamentos, que mostram conteúdo com utilidade e não só entretenimento",
     "Constância: um perfil que publica toda semana há meses tem audiência mais previsível que um pico isolado",
     "Proporção entre visualizações de stories e número de seguidores, que revela quantos de fato acompanham"]},
@@ -68,14 +68,14 @@ BLOG_POSTS = [
   {"h2": "Peça os números na fonte",
    "p": [
     "Antes de fechar, peça print do painel de métricas do perfil, com recorte de período. Você quer ver alcance, distribuição por cidade e faixa etária do público. Se o seu negócio atende só uma região, uma audiência espalhada pelo país inteiro vale muito menos do que o número bruto sugere.",
-    "Criadora organizada entrega isso sem drama, geralmente dentro do mídia kit. Resistência para mostrar dado costuma ser o primeiro sinal amarelo da negociação.",
+    "Criador organizado entrega isso sem drama, geralmente dentro do mídia kit. Resistência para mostrar dado costuma ser o primeiro sinal amarelo da negociação.",
     "Olhe também a proporção entre seguidores e alcance médio das últimas publicações. Perfil que cresceu rápido por sorteio ou conteúdo viral solto costuma ter alcance muito abaixo do que o número de seguidores promete, porque a audiência veio pelo prêmio e não pelo assunto."]},
 
   {"h2": "Valores da marca e risco de imagem",
    "p": [
     "Sua marca vai aparecer ao lado de tudo o que aquele perfil publica, antes e depois da campanha. Olhe o histórico, o tipo de humor, as posições públicas, as outras marcas que a pessoa já representou.",
     "Um caso hipotético que ilustra bem: uma clínica que trabalha com discurso de autoestima e cuidado fecha com um perfil que faz piada com a aparência de outras pessoas. O alcance até vem, mas o público certo não compra, e parte dele passa a associar a clínica ao tom da piada.",
-    "Vale conferir também se a criadora já divulgou concorrente direto seu nos últimos meses, e combinar exclusividade por categoria e prazo quando isso for relevante."]},
+    "Vale conferir também se o criador já divulgou concorrente direto seu nos últimos meses, e combinar exclusividade por categoria e prazo quando isso for relevante."]},
 
   {"h2": "Um checklist antes de assinar",
    "p": ["Antes de fechar qualquer parceria, tenha resposta clara para estes pontos:"],
@@ -88,7 +88,7 @@ BLOG_POSTS = [
 
   {"p": [
     "A parte mais cara de uma campanha malfeita não é o cachê. É o tempo que a equipe gasta produzindo, aprovando e depois tentando explicar por que não veio retorno.",
-    "Se você prefere não tocar essa etapa sozinho, é exatamente o que fazemos: cuidamos da parte comercial de um grupo de criadoras e conectamos elas às marcas quando o encaixe existe de verdade."]},
+    "Se você prefere não tocar essa etapa sozinho, é exatamente o que fazemos: cuidamos da parte comercial de um grupo de criadores e conectamos eles às marcas quando o encaixe existe de verdade."]},
 ],
 },
 
@@ -244,7 +244,7 @@ BLOG_POSTS = [
     "Negócio local com uma pessoa cuidando de tudo: dois posts por semana no feed e stories nos dias de atendimento",
     "Negócio com alguém dedicado a conteúdo: três a quatro posts por semana e stories quase diários",
     "Equipe ou agência cuidando: quatro a cinco posts por semana, com formatos variados e produção em bloco",
-    "Perfil pessoal de criadora: ritmo maior, porque a presença é o próprio produto"]},
+    "Perfil pessoal de criador: ritmo maior, porque a presença é o próprio produto"]},
 
   {"h2": "O que importa mais do que a frequência",
    "p": [
@@ -276,7 +276,7 @@ BLOG_POSTS = [
 {
 "slug": "marketing-de-influencia-como-funciona",
 "title": "Marketing de influência: como funciona e vale a pena?",
-"meta_description": "Como uma parceria com influenciadora é estruturada de verdade, do briefing à medição, e como avaliar se o investimento faz sentido para o seu negócio.",
+"meta_description": "Como uma parceria com influenciador é estruturada de verdade, do briefing à medição, e como avaliar se o investimento faz sentido para o seu negócio.",
 "category": GESTAO,
 "date": "2026-08-06",
 "excerpt": "Entre o primeiro contato e a publicação existe um processo com etapas bem definidas. Conhecer esse processo é o que separa parceria de aposta.",
@@ -285,7 +285,7 @@ BLOG_POSTS = [
   {"p": [
     "Marketing de influência costuma ser explicado de um jeito que não ajuda: pagar alguém com audiência para falar do seu produto. Descrito assim, parece loteria, e muita gente contrata como tal.",
     "Uma parceria bem estruturada tem etapas, entregas escritas e forma de medição combinada antes. É isso que faz a diferença entre investimento e aposta.",
-    "O que sustenta esse tipo de campanha é simples de entender: as pessoas confiam mais na indicação de alguém que acompanham do que em um anúncio. A criadora empresta credibilidade construída ao longo de anos. Por isso mesmo, o cuidado com quem representa a marca precisa ser proporcional ao que está sendo emprestado."]},
+    "O que sustenta esse tipo de campanha é simples de entender: as pessoas confiam mais na indicação de alguém que acompanham do que em um anúncio. O criador empresta credibilidade construída ao longo de anos. Por isso mesmo, o cuidado com quem representa a marca precisa ser proporcional ao que está sendo emprestado."]},
 
   {"h2": "Como funciona na prática",
    "p": ["Uma campanha bem conduzida passa por estas fases:"],
@@ -299,7 +299,7 @@ BLOG_POSTS = [
 
   {"h2": "O erro de escrever o roteiro inteiro",
    "p": [
-    "A tentação é mandar o texto pronto para a criadora ler. É justamente o que destrói o resultado, porque o público reconhece na hora quando a fala não é dela.",
+    "A tentação é mandar o texto pronto para o criador ler. É justamente o que destrói o resultado, porque o público reconhece na hora quando a fala não é dele.",
     "O que funciona é entregar o essencial e soltar a forma: o que o produto resolve, os pontos que precisam aparecer, o que não pode ser prometido, e o que a pessoa deve fazer depois. O jeito de dizer é o que você está contratando."]},
 
   {"h2": "Vale a pena para o seu caso?",
@@ -313,13 +313,13 @@ BLOG_POSTS = [
    "ul": [
     "Cachê por entrega, o mais direto: valor combinado por um conjunto definido de peças e prazo",
     "Permuta, quando o produto tem valor percebido alto, funciona melhor com perfis em crescimento e produto que a pessoa usaria de verdade",
-    "Contrato por período, com presença recorrente ao longo de meses, que constrói associação entre marca e criadora",
+    "Contrato por período, com presença recorrente ao longo de meses, que constrói associação entre marca e criador",
     "Comissão por venda, com cupom ou link próprio, que costuma complementar o cachê e raramente o substitui bem",
     "Embaixadora, formato mais longo e com exclusividade de categoria, para marcas que já validaram o encaixe"]},
 
   {"h2": "Como saber se deu certo",
    "p": [
-    "Defina a medição antes de publicar, nunca depois. Cupom exclusivo por criadora, link com parâmetro de rastreio, ou pergunta no atendimento sobre como a pessoa chegou.",
+    "Defina a medição antes de publicar, nunca depois. Cupom exclusivo por criador, link com parâmetro de rastreio, ou pergunta no atendimento sobre como a pessoa chegou.",
     "E compare com o objetivo que você escreveu no começo. Campanha de reconhecimento cobrada por venda imediata sempre vai parecer fracasso, mesmo tendo funcionado. Uma coisa é constância de presença, outra é conversão em sete dias.",
     "Vale ainda considerar o prazo. Uma publicação isolada raramente muda o jogo. Presença repetida com o mesmo perfil ao longo de meses constrói associação, e é aí que o retorno costuma aparecer."]},
 
@@ -327,14 +327,14 @@ BLOG_POSTS = [
    "p": [
     "Os problemas se repetem, e quase todos nascem antes da publicação. Vale conhecer para evitar:"],
    "ul": [
-    "Aprovar em cima da hora, o que empurra a criadora a publicar sem revisão ou a atrasar a campanha",
+    "Aprovar em cima da hora, o que empurra o criador a publicar sem revisão ou a atrasar a campanha",
     "Não combinar direito de uso e depois querer usar a peça em anúncio pago sem ter previsto isso",
     "Concentrar tudo em um único perfil, o que transforma a campanha inteira em aposta num só resultado",
     "Pedir número de vendas de uma campanha pensada para apresentar a marca a quem nunca ouviu falar dela",
     "Sumir depois da publicação, sem acompanhar comentário e direct, que é onde a dúvida de compra aparece"]},
 
   {"p": [
-    "É essa estrutura que colocamos de pé quando fazemos a ponte entre marca e criadora: briefing claro, entregas escritas, medição combinada e acompanhamento depois da publicação."]},
+    "É essa estrutura que colocamos de pé quando fazemos a ponte entre marca e criador: briefing claro, entregas escritas, medição combinada e acompanhamento depois da publicação."]},
 ],
 },
 
@@ -534,14 +534,14 @@ BLOG_POSTS = [
 {
 "slug": "como-medir-resultado-campanha-influenciador",
 "title": "Como mensurar resultado de campanha com influenciador",
-"meta_description": "Além de curtida: quais métricas acompanhar em campanha com influenciadora, como rastrear conversão com cupom e link, e em que prazo avaliar.",
+"meta_description": "Além de curtida: quais métricas acompanhar em campanha com influenciador, como rastrear conversão com cupom e link, e em que prazo avaliar.",
 "category": GESTAO,
 "date": "2026-07-08",
 "excerpt": "Curtida é a métrica mais fácil de ver e a que menos diz. O que acompanhar em cada etapa, e como montar o rastreio antes de publicar.",
 "cta": CTA_GESTAO,
 "body": [
   {"p": [
-    "A conversa sobre resultado de campanha com influenciadora costuma travar no mesmo ponto: a marca olha o número de curtidas, acha pouco ou acha muito, e não consegue dizer se valeu.",
+    "A conversa sobre resultado de campanha com influenciador costuma travar no mesmo ponto: a marca olha o número de curtidas, acha pouco ou acha muito, e não consegue dizer se valeu.",
     "O problema não é falta de dado, é falta de combinação prévia. Medição se monta antes da publicação, e a métrica certa depende do objetivo que você definiu no começo."]},
 
   {"h2": "Primeiro, o objetivo",
@@ -551,7 +551,7 @@ BLOG_POSTS = [
 
   {"h2": "Métricas de alcance",
    "p": [
-    "Servem para objetivo de reconhecimento. Peça sempre o print do painel da criadora, com recorte do período:"],
+    "Servem para objetivo de reconhecimento. Peça sempre o print do painel do criador, com recorte do período:"],
    "ul": [
     "Alcance: quantas pessoas diferentes viram a publicação",
     "Impressões: quantas vezes ela foi exibida, incluindo repetições",
@@ -563,7 +563,7 @@ BLOG_POSTS = [
     "Mostram que o conteúdo fez alguém parar e considerar. São as mais subestimadas:"],
    "ul": [
     "Salvamentos, sinal de que a pessoa quer voltar ao conteúdo depois",
-    "Compartilhamentos, que ampliam alcance para fora da audiência da criadora",
+    "Compartilhamentos, que ampliam alcance para fora da audiência do criador",
     "Comentários com pergunta sobre preço, disponibilidade ou como comprar",
     "Cliques no link e visitas ao seu perfil vindas da publicação",
     "Novos seguidores no seu perfil no período da campanha"]},
@@ -571,7 +571,7 @@ BLOG_POSTS = [
   {"h2": "Métricas de conversão",
    "p": [
     "Aqui é onde a campanha se paga, e onde o rastreio precisa estar montado antes. Três formas simples resolvem a maioria dos casos.",
-    "Cupom exclusivo por criadora é o mais fácil de implementar e de ler. Cada perfil recebe um código diferente, e o uso do código diz exatamente de onde veio a venda.",
+    "Cupom exclusivo por criador é o mais fácil de implementar e de ler. Cada perfil recebe um código diferente, e o uso do código diz exatamente de onde veio a venda.",
     "Link com parâmetro de rastreio funciona quando existe site ou loja online. O mesmo endereço com uma marcação diferente por campanha permite separar a origem no seu painel de análise.",
     "Para negócio que vende por WhatsApp, um link com mensagem pré-preenchida específica da campanha resolve. Quando a mensagem chega já escrita de um jeito diferente, você sabe a origem sem perguntar."]},
 
@@ -580,15 +580,15 @@ BLOG_POSTS = [
     "Esse é o ponto onde a maioria das campanhas se perde. O cupom é criado às pressas no dia da publicação, o link vai sem marcação, e depois não há como separar o que veio de onde.",
     "Uma preparação simples resolve, e leva pouco tempo:"],
    "ul": [
-    "Criar um cupom por criadora, com nome fácil de digitar e de lembrar",
+    "Criar um cupom por criador, com nome fácil de digitar e de lembrar",
     "Gerar um link marcado por campanha e testar se ele abre corretamente no celular",
     "Avisar a equipe de atendimento que a campanha vai ao ar e o que perguntar a quem chegar",
     "Registrar o desempenho do período anterior, para ter base de comparação",
-    "Combinar com a criadora que ela envia os prints do painel em uma data definida"]},
+    "Combinar com o criador que ele envia os prints do painel em uma data definida"]},
 
   {"h2": "O que não vale como métrica",
    "p": [
-    "Alguns números aparecem em relatório e não sustentam decisão. Número de seguidores da criadora não é resultado, é característica de quem você contratou. Curtida isolada diz pouco, porque é o gesto mais barato que existe na rede.",
+    "Alguns números aparecem em relatório e não sustentam decisão. Número de seguidores do criador não é resultado, é característica de quem você contratou. Curtida isolada diz pouco, porque é o gesto mais barato que existe na rede.",
     "Também não vale comparar campanhas com objetivos diferentes, nem comparar seu desempenho com o de uma marca de outro porte e outra frequência de investimento.",
     "E cuidado com o valor equivalente de mídia, aquele cálculo que estima quanto custaria comprar o mesmo alcance em anúncio. É um número que impressiona em apresentação e não corresponde a dinheiro que entrou."]},
 
@@ -600,7 +600,7 @@ BLOG_POSTS = [
   {"h2": "O prazo certo de avaliar",
    "p": [
     "Avaliar no dia seguinte induz ao erro. Publicação continua sendo vista por dias, e a decisão de compra raramente é imediata, principalmente em serviço de valor mais alto.",
-    "Combine uma janela de avaliação com a criadora, por exemplo trinta dias, e compare com o período anterior equivalente. Uma única publicação também raramente muda o jogo: presença repetida ao longo de meses é o que constrói associação, e é aí que o retorno aparece com mais clareza."]},
+    "Combine uma janela de avaliação com o criador, por exemplo trinta dias, e compare com o período anterior equivalente. Uma única publicação também raramente muda o jogo: presença repetida ao longo de meses é o que constrói associação, e é aí que o retorno aparece com mais clareza."]},
 ],
 },
 
@@ -682,7 +682,7 @@ BLOG_POSTS = [
 "cta": CTA_GESTAO,
 "body": [
   {"p": [
-    "Toda criadora passa por esse momento: a primeira marca chega, pergunta o valor, e vem o branco. Cobrar pouco desvaloriza o trabalho e cria referência ruim para as próximas. Cobrar muito sem justificativa afasta a negociação.",
+    "Todo criador passa por esse momento: a primeira marca chega, pergunta o valor, e vem o branco. Cobrar pouco desvaloriza o trabalho e cria referência ruim para as próximas. Cobrar muito sem justificativa afasta a negociação.",
     "Não existe tabela oficial, e desconfie de quem apresenta uma. O que existe são critérios objetivos que compõem o preço, e saber nomeá-los muda completamente a conversa comercial."]},
 
   {"h2": "O preço não é pelo post, é pelo pacote",
@@ -731,7 +731,7 @@ BLOG_POSTS = [
     "Para contratos maiores ou com produção que exige deslocamento e custo, é comum trabalhar com parte na aprovação do roteiro e parte após a publicação. Isso protege os dois lados e é prática aceita no mercado."]},
 
   {"p": [
-    "Boa parte do trabalho de assessoria é exatamente esse: estruturar proposta, negociar exclusividade e direito de uso, e manter o mídia kit atualizado, para que a criadora possa continuar focada em criar."]},
+    "Boa parte do trabalho de assessoria é exatamente esse: estruturar proposta, negociar exclusividade e direito de uso, e manter o mídia kit atualizado, para que o criador possa continuar focado em criar."]},
 ],
 },
 
@@ -798,7 +798,7 @@ BLOG_POSTS = [
 
 {
 "slug": "midia-kit-influenciadora",
-"title": "O papel do mídia kit na carreira de uma influenciadora",
+"title": "O papel do mídia kit na carreira de um influenciador",
 "meta_description": "O que um mídia kit precisa ter, por que ele encurta negociação com marcas e com que frequência atualizar os números para não perder contrato.",
 "category": GESTAO,
 "date": "2026-06-09",
@@ -806,15 +806,15 @@ BLOG_POSTS = [
 "cta": CTA_GESTAO,
 "body": [
   {"p": [
-    "Mídia kit é o material que apresenta uma criadora para uma marca: quem ela é, quem a acompanha, o que ela já fez e o que ela entrega. Na prática, é o documento que decide se a conversa avança ou morre no primeiro contato.",
-    "Muita criadora com bom conteúdo perde contrato por não ter esse material pronto. A marca precisa apresentar a proposta internamente, e sem números organizados ela vai apresentar outra pessoa.",
+    "Mídia kit é o material que apresenta um criador para uma marca: quem ele é, quem o acompanha, o que ele já fez e o que ele entrega. Na prática, é o documento que decide se a conversa avança ou morre no primeiro contato.",
+    "Muito criador com bom conteúdo perde contrato por não ter esse material pronto. A marca precisa apresentar a proposta internamente, e sem números organizados ela vai apresentar outra pessoa.",
     "Vale dizer também o que ele não é. Mídia kit não é portfólio de fotos bonitas nem currículo com histórico completo. É um documento comercial, feito para quem vai decidir se investe, e por isso precisa ser objetivo e fácil de ler em poucos minutos."]},
 
   {"h2": "Por que ele encurta a negociação",
    "p": [
-    "Do lado da marca, contratar criadora é uma decisão que quase sempre precisa ser justificada para alguém: um gestor, um cliente, um financeiro. Quem decide raramente é quem faz o primeiro contato.",
+    "Do lado da marca, contratar criador é uma decisão que quase sempre precisa ser justificada para alguém: um gestor, um cliente, um financeiro. Quem decide raramente é quem faz o primeiro contato.",
     "O mídia kit é o que essa pessoa consegue encaminhar. Se ele responde de antemão quem é o público, qual o alcance e quanto custa, o processo anda sem dez trocas de mensagem.",
-    "Ele também posiciona. Uma criadora com material organizado passa a impressão de quem trata a atividade como negócio, e isso muda o valor que a marca aceita pagar."]},
+    "Ele também posiciona. Um criador com material organizado passa a impressão de quem trata a atividade como negócio, e isso muda o valor que a marca aceita pagar."]},
 
   {"h2": "O que precisa ter",
    "p": ["Um mídia kit completo cabe em poucas páginas e cobre estes pontos:"],
@@ -837,7 +837,7 @@ BLOG_POSTS = [
    "p": [
     "Métrica sozinha não diz como você comunica. A parte visual do mídia kit precisa mostrar o seu conteúdo: capturas de publicações que funcionaram, prints de comentário real, fotos que representam seu estilo.",
     "Se você já fez campanha, conte o caso brevemente: qual era o objetivo, o que você entregou e o que aconteceu. Um exemplo concreto vale mais do que uma lista de logotipos de marcas.",
-    "O material também precisa parecer com você. Um mídia kit genérico, feito em modelo pronto sem adaptação, contradiz a ideia de que você é uma criadora com identidade própria."]},
+    "O material também precisa parecer com você. Um mídia kit genérico, feito em modelo pronto sem adaptação, contradiz a ideia de que você é um criador com identidade própria."]},
 
   {"h2": "Erros que derrubam a proposta",
    "p": ["Alguns problemas aparecem com frequência e custam contrato:"],
@@ -853,7 +853,7 @@ BLOG_POSTS = [
    "p": [
     "Audiência muda. O alcance de seis meses atrás não descreve o perfil de hoje, e as plataformas alteram distribuição com frequência.",
     "Mídia kit desatualizado tem dois riscos. Se os números caíram, você promete o que não entrega. Se subiram, você está cobrando abaixo do que poderia, o que é mais comum do que parece.",
-    "Uma atualização a cada temporada, com os dados do trimestre e as campanhas recentes, mantém o material vivo. É por isso que produzimos mídia kit atualizado por temporada para as criadoras que assessoramos, junto com o acompanhamento das métricas que sustentam cada negociação."]},
+    "Uma atualização a cada temporada, com os dados do trimestre e as campanhas recentes, mantém o material vivo. É por isso que produzimos mídia kit atualizado por temporada para os criadores que assessoramos, junto com o acompanhamento das métricas que sustentam cada negociação."]},
 ],
 },
 
@@ -1023,7 +1023,7 @@ BLOG_POSTS = [
    "p": [
     "A lógica de contratar apenas grandes números perdeu força. Criadores com público menor e bem definido entregam relação mais próxima e costumam converter melhor por real investido.",
     "Para marcas regionais isso é especialmente relevante, porque um perfil com audiência concentrada na mesma cidade vale muito mais do que alcance nacional disperso.",
-    "É por isso que trabalhamos com um grupo enxuto de criadoras, com nichos distintos, em vez de perseguir volume de nomes."]},
+    "É por isso que trabalhamos com um grupo enxuto de criadores, com nichos distintos, em vez de perseguir volume de nomes."]},
 
   {"h2": "O que continua igual",
    "p": [
@@ -1109,13 +1109,13 @@ BLOG_POSTS = [
 "body": [
   {"p": [
     "Existe uma ideia difusa sobre o que uma agência de gestão de influenciadores faz. Muita gente imagina que ela produz o conteúdo, ou que ela simplesmente arruma contratos em troca de uma porcentagem.",
-    "Nenhuma das duas descreve bem o trabalho. A agência cuida da parte comercial e estratégica da carreira, para que a criadora possa usar o tempo dela criando, que é o que gera valor."]},
+    "Nenhuma das duas descreve bem o trabalho. A agência cuida da parte comercial e estratégica da carreira, para que o criador possa usar o tempo dele criando, que é o que gera valor."]},
 
   {"h2": "O que a agência resolve",
    "p": ["Na prática, o trabalho se concentra em algumas frentes bem definidas:"],
    "ul": [
-    "Prospecção e relacionamento com marcas, incluindo apresentar a criadora para oportunidades que ela não alcançaria sozinha",
-    "Curadoria das propostas que chegam, filtrando o que faz sentido para a imagem e o público dela",
+    "Prospecção e relacionamento com marcas, incluindo apresentar o criador para oportunidades que ele não alcançaria sozinho",
+    "Curadoria das propostas que chegam, filtrando o que faz sentido para a imagem e o público dele",
     "Negociação comercial: valor, entregas, prazo, exclusividade e direito de uso",
     "Produção e atualização do mídia kit por temporada, com dados recentes",
     "Organização do calendário de entregas, para não acumular campanhas na mesma semana",
@@ -1125,36 +1125,36 @@ BLOG_POSTS = [
   {"h2": "Dizer não faz parte do serviço",
    "p": [
     "É a parte menos glamourosa e uma das mais valiosas. Nem toda proposta que chega deve ser aceita, mesmo quando o valor é bom.",
-    "Marca que não conversa com o público da criadora queima credibilidade. Excesso de publicidade em sequência cansa a audiência. Categoria conflitante com um contrato existente gera problema jurídico.",
-    "Ter alguém avaliando isso com distância, sem o entusiasmo do momento, protege o ativo mais importante da criadora, que é a confiança de quem a acompanha."]},
+    "Marca que não conversa com o público do criador queima credibilidade. Excesso de publicidade em sequência cansa a audiência. Categoria conflitante com um contrato existente gera problema jurídico.",
+    "Ter alguém avaliando isso com distância, sem o entusiasmo do momento, protege o ativo mais importante do criador, que é a confiança de quem o acompanha."]},
 
   {"h2": "A negociação que ninguém vê",
    "p": [
     "Boa parte do trabalho acontece em conversas que a audiência nunca percebe. Definir quantas rodadas de ajuste estão incluídas, o que acontece se a marca atrasar a aprovação, por quanto tempo a publicação fica no ar, se a peça pode virar anúncio pago.",
-    "São detalhes que parecem burocracia e que decidem se o contrato foi bom ou ruim. Criadora sem apoio costuma descobrir esses pontos depois, quando já não há margem para negociar.",
+    "São detalhes que parecem burocracia e que decidem se o contrato foi bom ou ruim. Criador sem apoio costuma descobrir esses pontos depois, quando já não há margem para negociar.",
     "Ter tudo por escrito também protege a relação com a marca. A maior parte dos conflitos nasce de expectativa não combinada, não de má fé."]},
 
   {"h2": "Estratégia de longo prazo",
    "p": [
     "Uma carreira construída só por oportunidade imediata vira uma sequência de publicidades sem linha. O público não consegue dizer do que aquele perfil trata, e o valor comercial cai com o tempo.",
-    "O trabalho de longo prazo é escolher com que tipo de marca a criadora quer ser associada, que assuntos ela quer dominar e como o perfil deve evoluir. Isso às vezes significa recusar dinheiro hoje para valer mais depois.",
-    "É também o que permite passar de publicidade avulsa para contratos mais longos, que dão previsibilidade de renda e constroem associação real entre criadora e marca."]},
+    "O trabalho de longo prazo é escolher com que tipo de marca o criador quer ser associado, que assuntos ele quer dominar e como o perfil deve evoluir. Isso às vezes significa recusar dinheiro hoje para valer mais depois.",
+    "É também o que permite passar de publicidade avulsa para contratos mais longos, que dão previsibilidade de renda e constroem associação real entre criador e marca."]},
 
-  {"h2": "O que continua sendo da criadora",
+  {"h2": "O que continua sendo do criador",
    "p": [
-    "A agência não cria no lugar dela, e não deveria. A voz, o formato, o jeito de falar com a audiência e a relação com quem segue são exatamente o produto.",
+    "A agência não cria no lugar dele, e não deveria. A voz, o formato, o jeito de falar com a audiência e a relação com quem segue são exatamente o produto.",
     "Quando uma agência começa a escrever roteiro e padronizar fala, o resultado cai, porque o público percebe. O papel é organizar em volta da criação, não substituí-la."]},
 
   {"h2": "Como a agência é remunerada",
    "p": [
-    "Os modelos variam, e vale entender antes de fechar. O mais comum é percentual sobre os contratos fechados, o que alinha o interesse dos dois lados: a agência ganha mais quando a criadora ganha mais.",
+    "Os modelos variam, e vale entender antes de fechar. O mais comum é percentual sobre os contratos fechados, o que alinha o interesse dos dois lados: a agência ganha mais quando o criador ganha mais.",
     "Há também formatos com valor fixo mensal, que costumam fazer sentido quando o trabalho envolve construção de carreira a longo prazo e não depende só do volume de publicidade do mês.",
     "O que precisa estar claro em qualquer modelo é o que está incluído, se há exclusividade de representação, qual o prazo do contrato e como ele pode ser encerrado."]},
 
   {"h2": "Quando faz sentido ter assessoria",
    "p": [
-    "Costuma fazer sentido quando o volume de proposta passou do que dá para administrar sozinha, quando as negociações estão travando por falta de material organizado, ou quando a criadora percebe que está gastando mais tempo respondendo mensagem comercial do que criando.",
-    "Hoje cuidamos da parte comercial de um grupo de criadoras com nichos diferentes, de conteúdo de fé e lifestyle a fitness e dicas de cidade, e a demanda que aparece é sempre a mesma: tempo para criar."]},
+    "Costuma fazer sentido quando o volume de proposta passou do que dá para administrar sozinho, quando as negociações estão travando por falta de material organizado, ou quando o criador percebe que está gastando mais tempo respondendo mensagem comercial do que criando.",
+    "Hoje cuidamos da parte comercial de um grupo de criadores com nichos diferentes, de conteúdo de fé e lifestyle a fitness e dicas de cidade, e a demanda que aparece é sempre a mesma: tempo para criar."]},
 ],
 },
 
@@ -1242,7 +1242,7 @@ BLOG_POSTS = [
    "ul": [
     "Profissional que assumiu o marketing da empresa sem formação na área e precisa ganhar critério",
     "Dono de negócio que quer entender o suficiente para conduzir a estratégia e cobrar fornecedores",
-    "Criadora de conteúdo que quer transformar audiência em carreira sustentável",
+    "Criador de conteúdo que quer transformar audiência em carreira sustentável",
     "Quem está começando a atender clientes de marketing e precisa estruturar método de trabalho",
     "Profissional que executa bem, mas trava quando precisa decidir prioridade e direção"]},
 
@@ -1273,7 +1273,7 @@ BLOG_POSTS = [
   {"h2": "Como é a nossa",
    "p": [
     "A mentoria da Bertoluchi é conduzida pela Beatriz Bertoluchi, que começou como criadora de conteúdo antes de assessorar outras pessoas e de montar a agência.",
-    "Isso significa uma perspectiva que vem dos dois lados: de quem já esteve na frente da câmera negociando a própria publicidade, e de quem hoje conduz a operação de uma agência que atende marcas e criadoras.",
+    "Isso significa uma perspectiva que vem dos dois lados: de quem já esteve na frente da câmera negociando a própria publicidade, e de quem hoje conduz a operação de uma agência que atende marcas e criadores.",
     "O formato é personalizado para o momento de quem procura, com foco em estratégia e resolução de desafios reais, não em conteúdo padronizado.",
     "Se você não tem certeza se o seu caso pede mentoria ou consultoria, essa é uma boa primeira pergunta a levar para a conversa. Contratar o formato errado custa tempo dos dois lados, e a distinção costuma ficar clara em poucos minutos de conversa sobre o seu contexto."]},
 ],
